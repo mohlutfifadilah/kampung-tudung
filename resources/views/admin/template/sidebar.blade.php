@@ -17,6 +17,13 @@
         <p class="menu-label">Data</p>
         <ul class="menu-list">
             <li>
+                <a href="/user" class="has-icon">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-table"></i></span>
+                    <span class="menu-item-label">Admin</span>
+                </a>
+            </li>
+            <li>
                 <a href="tables.html" class="has-icon">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                     <span class="icon"><i class="mdi mdi-table"></i></span>

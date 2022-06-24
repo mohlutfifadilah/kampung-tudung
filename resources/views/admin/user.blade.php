@@ -1,6 +1,7 @@
 @section('title', 'Dashboard')
 @include('admin.template.header')
 @include('admin.template.sidebar')
+
 <section class="section is-main-section">
     <div class="tile is-ancestor">
         <div class="tile is-parent">

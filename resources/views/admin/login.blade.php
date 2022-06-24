@@ -42,7 +42,6 @@
         .columns {
             margin: 0px;
         }
-
     </style>
 </head>
 
@@ -54,28 +53,37 @@
                     <img class="login-logo" src="assets/img/logo_r_resumme.png">
                 </div>
 
-                <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control has-icons-right">
-                        <input class="input" type="text">
-                        <span class="icon is-small is-right">
-                            <i class="fa fa-user"></i>
-                        </span>
+                <form action="/login" method="POST">
+                    @csrf
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control has-icons-right">
+                            <input class="input @error('username') is-invalid @enderror" type="text" name="username"
+                                autofocus required value="{{ old('username') }}">
+                            <span class="icon is-small is-right">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control has-icons-right">
-                        <input class="input" type="password">
-                        <span class="icon is-small is-right">
-                            <i class="fa fa-key"></i>
-                        </span>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control has-icons-right">
+                            <input class="input" type="password" name="password" required>
+                            <span class="icon is-small is-right">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div class="has-text-centered">
-                    <a class="button is-vcentered is-primary is-outlined">Login</a>
-                </div>
+                    <div class="has-text-centered">
+                        <button class="button is-vcentered is-primary is-outlined" type="submit">Login</button>
+                    </div>
+                </form>
             </section>
         </div>
         <div id="particles-js" class="interactive-bg column is-8">
