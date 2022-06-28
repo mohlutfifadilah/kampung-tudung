@@ -67,7 +67,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Kategori', 'type' => 'success']);
+        return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Admin', 'type' => 'success']);
     }
 
     /**
@@ -112,11 +112,11 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'username'        => 'required',
-            'password'        => 'required',
+            'password'        => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
-            return redirect('/kategori/' . $id . '/edit')->withErrors($validator)
+            return redirect('admin/' . $id . '/edit')->withErrors($validator)
                 ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
         }
 
@@ -127,7 +127,7 @@ class AdminController extends Controller
                 'password'       => Hash::make($password),
             ]);
 
-        return redirect('admin')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Kategori', 'type' => 'success']);
+        return redirect('admin')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Admin', 'type' => 'success']);
     }
 
     /**

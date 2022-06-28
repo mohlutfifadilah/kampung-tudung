@@ -1,6 +1,17 @@
 @section('title', 'Admin')
 @include('admin.template.header')
 @include('admin.template.sidebar')
+@if (session('status'))
+    <script>
+        swal({
+            text: "{!! session('status') !!}",
+            title: "{!! session('title') !!}",
+            type: "{!! session('type') !!}",
+            icon: "{!! session('type') !!}",
+            // more options
+        });
+    </script>
+@endif
 <section class="section is-main-section">
     <div class="notification is-white">
         <div class="level">
@@ -60,13 +71,11 @@
                                             <a href="/admin/{{ $a->id }}/edit"
                                                 class="button is-small is-warning"><span class="icon"><i
                                                         class="fa-solid fa-pen-to-square"></i></span></a>
-                                            <form action="{{ route('admin.destroy', $a->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="button is-small is-danger" type="submit">
-                                                    <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
-                                                </button>
-                                            </form>
+                                            <button class="button is-small is-danger remove-user" type="submit"
+                                                data-id="{{ $a->id }}"
+                                                data-action="{{ route('admin.destroy', $a->id) }}">
+                                                <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -96,4 +105,35 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    $("body").on("click", ".remove-user", function() {
+        var current_object = $(this);
+        swal({
+            title: "Apakah anda yakin ?",
+            text: "Hapus admin ini",
+            type: "warning",
+            showCancelButton: true,
+            dangerMode: true,
+            cancelButtonClass: '#DD6B55',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+        }, function(result) {
+            if (result) {
+                var action = current_object.attr('data-action');
+                var token = jQuery('meta[name="csrf-token"]').attr('content');
+                var id = current_object.attr('data-id');
+                $('body').html("<form class='form-inline remove-form' method='post' action='" + action +
+                    "'></form>");
+                $('body').find('.remove-form').append(
+                    '<input name="_method" type="hidden" value="delete">');
+                $('body').find('.remove-form').append('<input name="_token" type="hidden" value="' +
+                    token + '">');
+                $('body').find('.remove-form').append('<input name="id" type="hidden" value="' + id +
+                    '">');
+                $('body').find('.remove-form').submit();
+            }
+        });
+    });
+</script>
 @include('admin.template.footer')
