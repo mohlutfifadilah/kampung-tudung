@@ -31,12 +31,12 @@
                     <span class="menu-item-label">Produk</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="forms.html" class="has-icon">
                     <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
                     <span class="menu-item-label">Galeri</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
         <p class="menu-label">Pesanan</p>
         <ul class="menu-list">

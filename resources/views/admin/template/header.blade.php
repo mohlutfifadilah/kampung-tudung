@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
@@ -42,7 +42,7 @@
                         class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
                         <a class="navbar-link is-arrowless">
                             <div class="is-user-avatar">
-                                <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe">
+                                {{-- <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe"> --}}
                             </div>
                             <div class="is-user-name"><span>{{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
@@ -52,13 +52,13 @@
                                 <span class="icon"><i class="mdi mdi-account"></i></span>
                                 <span>Edit Password</span>
                             </a> --}}
-                            <hr class="navbar-divider">
+                            {{-- <hr class="navbar-divider"> --}}
                             <form action="/logout" method="post">
                                 @csrf
-                                <button type="submit" class="navbar-item">
+                                <a type="submit" class="navbar-item">
                                     <span class="icon"><i class="mdi mdi-logout"></i></span>
-                                    <span>Log Out</span>
-                                </button>
+                                    <span>Keluar</span>
+                                </a>
                             </form>
                         </div>
                     </div>
