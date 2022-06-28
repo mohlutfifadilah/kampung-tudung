@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 
@@ -23,8 +23,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     //
-    Route::get('/admin', [DashboardController::class, 'index']);
-    Route::resource('/user', UserController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::resource('/admin', AdminController::class);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

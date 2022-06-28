@@ -1,7 +1,13 @@
-@section('title', 'Dashboard')
+@section('title', 'Admin')
 @include('admin.template.header')
 @include('admin.template.sidebar')
-
+<form action="/admin/{{ $id->id }}" method="post">
+    @method('put')
+    @csrf
+    <input type="text" name="username" value="{{ $id->username }}">
+    <input type="password" name="password" id="">
+    <button type="submit">edit</button>
+</form>
 <section class="section is-main-section">
     <div class="tile is-ancestor">
         <div class="tile is-parent">

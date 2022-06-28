@@ -8,7 +8,8 @@
         <p class="menu-label">General</p>
         <ul class="menu-list">
             <li>
-                <a href="index.html" class="is-active router-link-active has-icon">
+                <a href="/dashboard"
+                    class="has-icon {{ $title === 'dashboard' ? 'is-active router-link-active' : '' }}">
                     <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
                     <span class="menu-item-label">Dashboard</span>
                 </a>
@@ -17,7 +18,7 @@
         <p class="menu-label">Data</p>
         <ul class="menu-list">
             <li>
-                <a href="/user" class="has-icon">
+                <a href="/admin" class="has-icon {{ $title === 'admin' ? 'is-active router-link-active' : '' }}">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                     <span class="icon"><i class="mdi mdi-table"></i></span>
                     <span class="menu-item-label">Admin</span>

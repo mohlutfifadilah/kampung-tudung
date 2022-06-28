@@ -31,6 +31,14 @@
 
 <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<!-- Page Specific JS File -->
+<!-- jQuery -->
+{{-- <script src="https://code.jquery.com/jquery.js"></script> --}}
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>
