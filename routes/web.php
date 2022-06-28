@@ -21,9 +21,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    //
+    Route::get('/admin', [DashboardController::class, 'index']);
+    Route::resource('/user', UserController::class);
+});
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
-
-Route::get('/admin', [DashboardController::class, 'index']);
-
-Route::resource('/user', UserController::class);
+Route::post('/logout', [LoginController::class, 'logout']);

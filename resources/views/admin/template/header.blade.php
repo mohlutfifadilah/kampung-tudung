@@ -37,19 +37,22 @@
                             <div class="is-user-avatar">
                                 <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe">
                             </div>
-                            <div class="is-user-name"><span>Admin</span></div>
+                            <div class="is-user-name"><span>{{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
                         </a>
                         <div class="navbar-dropdown">
-                            <a href="profile.html" class="navbar-item">
+                            {{-- <a href="profile.html" class="navbar-item">
                                 <span class="icon"><i class="mdi mdi-account"></i></span>
                                 <span>Edit Password</span>
-                            </a>
+                            </a> --}}
                             <hr class="navbar-divider">
-                            <a class="navbar-item">
-                                <span class="icon"><i class="mdi mdi-logout"></i></span>
-                                <span>Log Out</span>
-                            </a>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button type="submit" class="navbar-item">
+                                    <span class="icon"><i class="mdi mdi-logout"></i></span>
+                                    <span>Log Out</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
