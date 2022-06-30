@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $admin = Admin::all();
+        $admin = Admin::paginate(2);
         return view('admin.admin', [
             'title' => 'admin',
             'admin' => $admin

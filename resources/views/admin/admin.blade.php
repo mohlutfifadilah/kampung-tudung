@@ -19,7 +19,10 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Admin</b>
+                        <b>Admin</b><br>
+                        <small class="ml-2">
+                            Total data : {{ $admin->total() }}
+                        </small>
                     </div>
                 </div>
             </div>
@@ -35,72 +38,81 @@
         <div class="card-content">
             <div class="b-table has-pagination">
                 <div class="table-wrapper has-mobile-cards">
-                    {{-- <div class="card has-table">
-                        <div class="card-content">
-                            <section class="section">
-                                <div class="content has-text-grey has-text-centered">
-                                    <p>
-                                        <span class="icon is-large"><i class="mdi mdi-emoticon-sad mdi-48px"></i></span>
-                                    </p>
-                                    <p>Data kosong</p>
-                                </div>
-                            </section>
-                        </div>
-                    </div> --}}
-                    <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-                        <thead>
-                            <tr>
-                                {{-- <th class="is-checkbox-cell">
+                    @if ($admin->count())
+                        <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+                            <thead>
+                                <tr>
+                                    {{-- <th class="is-checkbox-cell">
                                     <label class="b-checkbox checkbox">
                                         <input type="checkbox" value="false">
                                         <span class="check"></span>
                                     </label>
                                 </th> --}}
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($admin as $a)
-                                <tr>
-                                    <td data-label="No">{{ $loop->iteration }}</td>
-                                    <td data-label="Username">{{ $a->username }}</td>
-                                    <td class="is-actions-cell">
-                                        <div class="buttons is-center">
-                                            <a href="/admin/{{ $a->id }}/edit"
-                                                class="button is-small is-warning"><span class="icon"><i
-                                                        class="fa-solid fa-pen-to-square"></i></span></a>
-                                            <button class="button is-small is-danger remove-user" type="submit"
-                                                data-id="{{ $a->id }}"
-                                                data-action="{{ route('admin.destroy', $a->id) }}">
-                                                <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
-                                            </button>
-                                        </div>
-                                    </td>
+                                    <th>No</th>
+                                    <th>Username</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="notification">
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <div class="buttons has-addons">
-                                    <button type="button" class="button is-active">1</button>
-                                    <button type="button" class="button">2</button>
-                                    <button type="button" class="button">3</button>
-                                </div>
+                            </thead>
+                            <tbody>
+                                @foreach ($admin as $a)
+                                    <tr>
+                                        <td data-label="No">{{ $loop->iteration }}</td>
+                                        <td data-label="Username">{{ $a->username }}</td>
+                                        <td class="is-actions-cell">
+                                            <div class="buttons is-center">
+                                                <a href="/admin/{{ $a->id }}/edit"
+                                                    class="button is-small is-warning"><span class="icon"><i
+                                                            class="fa-solid fa-pen-to-square"></i></span></a>
+                                                <button class="button is-small is-danger remove-user" type="submit"
+                                                    data-id="{{ $a->id }}"
+                                                    data-action="{{ route('admin.destroy', $a->id) }}">
+                                                    <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="card has-table">
+                            <div class="card-content">
+                                <section class="section">
+                                    <div class="content has-text-grey has-text-centered">
+                                        <p>
+                                            <span class="icon is-large"><i
+                                                    class="mdi mdi-emoticon-sad mdi-48px"></i></span>
+                                        </p>
+                                        <p>Data kosong</p>
+                                    </div>
+                                </section>
                             </div>
                         </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <small>Page 1 of 3</small>
-                            </div>
+                    @endif
+                </div>
+                @if ($admin->count())
+                    <hr>
+                    <div class="columns px-5 pb-5">
+                        <div class="column">
+
+                            <ul class="pagination-list">
+                                {{ $admin->links() }}
+                            </ul>
+                        </div>
+                        <div class="column">
+
+                        </div>
+                        <div class="column">
+
+                        </div>
+                        <div class="column has-text-right">
+                            <small>
+                                Halaman ke {{ $admin->currentPage() }} dari
+                                {{ $admin->count() }}
+                            </small>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
