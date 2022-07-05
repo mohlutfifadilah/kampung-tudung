@@ -25,9 +25,17 @@ class LoginController extends Controller
 
             return redirect()->intended('dashboard');
         }
-
-        return back()->withErrors([
+        // return back()->withInput(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+        // return redirect('/login')->withInput()->withErrors([
+        //     'username' => 'The provided credentials do not match our records.',
+        // ])->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+        return redirect('/login')->withErrors([
             'username' => 'The provided credentials do not match our records.',
+            'password' => 'dnawidnawnlid'
+        ])->withInput()->with([
+            'status' => 'Username atau password salah',
+            'title' => 'Login Admin',
+            'type' => 'error'
         ]);
     }
 

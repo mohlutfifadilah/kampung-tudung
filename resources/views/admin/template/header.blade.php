@@ -55,10 +55,10 @@
                             {{-- <hr class="navbar-divider"> --}}
                             <form action="/logout" method="post">
                                 @csrf
-                                <a type="submit" class="navbar-item">
+                                <button type="submit" class="navbar-item">
                                     <span class="icon"><i class="mdi mdi-logout"></i></span>
                                     <span>Keluar</span>
-                                </a>
+                                </button>
                             </form>
                         </div>
                     </div>

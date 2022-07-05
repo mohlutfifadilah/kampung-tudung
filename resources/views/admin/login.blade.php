@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin - Kampung Tudung</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         .interactive-bg {
             height: 100vh;
             background-color: #00d1b2;
+            background-image: url({{ asset('main-image/tudung.png') }});
             -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             -moz-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
@@ -34,8 +39,8 @@
 
         .login-logo {
             margin: 0 auto;
-            margin-bottom: 50px;
-            max-height: 100px;
+            margin-top: -20px;
+            max-height: 200px;
 
         }
 
@@ -46,11 +51,22 @@
 </head>
 
 <body>
+    @if (session('status'))
+        <script>
+            swal({
+                text: "{!! session('status') !!}",
+                title: "{!! session('title') !!}",
+                type: "{!! session('type') !!}",
+                icon: "{!! session('type') !!}",
+                // more options
+            });
+        </script>
+    @endif
     <div class="columns is-vcentered">
         <div class="login column is-4 ">
             <section class="section">
                 <div class="has-text-centered">
-                    <img class="login-logo" src="assets/img/logo_r_resumme.png">
+                    <img class="login-logo" src="{{ asset('main-image/tudung.png') }}">
                 </div>
 
                 <form action="/login" method="POST">
@@ -58,23 +74,19 @@
                     <div class="field">
                         <label class="label">Username</label>
                         <div class="control has-icons-right">
-                            <input class="input @error('username') is-invalid @enderror" type="text" name="username"
-                                autofocus required value="{{ old('username') }}">
+                            <input class="input @error('username') is-danger @enderror" type="text" name="username"
+                                autofocus required value="">
                             <span class="icon is-small is-right">
                                 <i class="fa fa-user"></i>
                             </span>
                         </div>
-                        @error('username')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
 
                     <div class="field">
                         <label class="label">Password</label>
                         <div class="control has-icons-right">
-                            <input class="input" type="password" name="password" required>
+                            <input class="input @error('password') is-danger @enderror" type="password" name="password"
+                                required>
                             <span class="icon is-small is-right">
                                 <i class="fa fa-key"></i>
                             </span>
@@ -91,5 +103,7 @@
     </div>
 
 </body>
+
+
 
 </html>
