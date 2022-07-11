@@ -15,7 +15,6 @@ class CreatePesanTable extends Migration
     {
         Schema::create('pesan', function (Blueprint $table) {
             $table->id();
-            $table->integer('ktp');
             $table->string('nama');
             $table->string('alamat');
             $table->integer('nohp');
@@ -24,6 +23,7 @@ class CreatePesanTable extends Migration
             $table->integer('jumlah-orang');
             $table->string('catatan');
             $table->integer('total');
+            $table->text('evidence');
             $table->integer('status');
             $table->timestamps();
         });

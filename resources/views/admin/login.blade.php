@@ -12,9 +12,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         .interactive-bg {
-            height: 100vh;
-            background-color: #00d1b2;
-            background-image: url({{ asset('main-image/tudung.png') }});
+            width: 100%;
+            height: 665px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            /* background-color: #00d1b2; */
+            background-image: url('{{ asset('main-image/slide_2.jpg') }}');
             -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             -moz-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
