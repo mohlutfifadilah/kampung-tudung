@@ -7,12 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kampung Tudung</title>
     <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.9.0-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/landing.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/landing.css') }}"> --}}
     <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css" />
+
     <style>
         .pointer {
             cursor: pointer;
@@ -28,37 +31,72 @@
             max-height: none !important;
             overflow: hidden;
         }
+
+        .hero {
+            width: 100%;
+            height: 665px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            /* background-color: #00d1b2; */
+            background-image: url('{{ asset('main-image/bg.jpg') }}');
+            -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
+            -moz-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
+            box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
+            padding: 0px;
+        }
+
+        .brand {
+            background: url('{{ asset('main-image/tudung.png') }}') no-repeat center center;
+            background-size: cover;
+            width: 84px
+        }
+
+        .navbar-end a.navbar-item {
+            margin-right: 4px;
+        }
+
+        .navbar-end .navbar-item.mr-5 {
+            color: white;
+        }
+
+        .navbar-menu .navbar-end .navbar-item.mr-5:hover {
+            color: #00c4a7;
+        }
     </style>
 </head>
 
 <body>
-    <section class="hero is-info is-fullheight">
+    <section class="hero is-fullheight mb-5" data-scroll href="#home">
         <div class="hero-head">
-            <nav data-scroll-header class="navbar">
+            <nav data-scroll-header class="navbar" role="navigation" aria-label="main navigation">
                 <div class="container">
                     <div class="navbar-brand">
-                        <a class="navbar-item" href="../">
-                            {{-- <img src="http://bulma.io/images/bulma-type-white.png" alt="Logo"> --}}
-                            Kampung Tudung
+                        <a class="navbar-item brand" href="#home">
+                            {{-- <img src="{{ asset('main-image/tudung.png') }}" width="112" height="500"> --}}
                         </a>
-                        <span class="navbar-burger burger" data-target="navbarMenu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
+
+                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                            data-target="navbarBasicExample">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
                     </div>
                     <div id="navbarBasicExample" class="navbar-menu">
                         <div class="navbar-end">
-                            <a class="navbar-item">
-                                Beranda <a data-scroll href="#bazinga">Anchor Link</a>
+                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#home">
+                                Beranda
                             </a>
-                            <a class="navbar-item">
-                                Galeri
-                            </a>
-                            <a class="navbar-item">
+                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#about">
                                 Tentang Kami
                             </a>
-                            <a class="navbar-item data-scroll" href="#map">
+                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#gallery">
+                                Galeri
+                            </a>
+                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#video">
+                                Video
+                            </a>
+                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#map">
                                 Lokasi
                             </a>
                             <div class="navbar-item">
@@ -77,14 +115,13 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-6 is-offset-3">
-                    <h1 class="title">
-                        Coming Soon
-                    </h1>
-                    <h2 class="subtitle">
-                        $this is the best software platform for running an internet business. We handle billions of
-                        dollars every year for forward-thinking businesses around the world.
-                    </h2>
-                    <div class="box">
+                    <p class="title is-1 has-text-white">Selamat Datang</p>
+                    <p class="subtitle is-6 has-text-white">Di website desa wisata Kampung Tudung, Ayo jelajahi lebih
+                        jauh mengenai "Wiskadung"</p>
+                    <button class="button is-primary" data-scroll href="#about">
+                        <strong>Jelajahi </strong> <i class="fas fa-arrow-right"></i>
+                    </button>
+                    {{-- <div class="box">
                         <div class="field is-grouped">
                             <p class="control is-expanded">
                                 <input class="input" type="text" placeholder="Enter your email">
@@ -95,56 +132,225 @@
                                 </a>
                             </p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <figure class="image is-16by9">
-                    <iframe class="img has-ratio" width="640" height="360"
-                        src="{{ asset('main-image/portfolio_1.jpg') }}" frameborder="0" allowfullscreen></iframe>
-                </figure>
-
-            </div>
-            <div class="container">
-                <p class="title is-2">Title 2</p>
-                <p class="subtitle is-4">Subtitle 4</p>
             </div>
         </div>
-
-        ...<p>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.
-        </p>
-        <p>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
-            .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>.
-        </p>
-        <div id="bazinga">Bazinga!</div>
     </section>
-    <section class="container gallery" id="gallery">
+    <section class="container about" id="about" style="margin-top: 30px;">
         <div class="columns">
-            <div class="column">
-                <!-- 01 -->
-                <img class="modal-button pointer" data-target="modal-01"
-                    src="https://www.freagraphy.de/wp-content/uploads/2017/10/MG_8072_end-120x130.jpg">
+            <div class="column has-text-centered">
+                <img src="{{ asset('main-image/selfie.jpg') }}" class="img" alt="" width="300"
+                    height="300">
+            </div>
+            <div class="column mt-5">
+                <p class="title">
+                    Tentang Kami
+                </p>
+                <p class="subtitle has-text-primary">
+                    Kampung Tudung
+                </p>
+                <hr class="is-primary" width="10%">
+                <p class="content has-text-justified">
+                    Kampung Tudung merupakan desa wisata yang terletak di Desa Grujugan, Kecamatan Petanahan, Kabupaten
+                    Kebumen. Wisata pendidikan atau wisata edukasi, bisa juga disebut
+                    sebagai anjangkarya atau karyawisata adalah suatu kegiatan
+                    atau perjalanan yang dilakukan untuk rekreasi atau liburan dan juga
+                    terdapat aktivitas edukasi atau pendidikan di dalamnya. Ada banyak
+                    kegiatan wisata edukasi yang bisa di lakukan khususnya bagi anak-
+                    anak untuk di Desa Wisata Kampung Tudung, anak-anak biasa belajar
+                    membuat Tudung/Caping, Besek, Ilir/kipas dan anyaman dari bambu.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="container gallery my-5" id="gallery">
+        <div class="text-has-centered mb-3">
+            <p class="title">
+                Gallery
+            </p>
+            <p class="subtitle has-text-primary">
+                Kampung Tudung
+            </p>
+            <hr class="is-primary" width="10%">
+        </div>
+        <div class="columns">
+            <div class="column is-6 has-text-centered">
+                <img class="modal-button pointer img" data-target="modal-01"
+                    src="{{ asset('main-image/DSC_2416.jpg') }}" alt="" width="450" height="450">
                 <div id="modal-01" class="modal modal-fx-fadeInScale">
                     <div class="modal-background"></div>
                     <div class="modal-content">
-                        <img src="https://www.freagraphy.de/wp-content/uploads/2017/10/MG_8072_end.jpg">
+                        <img src="{{ asset('main-image/DSC_2416.jpg') }}" width="450" height="450">
                     </div>
                     <button class="modal-close is-large" aria-label="close"></button>
                 </div>
                 <div id="modal-01" class="modal modal-fx-fadeInScale"></div>
             </div>
+            <div class="column is-3">
+                <img class="modal-button pointer atas" data-target="modal-02"
+                    src="{{ asset('main-image/portfolio_big_2.jpg') }}" alt="">
+                <div id="modal-02" class="modal modal-fx-fadeInScale">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <img src="{{ asset('main-image/portfolio_big_2.jpg') }}">
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+                <div id="modal-02" class="modal modal-fx-fadeInScale"></div>
+                <img class="modal-button pointer mt-3 kiri" data-target="modal-06"
+                    src="{{ asset('main-image/portfolio_5.jpg') }}" alt="">
+                <div id="modal-06" class="modal modal-fx-fadeInScale">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <img src="{{ asset('main-image/portfolio_5.jpg') }}">
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+                <div id="modal-06" class="modal modal-fx-fadeInScale"></div>
+                <img class="modal-button pointer mt-3 ki" data-target="modal-05"
+                    src="{{ asset('main-image/portfolio_4.jpg') }}" alt="">
+                <div id="modal-05" class="modal modal-fx-fadeInScale">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <img src="{{ asset('main-image/portfolio_4.jpg') }}">
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+                <div id="modal-05" class="modal modal-fx-fadeInScale"></div>
+            </div>
+            <div class="column is-3">
+                <img class="modal-button pointer mb-3 kiri" data-target="modal-04"
+                    src="{{ asset('main-image/slide_3.jpg') }}" alt="">
+                <div id="modal-04" class="modal modal-fx-fadeInScale">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <img src="{{ asset('main-image/slide_3.jpg') }}" height="450" width="450">
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+                <div id="modal-04" class="modal modal-fx-fadeInScale"></div>
+                <img class="modal-button pointer" data-target="modal-03"
+                    src="{{ asset('main-image/portfolio_big_3.jpg') }}" alt="">
+                <div id="modal-03" class="modal modal-fx-fadeInScale">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <img src="{{ asset('main-image/portfolio_big_3.jpg') }}">
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+                <div id="modal-03" class="modal modal-fx-fadeInScale"></div>
+            </div>
         </div>
     </section>
-    <section class="container video" id="video">
+    <section class="section produk">
+        <div class="container is-clipped">
+            <div id="slider">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9 is-covered">
+                            <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                                alt="" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            Mon titre 1
+                        </div>
+                        <div class="item__description">
+                            Ici une petite description pour tester le slider
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9 is-covered">
+                            <img src="https://images.unsplash.com/photo-1550945771-515f118cef86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                                alt="" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            Mon titre 2
+                        </div>
+                        <div class="item__description">
+                            Ici une petite description pour tester le slider
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9 is-covered">
+                            <img src="https://images.unsplash.com/photo-1550971264-3f7e4a7bb349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                                alt="" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            Mon titre 3
+                        </div>
+                        <div class="item__description">
+                            Ici une petite description pour tester le slider
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9 is-covered">
+                            <img src="https://images.unsplash.com/photo-1550931937-2dfd45a40da0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                                alt="" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            Mon titre 4
+                        </div>
+                        <div class="item__description">
+                            Ici une petite description pour tester le slider
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9 is-covered">
+                            <img src="https://images.unsplash.com/photo-1550930516-af8b8cc4f871?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                                alt="" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            Mon titre 5
+                        </div>
+                        <div class="item__description">
+                            Ici une petite description pour tester le slider
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image video-container is-16by9">
+                            <iframe type="text/html" src="https://www.youtube.com/embed/H0v773vKS_U"
+                                frameborder="0"></iframe>
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="item__title">
+                            <strong>Kipas</strong>
+                        </div>
+                        <div class="item__description">
+                            <p>Ici une petite description pour tester le slider</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container video my-5" id="video">
         <div class="card">
             <div class="card-content">
                 <div class="columns">
@@ -156,13 +362,7 @@
                             Kampung Tudung
                         </p>
                         <p class="content">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing software like Aldus PageMaker including
-                            versions of Lorem Ipsum.
+                            Kalian bisa lihat video profil Desa Wisata Kampung Tudung di channel YouTube kami
                         </p>
                     </div>
                     <div class="column">
@@ -257,6 +457,52 @@
             </div>
         </div>
     </section>
+    <footer class="footer">
+        <div class="content has-text-centered bg-primary mb-0">
+            <div class="columns">
+                <div class="column is-2 is-offset-5">
+                    <nav class="level">
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <a href="http://wa.me/6282323723593">
+                                    <span class="icon-text">
+                                        <span class="icon has-text-success">
+                                            <i class="fab fa-whatsapp fa-2x"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <a href="https://www.instagram.com/desa_grujugan/">
+                                    <span class="icon-text">
+                                        <span class="icon has-text-info">
+                                            <i class="fab fa-instagram fa-2x"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
+                                    <span class="icon-text">
+                                        <span class="icon has-text-danger">
+                                            <i class="fab fa-youtube fa-2x"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <p>
+                <strong>Powered</strong> by SID. Work.
+            </p>
+        </div>
+    </footer>
     <script async type="text/javascript" src="{{ asset('js/bulma.js') }}"></script>
     <!-- Always get the latest version -->
     <!-- Not recommended for production sites! -->
@@ -271,6 +517,7 @@
     <!-- Get a specific version -->
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
     <script>
         var scroll = new SmoothScroll('a[href*="#"]', {
@@ -280,7 +527,15 @@
 
         var image = document.getElementsByClassName('img');
         new simpleParallax(image, {
-            orientation: 'right'
+            orientation: 'right',
+            overflow: true,
+            scale: 1.5
+        });
+
+        bulmaCarousel.attach('#slider', {
+            slidesToScroll: 1,
+            slidesToShow: 3,
+            infinite: true,
         });
     </script>
 </body>
