@@ -60,7 +60,7 @@
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Gambar">
-                                            <img src="{{ url('product/' . $p->gambar) }}" alt="">
+                                            <img src="{{ asset('storage/' . $p->gambar) }}" alt="">
                                         </td>
                                         <td data-label="Judul">{{ $p->judul }}</td>
                                         <td data-label="Deskripsi">{{ $p->deskripsi }}</td>

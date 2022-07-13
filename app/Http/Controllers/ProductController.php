@@ -47,31 +47,33 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $gambar     = $request->gambar;
         $judul     = $request->judul;
         $deskripsi     = $request->deskripsi;
-        $a = $request->file('gambar')->getClientOriginalName();
-        dd($a);
-        // $password     = $request->password;
 
-        // $validator = Validator::make($request->all(), [
-        //         'username' => 'required',
-        //         'password' => 'required',
-        //     ]);
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'required|image|file',
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
 
-        // if ($validator->fails()) {
-        //     return redirect('/admin/create')->withErrors($validator)
-        //     ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
-        // }
+        if ($validator->fails()) {
+            return redirect('/product/create')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Produk', 'type' => 'error']);
+        }
 
-        // $admin = new Admin;
+        if ($request->file('gambar')) {
+            $gambar = $request->file('gambar')->store('product-image');
+        }
 
-        // $admin->username = $username;
-        // $admin->password = Hash::make($password);
+        $product = new Product;
 
-        // $admin->save();
+        $product->gambar = $gambar;
+        $product->judul = $judul;
+        $product->deskripsi = $deskripsi;
 
-        // return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Admin', 'type' => 'success']);
+        $product->save();
+
+        return redirect('product')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Produk', 'type' => 'success']);
     }
 
     /**

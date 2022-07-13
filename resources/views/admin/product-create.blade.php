@@ -43,8 +43,7 @@
                         <div class="file is-normal">
                             <label class="file-label">
                                 <input class="file-input @error('gambar') is-danger @enderror" accept="image/*"
-                                    onchange="showMyImage(this)" type="file" name="gambar"
-                                    value="{{ old('gambar') }}">
+                                    onchange="showMyImage(this)" type="file" name="gambar">
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fas fa-upload"></i>
