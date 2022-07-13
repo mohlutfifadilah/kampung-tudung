@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SendController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ConfirmController;
 
 
@@ -27,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     //
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('/admin', AdminController::class);
+    Route::resource('/product', ProductController::class);
     Route::resource('/confirm', ConfirmController::class);
 });
 

@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li>
-                <a href="tables.html" class="has-icon">
+                <a href="/product" class="has-icon {{ $title === 'produk' ? 'is-active router-link-active' : '' }}">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                     <span class="icon"><i class="mdi mdi-table"></i></span>
                     <span class="menu-item-label">Produk</span>
@@ -41,7 +41,7 @@
         <p class="menu-label">Pesanan</p>
         <ul class="menu-list">
             <li>
-                <a href="https://github.com/vikdiesel/admin-one-bulma-dashboard" target="_blank" class="has-icon">
+                <a href="/confirm" class="has-icon {{ $title === 'admin' ? 'is-active router-link-active' : '' }}">
                     <span class="icon"><i class="mdi mdi-github-circle"></i></span>
                     <span class="menu-item-label">Konfirmasi Pesanan</span>
                 </a>

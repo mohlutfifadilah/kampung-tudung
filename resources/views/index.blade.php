@@ -118,9 +118,9 @@
                     <p class="title is-1 has-text-white">Selamat Datang</p>
                     <p class="subtitle is-6 has-text-white">Di website desa wisata Kampung Tudung, Ayo jelajahi lebih
                         jauh mengenai "Wiskadung"</p>
-                    <button class="button is-primary" data-scroll href="#about">
+                    <a class="button is-primary" data-scroll href="#about">
                         <strong>Jelajahi </strong> <i class="fas fa-arrow-right"></i>
-                    </button>
+                    </a>
                     {{-- <div class="box">
                         <div class="field is-grouped">
                             <p class="control is-expanded">
@@ -176,8 +176,8 @@
         </div>
         <div class="columns">
             <div class="column is-6 has-text-centered">
-                <img class="modal-button pointer img" data-target="modal-01"
-                    src="{{ asset('main-image/DSC_2416.jpg') }}" alt="" width="450" height="450">
+                <img class="modal-button pointer" data-target="modal-01" src="{{ asset('main-image/DSC_2416.jpg') }}"
+                    alt="" width="450" height="450">
                 <div id="modal-01" class="modal modal-fx-fadeInScale">
                     <div class="modal-background"></div>
                     <div class="modal-content">
@@ -208,7 +208,7 @@
                     <button class="modal-close is-large" aria-label="close"></button>
                 </div>
                 <div id="modal-06" class="modal modal-fx-fadeInScale"></div>
-                <img class="modal-button pointer mt-3 ki" data-target="modal-05"
+                <img class="modal-button pointer mt-3" data-target="modal-05"
                     src="{{ asset('main-image/portfolio_4.jpg') }}" alt="">
                 <div id="modal-05" class="modal modal-fx-fadeInScale">
                     <div class="modal-background"></div>
@@ -230,7 +230,7 @@
                     <button class="modal-close is-large" aria-label="close"></button>
                 </div>
                 <div id="modal-04" class="modal modal-fx-fadeInScale"></div>
-                <img class="modal-button pointer" data-target="modal-03"
+                <img class="modal-button pointer kanan" data-target="modal-03"
                     src="{{ asset('main-image/portfolio_big_3.jpg') }}" alt="">
                 <div id="modal-03" class="modal modal-fx-fadeInScale">
                     <div class="modal-background"></div>
