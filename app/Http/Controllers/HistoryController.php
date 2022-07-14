@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Confirm;
 use App\Models\Paket;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
-class ConfirmController extends Controller
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +16,11 @@ class ConfirmController extends Controller
     public function index()
     {
         //
-        $confirm = Confirm::where('status', 0)->paginate(10);
+        $history = Confirm::where('status', 1)->paginate(10);
         $paket = Paket::all();
-        return view('admin.confirm', [
-            'title' => 'confirm',
-            'confirm' => $confirm,
+        return view('admin.history', [
+            'title' => 'history',
+            'history' => $history,
             'paket' => $paket
         ]);
     }
@@ -57,11 +54,7 @@ class ConfirmController extends Controller
      */
     public function show($id)
     {
-        // 
-        $confirm = Confirm::find($id);
-        return view('admin.confirm-show', [
-            'confirm' => $confirm
-        ]);
+        //
     }
 
     /**
@@ -96,14 +89,5 @@ class ConfirmController extends Controller
     public function destroy($id)
     {
         //
-        $confirm = Confirm::find($id);
-
-        DB::table('pesan')
-            ->where('id', $id)
-            ->update([
-                'status'      => 1,
-            ]);
-
-        return redirect('confirm')->with(['status' => 'Berhasil Dikonfirmasi', 'title' => 'Data Pesanan', 'type' => 'success']);
     }
 }

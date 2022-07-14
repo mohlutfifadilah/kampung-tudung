@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Confirm;
 
 class DashboardController extends Controller
 {
@@ -14,8 +16,14 @@ class DashboardController extends Controller
     public function index()
     {
         //
+        $product = Product::all();
+        $uncofirmed = Confirm::where('status', 0);
+        $confirmed = Confirm::where('status', 1);
         return view('admin.dashboard', [
-            'title' => 'dashboard'
+            'title' => 'dashboard',
+            'product' => $product,
+            'unconfirmed' => $uncofirmed,
+            'confirmed' => $confirmed
         ]);
     }
 

@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css" />
-
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         .pointer {
             cursor: pointer;
@@ -66,6 +69,17 @@
 </head>
 
 <body>
+    @if (session('status'))
+        <script>
+            swal({
+                text: "{!! session('status') !!}",
+                title: "{!! session('title') !!}",
+                type: "{!! session('type') !!}",
+                icon: "{!! session('type') !!}",
+                // more options
+            });
+        </script>
+    @endif
     <section class="hero is-fullheight mb-5" data-scroll href="#home">
         <div class="hero-head">
             <nav data-scroll-header class="navbar" role="navigation" aria-label="main navigation">
@@ -246,107 +260,23 @@
     <section class="section produk">
         <div class="container is-clipped">
             <div id="slider">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-16by9 is-covered">
-                            <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            Mon titre 1
+                @foreach ($produk as $p)
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-16by9 is-covered">
+                                <img src="{{ asset('storage/' . $p->gambar) }}" alt="" />
+                            </figure>
                         </div>
-                        <div class="item__description">
-                            Ici une petite description pour tester le slider
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-16by9 is-covered">
-                            <img src="https://images.unsplash.com/photo-1550945771-515f118cef86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            Mon titre 2
-                        </div>
-                        <div class="item__description">
-                            Ici une petite description pour tester le slider
+                        <div class="card-content">
+                            <div class="item__title has-text-centered has-text-weight-bold">
+                                {{ $p->judul }}
+                            </div>
+                            <div class="item__description">
+                                {{ $p->deskripsi }}
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-16by9 is-covered">
-                            <img src="https://images.unsplash.com/photo-1550971264-3f7e4a7bb349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            Mon titre 3
-                        </div>
-                        <div class="item__description">
-                            Ici une petite description pour tester le slider
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-16by9 is-covered">
-                            <img src="https://images.unsplash.com/photo-1550931937-2dfd45a40da0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            Mon titre 4
-                        </div>
-                        <div class="item__description">
-                            Ici une petite description pour tester le slider
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-16by9 is-covered">
-                            <img src="https://images.unsplash.com/photo-1550930516-af8b8cc4f871?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                                alt="" />
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            Mon titre 5
-                        </div>
-                        <div class="item__description">
-                            Ici une petite description pour tester le slider
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image video-container is-16by9">
-                            <iframe type="text/html" src="https://www.youtube.com/embed/H0v773vKS_U"
-                                frameborder="0"></iframe>
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="item__title">
-                            <strong>Kipas</strong>
-                        </div>
-                        <div class="item__description">
-                            <p>Ici une petite description pour tester le slider</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -394,22 +324,33 @@
                         <div class="column">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Nama / Instansi"
-                                        name="nama">
+                                    <input class="input @error('nama') is-danger @enderror" type="text"
+                                        placeholder="Nama / Instansi" name="nama" value="{{ old('nama') }}">
+                                    @error('nama')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Alamat" name="alamat">
+                                    <input class="input @error('alamat') is-danger @enderror" type="text"
+                                        placeholder="Alamat" name="alamat" value="{{ old('alamat') }}">
+                                    @error('alamat')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="No. Telepon" name="no">
+                                    <input class="input @error('no') is-danger @enderror" type="text"
+                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}">
+                                    @error('no')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -418,22 +359,54 @@
                         <div class="column">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input" type="date" placeholder="Tanggal" name="tanggal">
+                                    <input class="input @error('tanggal') is-danger @enderror" type="date"
+                                        placeholder="Tanggal" name="tanggal" value="{{ old('tanggal') }}">
+                                    @error('tanggal')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="column">
                             <div class="field">
                                 <div class="control">
+                                    <input class="input @error('email') is-danger @enderror" type="email"
+                                        placeholder="E-mail" name="email" value="{{ old('email') }}">
+                                    @error('email')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input @error('jumlah') is-danger @enderror" type="text"
+                                        placeholder="Jumlah Orang" name="jumlah" value="{{ old('jumlah') }}">
+                                    @error('jumlah')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-4">
+                            <div class="field">
+                                <div class="control">
                                     <div class="select">
-                                        <select class="input" style="width: 100%;" name="paket">
-                                            <option>Pilih Paket</option>
-                                            <option>Tudung</option>
-                                            <option>Ilir</option>
-                                            <option>Ethnik</option>
-                                            <option>Lukis Ilis</option>
-                                            <option>Tudung Batik</option>
+                                        <select class="input @error('paket') is-danger @enderror" style="width: 100%;"
+                                            name="paket">
+                                            <option selected disabled>Pilih Paket</option>
+                                            @foreach ($paket as $p)
+                                                <option value="{{ $p->id }}">{{ $p->nama }}
+                                                    ({{ $p->harga }}/orang)
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        @error('paket')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -441,16 +414,7 @@
                         <div class="column">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Jumlah Orang" name="jumlah">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column">
-                            <div class="field">
-                                <div class="control">
-                                    <textarea class="textarea" placeholder="Pesan" name="pesan"></textarea>
+                                    <textarea class="textarea" placeholder="Pesan (Opsional)" name="pesan">{{ old('pesan') }}</textarea>
                                 </div>
                             </div>
                         </div>

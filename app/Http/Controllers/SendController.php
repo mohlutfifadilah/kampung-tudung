@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Confirm;
+use App\Models\Paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -17,42 +19,53 @@ class SendController extends Controller
         $no     = $request->no;
         $tanggal     = $request->tanggal;
         $paket     = $request->paket;
-        if ($paket == 'Tudung') {
-            $paket = 30000;
-        } else if ($paket == 'Ilir') {
-            $paket = 23000;
-        } else if ($paket == 'Ethnik') {
-            $paket = 30000;
-        } else if ($paket == 'Lukis Ilis') {
-            $paket = 21000;
-        } else {
-            $paket = 57500;
-        }
+        // if ($paket == 'Tudung') {
+        //     $paket = 30000;
+        // } else if ($paket == 'Ilir') {
+        //     $paket = 23000;
+        // } else if ($paket == 'Ethnik') {
+        //     $paket = 30000;
+        // } else if ($paket == 'Lukis Ilis') {
+        //     $paket = 21000;
+        // } else {
+        //     $paket = 57500;
+        // }
         $jumlah     = $request->jumlah;
+        $email     = $request->email;
         $pesan     = $request->pesan;
-        $total     = $paket * $jumlah;
+        $p = Paket::find($paket);
+        $total     = $p->harga * (int) $jumlah;
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'nama' => 'required',
             'alamat' => 'required',
-            'no' => 'required',
+            'no' => 'required|numeric',
             'tanggal' => 'required',
             'paket' => 'required',
-            'jumlah' => 'required',
+            'jumlah' => 'required|numeric|max:10',
+            'email' => 'email:rfc,dns|required',
         ]);
 
         if ($validator->fails()) {
             return redirect('/#booking')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Booking', 'type' => 'error']);
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Gagal Booking', 'type' => 'error']);
         }
 
-        // $admin = new Admin;
+        $confirm = new Confirm;
 
-        // $admin->username = $username;
-        // $admin->password = Hash::make($password);
+        $confirm->nama = $nama;
+        $confirm->alamat = $alamat;
+        $confirm->nohp = $no;
+        $confirm->tanggal = $tanggal;
+        $confirm->paket = $paket;
+        $confirm->jumlahorang = $jumlah;
+        $confirm->email = $email;
+        $confirm->catatan = $pesan;
+        $confirm->total = $total;
+        $confirm->status = 0;
 
-        // $admin->save();
+        $confirm->save();
 
-        // return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Admin', 'type' => 'success']);
+        return redirect('/')->with(['status' => 'Telah dikirim, cek email anda', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }
 }

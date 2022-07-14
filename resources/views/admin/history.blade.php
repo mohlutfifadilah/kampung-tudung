@@ -1,4 +1,4 @@
-@section('title', 'Konfirmasi')
+@section('title', 'Riwayat')
 @include('admin.template.header')
 @include('admin.template.sidebar')
 @if (session('status'))
@@ -19,18 +19,13 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Konfirmasi Pesanan</b><br>
+                        <b>Riwayat</b><br>
                         <small class="ml-2">
-                            Total data : {{ $confirm->total() }}
+                            Total data : {{ $history->total() }}
                         </small>
                     </div>
                 </div>
             </div>
-            {{-- <div class="level-right">
-                <a href="/confirm/create" class="button is-small is-info">
-                    <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
-                </a>
-            </div> --}}
         </div>
     </div>
 
@@ -38,7 +33,7 @@
         <div class="card-content">
             <div class="b-table has-pagination">
                 <div class="table-wrapper has-mobile-cards">
-                    @if ($confirm->count())
+                    @if ($history->count())
                         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
@@ -51,47 +46,40 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Tanggal</th>
-                                    <th>Catatan</th>
                                     <th>Paket</th>
-                                    <th>Harga</th>
                                     <th>Jumlah Orang</th>
+                                    <th>Catatan</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    <th>Aksi</th>
+                                    {{-- <th>Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($confirm as $c)
+                                @foreach ($history as $c)
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $c->nama }}</td>
                                         <td data-label="Tanggal">{{ $c->tanggal }}</td>
-                                        <td data-label="Catatan">{{ $c->catatan }}</td>
-                                        @php
-                                            $nama_paket = \App\Models\Paket::where('id', $c->paket)->value('nama');
-                                            $harga_paket = \App\Models\Paket::where('id', $c->paket)->value('harga');
-                                        @endphp
-                                        <td data-label="Paket">{{ $nama_paket }}</td>
-                                        <td data-label="Harga">{{ $harga_paket }}</td>
+                                        <td data-label="Paket">{{ $c->paket }}</td>
                                         <td data-label="Jumlahorang">{{ $c->jumlahorang }}</td>
+                                        <td data-label="Catatan">{{ $c->catatan }}</td>
                                         <td data-label="Total">{{ $c->total }}</td>
                                         <td data-label="Status">
                                             <span
-                                                class="tag is-warning is-medium has-text-white has-text-weight-bold">Belum
-                                                Dikonfirmasi</span>
+                                                class="tag is-success is-medium has-text-white has-text-weight-bold">Dikonfirmasi</span>
                                         </td>
-                                        <td class="is-actions-cell">
+                                        {{-- <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                {{-- <a href="/confirm/{{ $c->id }}"
+                                                <a href="/confirm/{{ $c->id }}"
                                                     class="button is-small is-info text-white"><span class="icon"><i
-                                                            class="fa-solid fa-info"></i></span></a> --}}
+                                                            class="fa-solid fa-info"></i></span></a>
                                                 <button class="button is-small is-success remove-user text-white"
                                                     type="submit" data-id="{{ $c->id }}"
                                                     data-action="{{ route('confirm.destroy', $c->id) }}">
                                                     <span class="icon"><i class="fa-solid fa-check"></i></span>
                                                 </button>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -112,13 +100,13 @@
                         </div>
                     @endif
                 </div>
-                @if ($confirm->count())
+                @if ($history->count())
                     <hr>
                     <div class="columns px-5 pb-5">
                         <div class="column">
 
                             <ul class="pagination-list">
-                                {{ $confirm->links() }}
+                                {{ $history->links() }}
                             </ul>
                         </div>
                         <div class="column">
@@ -129,8 +117,8 @@
                         </div>
                         <div class="column has-text-right">
                             <small>
-                                Halaman ke {{ $confirm->currentPage() }} dari
-                                {{ $confirm->count() }}
+                                Halaman ke {{ $history->currentPage() }} dari
+                                {{ $history->count() }}
                             </small>
                         </div>
                     </div>

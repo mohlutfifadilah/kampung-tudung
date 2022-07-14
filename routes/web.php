@@ -6,7 +6,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ConfirmController;
+use App\Http\Controllers\PaketController;
+use App\Models\Paket;
+use App\Models\Product;
 
 
 /*
@@ -21,7 +25,12 @@ use App\Http\Controllers\ConfirmController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $paket = Paket::all();
+    $product = Product::all();
+    return view('index', [
+        'paket' => $paket,
+        'produk' => $product
+    ]);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -30,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/admin', AdminController::class);
     Route::resource('/product', ProductController::class);
     Route::resource('/confirm', ConfirmController::class);
+    Route::resource('/paket', PaketController::class);
+    Route::resource('/history', HistoryController::class);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

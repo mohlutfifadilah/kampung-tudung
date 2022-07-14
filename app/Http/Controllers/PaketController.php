@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Admin;
+use App\Models\Paket;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-class AdminController extends Controller
+class PaketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +17,10 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $admin = Admin::paginate(10);
-        return view('admin.admin', [
-            'title' => 'admin',
-            'admin' => $admin
+        $paket = Paket::paginate(10);
+        return view('admin.paket', [
+            'title' => 'paket',
+            'paket' => $paket
         ]);
     }
 
@@ -33,8 +32,8 @@ class AdminController extends Controller
     public function create()
     {
         //
-        return view('admin.admin-create', [
-            'title' => 'admin'
+        return view('admin.paket-create', [
+            'title' => 'paket'
         ]);
     }
 
@@ -47,27 +46,27 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
-        $username     = $request->username;
-        $password     = $request->password;
+        $nama     = $request->nama;
+        $harga     = $request->harga;
 
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
+            'nama' => 'required',
+            'harga' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('/admin/create')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            return redirect('/paket/create')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
         }
 
-        $admin = new Admin;
+        $paket = new Paket;
 
-        $admin->username = $username;
-        $admin->password = Hash::make($password);
+        $paket->nama = $nama;
+        $paket->harga = $harga;
 
-        $admin->save();
+        $paket->save();
 
-        return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Admin', 'type' => 'success']);
+        return redirect('paket')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Paket', 'type' => 'success']);
     }
 
     /**
@@ -90,10 +89,10 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
-        $id  = Admin::find($id);
-        return view('admin.admin-edit', [
+        $id  = Paket::find($id);
+        return view('admin.paket-edit', [
             'id' => $id,
-            'title' => 'admin'
+            'title' => 'paket'
         ]);
     }
 
@@ -107,27 +106,27 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $username     = $request->username;
-        $password     = $request->password;
+        $nama     = $request->nama;
+        $harga     = $request->harga;
 
         $validator = Validator::make($request->all(), [
-            'username'        => 'required',
-            'password'        => 'required|confirmed',
+            'nama'        => 'required',
+            'harga'        => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('admin/' . $id . '/edit')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            return redirect('paket/' . $id . '/edit')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
         }
 
-        DB::table('users')
+        DB::table('paket')
             ->where('id', $id)
             ->update([
-                'username'       => $username,
-                'password'       => Hash::make($password),
+                'nama'       => $nama,
+                'harga'       => $harga,
             ]);
 
-        return redirect('admin')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Admin', 'type' => 'success']);
+        return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
     }
 
     /**
@@ -139,9 +138,9 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-        $admin  = Admin::find($id);
-        $admin->delete();
+        $paket  = Paket::find($id);
+        $paket->delete();
 
-        return redirect('admin')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Admin', 'type' => 'success']);
+        return redirect('paket')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Paket', 'type' => 'success']);
     }
 }

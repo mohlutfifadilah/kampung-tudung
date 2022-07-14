@@ -17,13 +17,13 @@ class CreatePesanTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
-            $table->integer('nohp');
+            $table->string('nohp')->length(255);
             $table->date('tanggal');
             $table->string('paket');
-            $table->integer('jumlah-orang');
-            $table->string('catatan');
+            $table->integer('jumlahorang');
+            $table->string('email');
+            $table->string('catatan')->nullable();
             $table->integer('total');
-            $table->text('evidence');
             $table->integer('status');
             $table->timestamps();
         });

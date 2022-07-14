@@ -19,18 +19,13 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Konfirmasi Pesanan</b><br>
-                        <small class="ml-2">
+                        <b>Info Konfirmasi Pesanan</b><br>
+                        {{-- <small class="ml-2">
                             Total data : {{ $confirm->total() }}
-                        </small>
+                        </small> --}}
                     </div>
                 </div>
             </div>
-            {{-- <div class="level-right">
-                <a href="/confirm/create" class="button is-small is-info">
-                    <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
-                </a>
-            </div> --}}
         </div>
     </div>
 
@@ -50,11 +45,12 @@
                                 </th> --}}
                                     <th>No</th>
                                     <th>Nama</th>
+                                    <th>Alamat</th>
+                                    <th>No. Handphone</th>
                                     <th>Tanggal</th>
-                                    <th>Catatan</th>
                                     <th>Paket</th>
-                                    <th>Harga</th>
                                     <th>Jumlah Orang</th>
+                                    <th>Catatan</th>
                                     <th>Total</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -65,26 +61,27 @@
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $c->nama }}</td>
+                                        <td data-label="Alamat">{{ $c->alamat }}</td>
+                                        <td data-label="Nohp">{{ $c->nohp }}</td>
                                         <td data-label="Tanggal">{{ $c->tanggal }}</td>
-                                        <td data-label="Catatan">{{ $c->catatan }}</td>
-                                        @php
-                                            $nama_paket = \App\Models\Paket::where('id', $c->paket)->value('nama');
-                                            $harga_paket = \App\Models\Paket::where('id', $c->paket)->value('harga');
-                                        @endphp
-                                        <td data-label="Paket">{{ $nama_paket }}</td>
-                                        <td data-label="Harga">{{ $harga_paket }}</td>
+                                        <td data-label="Paket">{{ $c->paket }}</td>
                                         <td data-label="Jumlahorang">{{ $c->jumlahorang }}</td>
+                                        <td data-label="Catatan">{{ $c->catatan }}</td>
                                         <td data-label="Total">{{ $c->total }}</td>
                                         <td data-label="Status">
-                                            <span
-                                                class="tag is-warning is-medium has-text-white has-text-weight-bold">Belum
-                                                Dikonfirmasi</span>
+                                            @if ($c->status == 0)
+                                                <span class="tag is-warning is-medium text-white has-text-bold">Belum
+                                                    Dikonfirmasi</span>
+                                            @else
+                                                <span
+                                                    class="tag is-success is-medium text-white has-text-bold">Dikonfirmasi</span>
+                                            @endif
                                         </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                {{-- <a href="/confirm/{{ $c->id }}"
+                                                <a href="/confirm/{{ $c->id }}"
                                                     class="button is-small is-info text-white"><span class="icon"><i
-                                                            class="fa-solid fa-info"></i></span></a> --}}
+                                                            class="fa-solid fa-info"></i></span></a>
                                                 <button class="button is-small is-success remove-user text-white"
                                                     type="submit" data-id="{{ $c->id }}"
                                                     data-action="{{ route('confirm.destroy', $c->id) }}">
@@ -144,13 +141,13 @@
         var current_object = $(this);
         swal({
             title: "Apakah anda yakin ?",
-            text: "Konfirmasi Pesanan ini",
+            text: "Hapus data ini",
             type: "warning",
             showCancelButton: true,
             dangerMode: true,
             cancelButtonClass: '#DD6B55',
-            confirmButtonColor: '#48c78e',
-            confirmButtonText: 'Konfirmasi',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Hapus',
             cancelButtonText: 'Batal',
         }, function(result) {
             if (result) {
