@@ -41,7 +41,7 @@
         <p class="menu-label">Pesanan</p>
         <ul class="menu-list">
             <li>
-                <a href="/confirm" class="has-icon {{ $title === 'admin' ? 'is-active router-link-active' : '' }}">
+                <a href="/confirm" class="has-icon {{ $title === 'confirm' ? 'is-active router-link-active' : '' }}">
                     <span class="icon"><i class="mdi mdi-github-circle"></i></span>
                     <span class="menu-item-label">Konfirmasi Pesanan</span>
                 </a>

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Confirm;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ConfirmController extends Controller
 {
@@ -14,6 +18,11 @@ class ConfirmController extends Controller
     public function index()
     {
         //
+        $confirm = Confirm::paginate(2);
+        return view('admin.confirm', [
+            'title' => 'confirm',
+            'confirm' => $confirm
+        ]);
     }
 
     /**

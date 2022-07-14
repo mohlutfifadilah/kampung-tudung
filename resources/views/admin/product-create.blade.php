@@ -65,7 +65,7 @@
                     <div class="field-label is-normal">
                     </div>
                     <div class="field-body">
-                        <img id="thumbnail" src="" alt="" />
+                        <img id="thumbnail" src="" alt="" style="max-height: 200px;">
                     </div>
                 </div>
                 <div class="field is-horizontal mb-5">

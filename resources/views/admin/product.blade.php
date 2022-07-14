@@ -60,7 +60,8 @@
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Gambar">
-                                            <img src="{{ asset('storage/' . $p->gambar) }}" alt="">
+                                            <img src="{{ asset('storage/' . $p->gambar) }}" alt=""
+                                                style="max-height: 200px; max-width: 400px;">
                                         </td>
                                         <td data-label="Judul">{{ $p->judul }}</td>
                                         <td data-label="Deskripsi">{{ $p->deskripsi }}</td>

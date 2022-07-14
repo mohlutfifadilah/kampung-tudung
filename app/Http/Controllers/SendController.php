@@ -17,10 +17,16 @@ class SendController extends Controller
         $no     = $request->no;
         $tanggal     = $request->tanggal;
         $paket     = $request->paket;
-        if ($paket == 'Paket Eduwisata') {
-            $paket = 15000;
-        } else if ($paket == 'Paket Spot Selfie') {
-            $paket = 10000;
+        if ($paket == 'Tudung') {
+            $paket = 30000;
+        } else if ($paket == 'Ilir') {
+            $paket = 23000;
+        } else if ($paket == 'Ethnik') {
+            $paket = 30000;
+        } else if ($paket == 'Lukis Ilis') {
+            $paket = 21000;
+        } else {
+            $paket = 57500;
         }
         $jumlah     = $request->jumlah;
         $pesan     = $request->pesan;
@@ -36,8 +42,8 @@ class SendController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/admin/create')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            return redirect('/#booking')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Booking', 'type' => 'error']);
         }
 
         // $admin = new Admin;

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -96,6 +96,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $id  = Product::find($id);
+        return view('admin.product-edit', [
+            'id' => $id,
+            'title' => 'produk'
+        ]);
     }
 
     /**
@@ -108,6 +113,36 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $u = Product::find($id);
+        $judul     = $request->judul;
+        $deskripsi     = $request->deskripsi;
+        $gambar = $u->gambar;
+
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'image|file',
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('product/' . $id . '/edit')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Produk', 'type' => 'error']);
+        }
+
+        if ($request->file('gambar')) {
+            Storage::delete($gambar);
+            $gambar = $request->file('gambar')->store('product-image');
+        }
+
+        DB::table('produk')
+            ->where('id', $id)
+            ->update([
+                'judul'       => $judul,
+                'deskripsi'   => $deskripsi,
+                'gambar'      => $gambar,
+            ]);
+
+        return redirect('product')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Produk', 'type' => 'success']);
     }
 
     /**
@@ -119,5 +154,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $produk = Product::find($id);
+        Storage::delete($produk->gambar);
+        Product::destroy($id);
+
+        return redirect('product')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Produk', 'type' => 'success']);
     }
 }

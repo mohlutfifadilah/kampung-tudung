@@ -428,8 +428,11 @@
                                     <div class="select">
                                         <select class="input" style="width: 100%;" name="paket">
                                             <option>Pilih Paket</option>
-                                            <option>Paket Eduwisata</option>
-                                            <option>Paket Spot Selfie</option>
+                                            <option>Tudung</option>
+                                            <option>Ilir</option>
+                                            <option>Ethnik</option>
+                                            <option>Lukis Ilis</option>
+                                            <option>Tudung Batik</option>
                                         </select>
                                     </div>
                                 </div>
