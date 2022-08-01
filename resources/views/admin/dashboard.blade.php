@@ -10,10 +10,10 @@
                         <div class="level-item">
                             <div class="is-widget-label">
                                 <h3 class="subtitle is-spaced">
-                                    Produk
+                                    Mitra
                                 </h3>
                                 <h1 class="title">
-                                    {{ $product->count() }}
+                                    {{ $merchant->count() }}
                                 </h1>
                             </div>
                         </div>

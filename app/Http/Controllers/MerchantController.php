@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Merchant;
-use App\Models\Confirm;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
-class DashboardController extends Controller
+class MerchantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +19,10 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $merchant = Merchant::all();
-        $uncofirmed = Confirm::where('status', 0);
-        $confirmed = Confirm::where('status', 1);
-        return view('admin.dashboard', [
-            'title' => 'dashboard',
-            'merchant' => $merchant,
-            'unconfirmed' => $uncofirmed,
-            'confirmed' => $confirmed
+        $merchant = Merchant::paginate(10);
+        return view('admin.merchant', [
+            'title' => 'Mitra',
+            'merchant' => $merchant
         ]);
     }
 
@@ -35,6 +34,9 @@ class DashboardController extends Controller
     public function create()
     {
         //
+        return view('admin.merchant-create', [
+            'title' => 'Mitra'
+        ]);
     }
 
     /**
@@ -46,6 +48,35 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         //
+        $nama     = $request->nama;
+        // $harga     = $request->harga;
+        $kode = Str::random(40);
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            // 'harga' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/merchant/create')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Mitra', 'type' => 'error']);
+        }
+
+        $merchant = new Merchant;
+
+        $merchant->nama = $nama;
+        $merchant->kode = $kode;
+        // $merchant->harga = $harga;
+
+        $merchant->save();
+
+        $user = new User;
+
+        $user->username = 'dwa';
+        $user->password = Hash::make('dawd');
+        $user->kode = $kode;
+
+        $user->save();
+        return redirect('merchant')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Mitra', 'type' => 'success']);
     }
 
     /**

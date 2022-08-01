@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ConfirmController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\MerchantController;
 use App\Models\Paket;
 use App\Models\Product;
 
@@ -41,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/confirm', ConfirmController::class);
     Route::resource('/paket', PaketController::class);
     Route::resource('/history', HistoryController::class);
+    Route::resource('/merchant', MerchantController::class);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
