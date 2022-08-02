@@ -1,6 +1,6 @@
 @section('title', 'Produk')
-@include('admin.template.header')
-@include('admin.template.sidebar')
+@include('merchant.template.header')
+@include('merchant.template.sidebar')
 @if (session('status'))
     <script>
         swal({
@@ -157,4 +157,4 @@
         });
     });
 </script>
-@include('admin.template.footer')
+@include('merchant.template.footer')

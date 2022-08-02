@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Models\Merchant;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class MerchantController extends Controller
 {
@@ -19,10 +22,12 @@ class MerchantController extends Controller
     public function index()
     {
         //
-        $merchant = Merchant::paginate(10);
+        $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
+        // $produk = Product::where('kode', $merchant->id_produk)->count();
         return view('admin.merchant', [
-            'title' => 'Mitra',
-            'merchant' => $merchant
+            'title' => 'merchant',
+            'merchant' => $merchant,
+            // 'produk' => $produk
         ]);
     }
 
@@ -35,7 +40,7 @@ class MerchantController extends Controller
     {
         //
         return view('admin.merchant-create', [
-            'title' => 'Mitra'
+            'title' => 'merchant'
         ]);
     }
 
@@ -49,10 +54,14 @@ class MerchantController extends Controller
     {
         //
         $nama     = $request->nama;
-        // $harga     = $request->harga;
-        $kode = Str::random(40);
+        $username     = $request->username;
+        $password     = $request->password;
+
+        // $kode = Str::random(40);
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'username' => 'required',
+            'password' => 'required',
             // 'harga' => 'required',
         ]);
 
@@ -64,16 +73,17 @@ class MerchantController extends Controller
         $merchant = new Merchant;
 
         $merchant->nama = $nama;
-        $merchant->kode = $kode;
+        $merchant->username = $username;
+        $merchant->password = Hash::make($password);
         // $merchant->harga = $harga;
 
         $merchant->save();
 
         $user = new User;
 
-        $user->username = 'dwa';
-        $user->password = Hash::make('dawd');
-        $user->kode = $kode;
+        $user->role = 1;
+        $user->username = $username;
+        $user->password = Hash::make($password);
 
         $user->save();
         return redirect('merchant')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Mitra', 'type' => 'success']);
@@ -88,6 +98,13 @@ class MerchantController extends Controller
     public function show($id)
     {
         //
+        $merchant  = Merchant::find($id);
+        $product = Product::where('id_merchant', $merchant->id)->paginate(10);
+        return view('merchant-show', [
+            'product' => $product,
+            'merchant'       => $merchant,
+            'title' => 'produk'
+        ]);
     }
 
     /**
@@ -122,5 +139,11 @@ class MerchantController extends Controller
     public function destroy($id)
     {
         //
+        $merchant  = Merchant::find($id);
+        $merchant->delete();
+
+        $admin = Admin::where('username', $merchant->username);
+        $admin->delete();
+        return redirect('merchant')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Mitra', 'type' => 'success']);
     }
 }

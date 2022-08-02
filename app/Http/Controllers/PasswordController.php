@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Admin;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class AdminController extends Controller
+class PasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +20,6 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $admin = Admin::where('role', 0)->paginate(10);
-        return view('admin.admin', [
-            'title' => 'admin',
-            'admin' => $admin
-        ]);
     }
 
     /**
@@ -33,9 +30,6 @@ class AdminController extends Controller
     public function create()
     {
         //
-        return view('admin.admin-create', [
-            'title' => 'admin'
-        ]);
     }
 
     /**
@@ -47,27 +41,6 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
-        $username     = $request->username;
-        $password     = $request->password;
-
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/admin/create')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
-        }
-
-        $admin = new Admin;
-
-        $admin->username = $username;
-        $admin->password = Hash::make($password);
-
-        $admin->save();
-
-        return redirect('admin')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Admin', 'type' => 'success']);
     }
 
     /**
@@ -90,10 +63,12 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
-        $id  = Admin::find($id);
-        return view('admin.admin-edit', [
-            'id' => $id,
-            'title' => 'admin'
+        $coba  = User::find($id);
+        $merchant = DB::table('merchant')->where('username', $coba->username)->first();
+        return view('merchant.password-edit', [
+            'merchant' => $merchant,
+            'coba'       => $coba,
+            'title' => 'password'
         ]);
     }
 
@@ -107,27 +82,32 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $merchant = DB::table('merchant')->where('username', $request->username)->first();
         $username     = $request->username;
         $password     = $request->password;
 
         $validator = Validator::make($request->all(), [
-            'username'        => 'required',
             'password'        => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
-            return redirect('admin/' . $id . '/edit')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            return redirect('password/' . $id . '/edit')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Edit Password', 'type' => 'error']);
         }
+
+        DB::table('merchant')
+            ->where('username', $username)
+            ->update([
+                'password'       => Hash::make($password),
+            ]);
 
         DB::table('users')
             ->where('id', $id)
             ->update([
-                'username'       => $username,
                 'password'       => Hash::make($password),
             ]);
 
-        return redirect('admin')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Admin', 'type' => 'success']);
+        return redirect('password/' . $id . '/edit')->with(['status' => 'Berhasil Diubah', 'title' => 'Edit Password', 'type' => 'success']);
     }
 
     /**
@@ -139,9 +119,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-        $admin  = Admin::find($id);
-        $admin->delete();
-
-        return redirect('admin')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Admin', 'type' => 'success']);
     }
 }

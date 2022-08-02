@@ -14,8 +14,11 @@ class Product extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'kode',
+        'id_merchant',
         'gambar',
         'judul',
-        'deskripsi'
+        'deskripsi',
+        'harga'
     ];
 }

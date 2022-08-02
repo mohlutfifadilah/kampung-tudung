@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -33,7 +36,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.product-create', [
+        return view('merchant.product-create', [
             'title' => 'produk'
         ]);
     }
@@ -47,13 +50,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $judul     = $request->judul;
+        $coba  = User::find($request->id);
+        $merchant = DB::table('merchant')->where('username', $coba->username)->first();
+        // $product = Product::where('id', $merchant->id_produk)->paginate(10);
+        // dd($merchant->id);
+        $judul         = $request->judul;
         $deskripsi     = $request->deskripsi;
+        $harga         = $request->harga;
+        $kode = Str::random(40);
 
         $validator = Validator::make($request->all(), [
             'gambar' => 'required|image|file',
             'judul' => 'required',
             'deskripsi' => 'required',
+            'harga' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -67,13 +77,28 @@ class ProductController extends Controller
 
         $product = new Product;
 
+        $product->kode = $kode;
+        $product->id_merchant = $merchant->id;
         $product->gambar = $gambar;
         $product->judul = $judul;
         $product->deskripsi = $deskripsi;
+        $product->harga = $harga;
 
         $product->save();
 
-        return redirect('product')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Produk', 'type' => 'success']);
+        $mer = new Merchant;
+
+        $mer->id_produk = $kode;
+        $mer->username = $merchant->username;
+        $mer->password = $merchant->password;
+        $mer->nama = $merchant->nama;
+        $mer->foto = $merchant->foto;
+        $mer->deskripsi = $merchant->deskripsi;
+        $mer->wa = $merchant->wa;
+
+        $mer->save();
+
+        return redirect('product/' . $coba->id)->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Produk', 'type' => 'success']);
     }
 
     /**
@@ -85,6 +110,15 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $coba  = User::find($id);
+        $merchant = DB::table('merchant')->where('username', $coba->username)->first();
+        $product = Product::where('id_merchant', $merchant->id)->paginate(10);
+        return view('merchant.product-show', [
+            'merchant' => $merchant,
+            'product' => $product,
+            'coba'       => $coba,
+            'title' => 'produk'
+        ]);
     }
 
     /**
@@ -97,7 +131,7 @@ class ProductController extends Controller
     {
         //
         $id  = Product::find($id);
-        return view('admin.product-edit', [
+        return view('merchant.product-edit', [
             'id' => $id,
             'title' => 'produk'
         ]);
@@ -114,13 +148,17 @@ class ProductController extends Controller
     {
         //
         $u = Product::find($id);
+        $merchant = DB::table('merchant')->where('id_produk', $u->kode)->first();
+        $user = DB::table('users')->where('username', $merchant->username)->first();
         $judul     = $request->judul;
+        $harga     = $request->harga;
         $deskripsi     = $request->deskripsi;
         $gambar = $u->gambar;
 
         $validator = Validator::make($request->all(), [
             'gambar' => 'image|file',
             'judul' => 'required',
+            'harga' => 'required',
             'deskripsi' => 'required',
         ]);
 
@@ -138,11 +176,12 @@ class ProductController extends Controller
             ->where('id', $id)
             ->update([
                 'judul'       => $judul,
+                'harga'       => $harga,
                 'deskripsi'   => $deskripsi,
                 'gambar'      => $gambar,
             ]);
 
-        return redirect('product')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Produk', 'type' => 'success']);
+        return redirect('product/' . $user->id)->with(['status' => 'Berhasil Diubah', 'title' => 'Data Produk', 'type' => 'success']);
     }
 
     /**
@@ -158,6 +197,7 @@ class ProductController extends Controller
         Storage::delete($produk->gambar);
         Product::destroy($id);
 
-        return redirect('product')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Produk', 'type' => 'success']);
+        DB::table('merchant')->where('id_produk', $produk->kode)->delete();
+        return redirect('product/' . $id)->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Produk', 'type' => 'success']);
     }
 }

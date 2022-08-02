@@ -15,5 +15,11 @@ class Merchant extends Model
 
     protected $fillable = [
         'nama',
+        'username',
+        'password',
+        'id_produk',
+        'foto',
+        'deskripsi',
+        'wa'
     ];
 }

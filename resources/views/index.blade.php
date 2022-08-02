@@ -58,11 +58,11 @@
             margin-right: 4px;
         }
 
-        .navbar-end .navbar-item.mr-5 {
+        .navbar-end .navbar-item.mr-3 {
             color: white;
         }
 
-        .navbar-menu .navbar-end .navbar-item.mr-5:hover {
+        .navbar-menu .navbar-end .navbar-item.mr-3:hover {
             color: #00c4a7;
         }
     </style>
@@ -98,19 +98,22 @@
                     </div>
                     <div id="navbarBasicExample" class="navbar-menu">
                         <div class="navbar-end">
-                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#home">
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#home">
                                 Beranda
                             </a>
-                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#about">
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#about">
                                 Tentang Kami
                             </a>
-                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#gallery">
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#gallery">
                                 Galeri
                             </a>
-                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#video">
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#mitra">
+                                Mitra
+                            </a>
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#video">
                                 Video
                             </a>
-                            <a class="navbar-item mr-5 has-text-weight-bold" data-scroll href="#map">
+                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#map">
                                 Lokasi
                             </a>
                             <div class="navbar-item">
@@ -181,7 +184,7 @@
     <section class="container gallery my-5" id="gallery">
         <div class="text-has-centered mb-3">
             <p class="title">
-                Gallery
+                Galeri
             </p>
             <p class="subtitle has-text-primary">
                 Kampung Tudung
@@ -257,7 +260,47 @@
             </div>
         </div>
     </section>
-    <section class="section produk">
+    <section class="container is-fluid mitra my-5" id="mitra">
+        <div class="text-has-centered mb-3">
+            <p class="title">
+                Mitra
+            </p>
+            <p class="subtitle has-text-primary">
+                Kampung Tudung
+            </p>
+            <hr class="is-primary" width="10%">
+        </div>
+        <div class="columns is-multiline">
+            @foreach ($merchant as $m)
+                <div class="column is-3 has-text-centered">
+                    <div class="card">
+                        <div class="card-image has-text-centered">
+                            <figure class="image is-128x128 is-inline-block mt-5">
+                                <img class="is-rounded" src="{{ asset('storage/' . $m->foto) }}"
+                                    alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">{{ $m->nama }}</p>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                {{ $m->deskripsi }}
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="/merchant/{{ $m->id }}" class="card-footer-item button is-primary">Lihat
+                                Selengkapnya</a>
+                        </footer>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
+    {{-- <section class="section produk">
         <div class="container is-clipped">
             <div id="slider">
                 @foreach ($produk as $p)
@@ -279,7 +322,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="container video my-5" id="video">
         <div class="card">
             <div class="card-content">

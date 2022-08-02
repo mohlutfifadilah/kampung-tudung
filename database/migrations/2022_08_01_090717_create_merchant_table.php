@@ -15,8 +15,13 @@ class CreateMerchantTable extends Migration
     {
         Schema::create('merchant', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
+            $table->string('username');
+            $table->string('password');
             $table->string('nama');
+            $table->string('id_produk')->nullable();
+            $table->text('foto')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('wa')->length(255)->nullable();
             $table->timestamps();
         });
     }

@@ -8,8 +8,7 @@
         <p class="menu-label">General</p>
         <ul class="menu-list">
             <li>
-                <a href="/dashboard"
-                    class="has-icon {{ $title === 'dashboard' ? 'is-active router-link-active' : '' }}">
+                <a href="/dashboard" class="has-icon {{ $title === 'dashboard' ? 'is-active router-link-active' : '' }}">
                     <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
                     <span class="menu-item-label">Dashboard</span>
                 </a>
@@ -25,8 +24,7 @@
                 </a>
             </li>
             <li>
-                <a href="/merchant"
-                    class="has-icon {{ $title === 'merchant' ? 'is-active router-link-active' : '' }}">
+                <a href="/merchant" class="has-icon {{ $title === 'merchant' ? 'is-active router-link-active' : '' }}">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                     <span class="icon"><i class="mdi mdi-shopping"></i></span>
                     <span class="menu-item-label">Mitra</span>
@@ -99,16 +97,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/product"
-                        class="has-icon {{ $title === 'produk' ? 'is-active router-link-active' : '' }}">
+                    <a href="/product" class="has-icon {{ $title === 'produk' ? 'is-active router-link-active' : '' }}">
                         <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                         <span class="icon"><i class="mdi mdi-shopping"></i></span>
                         <span class="menu-item-label">Produk</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/paket"
-                        class="has-icon {{ $title === 'paket' ? 'is-active router-link-active' : '' }}">
+                    <a href="/paket" class="has-icon {{ $title === 'paket' ? 'is-active router-link-active' : '' }}">
                         <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                         <span class="icon"><i class="mdi mdi-playlist-plus"></i></span>
                         <span class="menu-item-label">Paket</span>

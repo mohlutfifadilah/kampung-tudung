@@ -49,21 +49,34 @@
                                     </label>
                                 </th> --}}
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    {{-- <th>Harga</th>
-                                    <th>Aksi</th> --}}
+                                    <th>Foto</th>
+                                    <th>Nama Mitra</th>
+                                    <th>No Whatsapp</th>
+                                    {{-- <th>Harga</th> --}}
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($merchant as $p)
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
+                                        @if ($p->foto)
+                                            <td data-label="Foto">
+                                                <img src="{{ asset('storage/' . $p->foto) }}" alt=""
+                                                    style="max-height: 200px; max-width: 400px;">
+                                            </td>
+                                        @else
+                                            <td data-label="Foto">
+                                                Belum ada Foto
+                                            </td>
+                                        @endif
                                         <td data-label="Nama">{{ $p->nama }}</td>
+                                        <td data-label="Whatsapp">{{ $p->wa }}</td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                <a href="/merchant/{{ $p->id }}/edit"
+                                                {{-- <a href="/merchant/{{ $p->id }}/edit"
                                                     class="button is-small is-warning"><span class="icon"><i
-                                                            class="fa-solid fa-pen-to-square"></i></span></a>
+                                                            class="fa-solid fa-pen-to-square"></i></span></a> --}}
                                                 <button class="button is-small is-danger remove-user" type="submit"
                                                     data-id="{{ $p->id }}"
                                                     data-action="{{ route('merchant.destroy', $p->id) }}">
@@ -123,7 +136,7 @@
         var current_object = $(this);
         swal({
             title: "Apakah anda yakin ?",
-            text: "Hapus merchant ini",
+            text: "Hapus Mitra ini",
             type: "warning",
             showCancelButton: true,
             dangerMode: true,

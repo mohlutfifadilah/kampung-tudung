@@ -41,11 +41,46 @@
                     </div>
                     <div class="field-body">
                         <div class="field">
-                            <p class="control is-expanded">
+                            <p class="control is-expanded has-icons-left">
                                 <input class="input @error('nama') is-danger @enderror" type="text" placeholder=""
                                     name="nama" id="nama" value="{{ old('nama') }}">
+                                <span class="icon is-small is-left"><i class="fa-solid fa-shop"></i></span>
                             </p>
                             @error('nama')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                        <label class="label">Username</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded has-icons-left">
+                                <input class="input @error('username') is-danger @enderror" type="text"
+                                    placeholder="" name="username" id="username" value="{{ old('username') }}">
+                                <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span>
+                            </p>
+                            @error('username')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Password</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded has-icons-left">
+                                <input class="input @error('password') is-danger @enderror" type="password"
+                                    placeholder="" name="password" id="password">
+                                <span class="icon is-small is-left"><i class="fa-solid fa-lock"></i></span>
+                            </p>
+                            @error('password')
                                 <p class="help is-danger">{{ $message }}</p>
                             @enderror
                         </div>

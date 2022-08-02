@@ -22,21 +22,24 @@ class LoginController extends Controller
         // dd('dawdiaw');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
+            if (auth()->user()->role == 0) {
+                return redirect()->intended('dashboard');
+            }
+            return redirect('/profile');
+        } else {
+            // return back()->withInput(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            // return redirect('/login')->withInput()->withErrors([
+            //     'username' => 'The provided credentials do not match our records.',
+            // ])->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
+            return redirect('/login')->withErrors([
+                'username' => 'The provided credentials do not match our records.',
+                'password' => 'dnawidnawnlid'
+            ])->withInput()->with([
+                'status' => 'Username atau password salah',
+                'title' => 'Login Admin',
+                'type' => 'error'
+            ]);
         }
-        // return back()->withInput(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
-        // return redirect('/login')->withInput()->withErrors([
-        //     'username' => 'The provided credentials do not match our records.',
-        // ])->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Admin', 'type' => 'error']);
-        return redirect('/login')->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-            'password' => 'dnawidnawnlid'
-        ])->withInput()->with([
-            'status' => 'Username atau password salah',
-            'title' => 'Login Admin',
-            'type' => 'error'
-        ]);
     }
 
     public function logout(Request $request)

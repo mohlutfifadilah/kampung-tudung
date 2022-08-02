@@ -93,6 +93,23 @@
                 </div>
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
+                        <label class="label">Harga</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded">
+                                <input class="input @error('harga') is-danger @enderror" type="text" placeholder=""
+                                    name="harga" id="harga" value="{{ $id->harga }}">
+                                {{-- <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span> --}}
+                            </p>
+                            @error('harga')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
                         <label class="label">Deskripsi</label>
                     </div>
                     <div class="field-body">
