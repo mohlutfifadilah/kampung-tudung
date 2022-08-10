@@ -325,6 +325,7 @@
             <div class="card-content">
                 <form action="/send" method="post">
                     @csrf
+                    {{ csrf_field() }}
                     <div class="columns">
                         <div class="column">
                             <div class="field">
