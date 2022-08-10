@@ -1,7 +1,7 @@
 <aside class="aside is-placed-left is-expanded">
     <div class="aside-tools">
         <div class="aside-tools-label">
-            <span class="has-text-centered ml-2"><b>Mitra - Kampung Tudung</b></span>
+            <span class="has-text-centered ml-2"><b>Toko - Kampung Tudung</b></span>
         </div>
     </div>
     <div class="menu is-menu-main">

@@ -37,21 +37,15 @@
                         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
-                                    {{-- <th class="is-checkbox-cell">
-                                    <label class="b-checkbox checkbox">
-                                        <input type="checkbox" value="false">
-                                        <span class="check"></span>
-                                    </label>
-                                </th> --}}
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Tanggal</th>
                                     <th>Paket</th>
+                                    <th>Harga</th>
                                     <th>Jumlah Orang</th>
-                                    <th>Catatan</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    {{-- <th>Aksi</th> --}}
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,26 +54,25 @@
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $c->nama }}</td>
                                         <td data-label="Tanggal">{{ $c->tanggal }}</td>
-                                        <td data-label="Paket">{{ $c->paket }}</td>
+                                        @php
+                                            $nama_paket = \App\Models\Paket::where('id', $c->paket)->value('nama');
+                                            $harga_paket = \App\Models\Paket::where('id', $c->paket)->value('harga');
+                                        @endphp
+                                        <td data-label="Paket">{{ $nama_paket }}</td>
+                                        <td data-label="Harga">@currency($harga_paket)</td>
                                         <td data-label="Jumlahorang">{{ $c->jumlahorang }}</td>
-                                        <td data-label="Catatan">{{ $c->catatan }}</td>
-                                        <td data-label="Total">{{ $c->total }}</td>
+                                        <td data-label="Total">@currency($c->total)</td>
                                         <td data-label="Status">
                                             <span
                                                 class="tag is-success is-medium has-text-white has-text-weight-bold">Dikonfirmasi</span>
                                         </td>
-                                        {{-- <td class="is-actions-cell">
+                                        <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                <a href="/confirm/{{ $c->id }}"
-                                                    class="button is-small is-info text-white"><span class="icon"><i
+                                                <a href="/history/{{ $c->id }}"
+                                                    class="button is-small is-info text-white"><span><i
                                                             class="fa-solid fa-info"></i></span></a>
-                                                <button class="button is-small is-success remove-user text-white"
-                                                    type="submit" data-id="{{ $c->id }}"
-                                                    data-action="{{ route('confirm.destroy', $c->id) }}">
-                                                    <span class="icon"><i class="fa-solid fa-check"></i></span>
-                                                </button>
                                             </div>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -127,35 +120,4 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-    $("body").on("click", ".remove-user", function() {
-        var current_object = $(this);
-        swal({
-            title: "Apakah anda yakin ?",
-            text: "Konfirmasi Pesanan ini",
-            type: "warning",
-            showCancelButton: true,
-            dangerMode: true,
-            cancelButtonClass: '#DD6B55',
-            confirmButtonColor: '#48c78e',
-            confirmButtonText: 'Konfirmasi',
-            cancelButtonText: 'Batal',
-        }, function(result) {
-            if (result) {
-                var action = current_object.attr('data-action');
-                var token = jQuery('meta[name="csrf-token"]').attr('content');
-                var id = current_object.attr('data-id');
-                $('body').html("<form class='form-inline remove-form' method='post' action='" + action +
-                    "'></form>");
-                $('body').find('.remove-form').append(
-                    '<input name="_method" type="hidden" value="delete">');
-                $('body').find('.remove-form').append('<input name="_token" type="hidden" value="' +
-                    token + '">');
-                $('body').find('.remove-form').append('<input name="id" type="hidden" value="' + id +
-                    '">');
-                $('body').find('.remove-form').submit();
-            }
-        });
-    });
-</script>
 @include('admin.template.footer')

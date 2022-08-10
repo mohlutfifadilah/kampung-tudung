@@ -55,6 +55,11 @@ class HistoryController extends Controller
     public function show($id)
     {
         //
+        $history = Confirm::find($id);
+        return view('admin.history-show', [
+            'history' => $history,
+            'title'   => 'history'
+        ]);
     }
 
     /**

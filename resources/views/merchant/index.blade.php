@@ -1,4 +1,4 @@
-@section('title', 'Mitra')
+@section('title', 'Toko')
 @include('merchant.template.header')
 @include('merchant.template.sidebar')
 @if (session('status'))
@@ -17,7 +17,7 @@
         <header class="card-header">
             <p class="card-header-title">
                 <span class="icon"><i class="mdi mdi-account-star"></i></span>
-                Profil Mitra
+                Profil Toko
             </p>
         </header>
         <div class="card-content">

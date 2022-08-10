@@ -42,16 +42,9 @@
                         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
-                                    {{-- <th class="is-checkbox-cell">
-                                    <label class="b-checkbox checkbox">
-                                        <input type="checkbox" value="false">
-                                        <span class="check"></span>
-                                    </label>
-                                </th> --}}
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Tanggal</th>
-                                    <th>Catatan</th>
                                     <th>Paket</th>
                                     <th>Harga</th>
                                     <th>Jumlah Orang</th>
@@ -66,15 +59,14 @@
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $c->nama }}</td>
                                         <td data-label="Tanggal">{{ $c->tanggal }}</td>
-                                        <td data-label="Catatan">{{ $c->catatan }}</td>
                                         @php
                                             $nama_paket = \App\Models\Paket::where('id', $c->paket)->value('nama');
                                             $harga_paket = \App\Models\Paket::where('id', $c->paket)->value('harga');
                                         @endphp
                                         <td data-label="Paket">{{ $nama_paket }}</td>
-                                        <td data-label="Harga">{{ $harga_paket }}</td>
+                                        <td data-label="Harga">@currency($harga_paket)</td>
                                         <td data-label="Jumlahorang">{{ $c->jumlahorang }}</td>
-                                        <td data-label="Total">{{ $c->total }}</td>
+                                        <td data-label="Total">@currency($c->total)</td>
                                         <td data-label="Status">
                                             <span
                                                 class="tag is-warning is-medium has-text-white has-text-weight-bold">Belum
@@ -82,9 +74,9 @@
                                         </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                {{-- <a href="/confirm/{{ $c->id }}"
+                                                <a href="/confirm/{{ $c->id }}"
                                                     class="button is-small is-info text-white"><span class="icon"><i
-                                                            class="fa-solid fa-info"></i></span></a> --}}
+                                                            class="fa-solid fa-info"></i></span></a>
                                                 <button class="button is-small is-success remove-user text-white"
                                                     type="submit" data-id="{{ $c->id }}"
                                                     data-action="{{ route('confirm.destroy', $c->id) }}">
@@ -144,12 +136,12 @@
         var current_object = $(this);
         swal({
             title: "Apakah anda yakin ?",
-            text: "Konfirmasi Pesanan ini",
+            text: "Konfirmasi pesanan ini",
             type: "warning",
             showCancelButton: true,
             dangerMode: true,
             cancelButtonClass: '#DD6B55',
-            confirmButtonColor: '#48c78e',
+            confirmButtonColor: '#48C78E',
             confirmButtonText: 'Konfirmasi',
             cancelButtonText: 'Batal',
         }, function(result) {

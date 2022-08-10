@@ -75,7 +75,7 @@ class ProfileController extends Controller
         $id  = Merchant::find($id);
         return view('merchant.profile-edit', [
             'id' => $id,
-            'title' => 'produk'
+            'title' => 'profile'
         ]);
     }
 

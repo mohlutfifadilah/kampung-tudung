@@ -134,7 +134,7 @@
                                     </button>
                                 </div>
                                 <div class="control">
-                                    <a href="/product" class="button is-outlined is-danger">
+                                    <a href="/product/{{ auth()->user()->id }}" class="button is-outlined is-danger">
                                         Kembali
                                     </a>
                                 </div>

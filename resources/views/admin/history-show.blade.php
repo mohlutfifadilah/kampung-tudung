@@ -1,4 +1,4 @@
-@section('title', 'Konfirmasi')
+@section('title', 'Riwayat')
 @include('admin.template.header')
 @include('admin.template.sidebar')
 @if (session('status'))
@@ -19,7 +19,7 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Info Konfirmasi Pesanan</b><br>
+                        <b>Info Riwayat Pesanan</b><br>
                         {{-- <small class="ml-2">
                             Total data : {{ $confirm->total() }}
                         </small> --}}
@@ -36,19 +36,19 @@
                     <div class="column">
                         <dl>
                             <dt><strong>Nama / Instansi</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->nama }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->nama }}</dd>
                             <dt><strong>Alamat</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->alamat }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->alamat }}</dd>
                             <dt><strong>No Handphone</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->nohp }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->nohp }}</dd>
                             <dt><strong>Tanggal</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->tanggal }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->tanggal }}</dd>
                             @php
-                                $nama_paket = \App\Models\Paket::where('id', $confirm->paket)->value('nama');
-                                $harga_paket = \App\Models\Paket::where('id', $confirm->paket)->value('harga');
+                                $nama_paket = \App\Models\Paket::where('id', $history->paket)->value('nama');
+                                $harga_paket = \App\Models\Paket::where('id', $history->paket)->value('harga');
                             @endphp
                             <dt><strong>Email</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->email }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->email }}</dd>
                         </dl>
                     </div>
                     <div class="column">
@@ -56,13 +56,13 @@
                             <dt><strong>Paket</strong></dt>
                             <dd class="mb-4 mt-2">{{ $nama_paket }}</dd>
                             <dt><strong>Catatan</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->catatan }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->catatan }}</dd>
                             <dt><strong>Harga</strong></dt>
                             <dd class="mb-4 mt-2">@currency($harga_paket)</dd>
                             <dt><strong>Jumlah Orang</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $confirm->jumlahorang }}</dd>
+                            <dd class="mb-4 mt-2">{{ $history->jumlahorang }}</dd>
                             <dt><strong>Total</strong></dt>
-                            <dd class="mb-4 mt-2">@currency($confirm->total)</dd>
+                            <dd class="mb-4 mt-2">@currency($history->total)</dd>
                         </dl>
                     </div>
                 </div>
@@ -72,25 +72,16 @@
                         <dl>
                             <dt><strong>Status</strong></dt>
                             <dd class="mb-4 mt-2">
-                                @if ($confirm->status == 0)
+                                @if ($history->status == 0)
                                     <span class="tag is-warning is-medium has-text-white has-text-weight-bold">Belum
                                         Dikonfirmasi</span>
                                 @endif
+                                <span
+                                    class="tag is-success is-medium has-text-white has-text-weight-bold">Dikonfirmasi</span>
                             </dd>
                         </dl>
                     </div>
-                    <div class="column">
-                        <dl>
-                            <dt><strong>Aksi</strong></dt>
-                            <dd class="mb-4 mt-2">
-                                <button class="button is-success remove-user text-white" type="submit"
-                                    data-id="{{ $confirm->id }}"
-                                    data-action="{{ route('confirm.destroy', $confirm->id) }}">
-                                    <span><strong><i class="fa-solid fa-check"></i> Konfirmasi Sekarang</strong></span>
-                                </button>
-                            </dd>
-                        </dl>
-                    </div>
+
                 </div>
             </div>
         </div>

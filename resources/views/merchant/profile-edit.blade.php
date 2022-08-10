@@ -1,4 +1,4 @@
-@section('title', 'Mitra')
+@section('title', 'Toko')
 @include('merchant.template.header')
 @include('merchant.template.sidebar')
 @if (session('status'))

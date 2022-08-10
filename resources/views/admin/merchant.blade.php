@@ -1,4 +1,4 @@
-@section('title', 'Mitra')
+@section('title', 'Toko')
 @include('admin.template.header')
 @include('admin.template.sidebar')
 @if (session('status'))
@@ -19,7 +19,7 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Mitra</b><br>
+                        <b>Toko</b><br>
                         <small class="ml-2">
                             Total data : {{ $merchant->total() }}
                         </small>

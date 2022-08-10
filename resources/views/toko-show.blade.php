@@ -83,20 +83,24 @@
     <section class="container is-fluid mitra my-5" id="mitra">
         <div class="columns">
             <div class="column">
-                <a href="/" class="button has-text-primary">
-                    Kembali
-                </a>
+                <nav class="breadcrumb mt-3" aria-label="breadcrumbs">
+                    <ul>
+                        <li><a href="/">Beranda</a></li>
+                        <li><a href="/toko">Toko</a></li>
+                        <li class="is-active"><a href="#" aria-current="page">{{ $merchant->nama }}</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        <div class="columns">
-            <div class="column is-4">
-                <figure class="image is-1by1">
-                    <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}">
-                </figure>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-content mt-5">
+        <div class="card mb-5">
+            <div class="card-content">
+                <div class="columns">
+                    <div class="column is-4">
+                        <figure class="image is-1by1">
+                            <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}">
+                        </figure>
+                    </div>
+                    <div class="column mt-5 py-5">
                         <div class="media">
                             <div class="media-content">
                                 <p class="title is-4">{{ $merchant->nama }}</p>
@@ -115,9 +119,9 @@
             <p class="title">
                 Produk
             </p>
-            {{-- <p class="subtitle has-text-primary">
-                Kampung Tudung
-            </p> --}}
+            <p class="subtitle has-text-primary">
+                {{ $merchant->nama }}
+            </p>
             <hr class="is-primary" width="10%">
         </div>
         <div class="columns is-multiline">
@@ -134,7 +138,8 @@
                             <div class="media">
                                 <div class="media-content">
                                     <p class="title is-4">{{ $m->judul }}</p>
-                                    <p class="subtitle is-6">{{ $m->harga }}</p>
+                                    <p class="subtitle is-6"><span
+                                            class="tag is-medium is-info is-rounded">@currency($m->harga)</span></p>
                                 </div>
                             </div>
 
@@ -143,7 +148,7 @@
                             </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="http://wa.me/{{ Str::replaceFirst('0', '62', $merchant->wa) }}"
+                            <a href="http://wa.me/{{ Str::replaceFirst('0', '62', $merchant->wa) }}?text=Saya%20mau%20order%20{{ $m->judul }}%20ini%21%21"
                                 class="card-footer-item button is-primary" target="_blank" rel="noopener noreferrer">
                                 Beli Sekarang
                             </a>

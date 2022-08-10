@@ -107,8 +107,8 @@
                             <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#gallery">
                                 Galeri
                             </a>
-                            <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#mitra">
-                                Mitra
+                            <a class="navbar-item mr-3 has-text-weight-bold" href="/toko">
+                                Toko Online
                             </a>
                             <a class="navbar-item mr-3 has-text-weight-bold" data-scroll href="#video">
                                 Video
@@ -260,69 +260,31 @@
             </div>
         </div>
     </section>
-    <section class="container is-fluid mitra my-5" id="mitra">
-        <div class="text-has-centered mb-3">
-            <p class="title">
-                Mitra
-            </p>
-            <p class="subtitle has-text-primary">
-                Kampung Tudung
-            </p>
-            <hr class="is-primary" width="10%">
-        </div>
-        <div class="columns is-multiline">
-            @foreach ($merchant as $m)
-                <div class="column is-3 has-text-centered">
-                    <div class="card">
-                        <div class="card-image has-text-centered">
-                            <figure class="image is-128x128 is-inline-block mt-5">
-                                <img class="is-rounded" src="{{ asset('storage/' . $m->foto) }}"
-                                    alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">{{ $m->nama }}</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                {{ $m->deskripsi }}
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="/merchant/{{ $m->id }}" class="card-footer-item button is-primary">Lihat
-                                Selengkapnya</a>
-                        </footer>
-                    </div>
+    <section class="container has-text-centered is-fluid mitra my-5 py-5 has-background-primary" id="mitra">
+        <div class="columns is-centered mt-3">
+            <div class="column has-text-centered">
+                <div class="text-has-centered mb-3">
+                    <p class="title">
+                        Toko Online
+                    </p>
+                    <p class="subtitle has-text-white">
+                        Kampung Tudung
+                    </p>
+                    <hr class="is-white is-centered" width="10%" style="margin:auto;">
                 </div>
-            @endforeach
-        </div>
-    </section>
-    {{-- <section class="section produk">
-        <div class="container is-clipped">
-            <div id="slider">
-                @foreach ($produk as $p)
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-16by9 is-covered">
-                                <img src="{{ asset('storage/' . $p->gambar) }}" alt="" />
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="item__title has-text-centered has-text-weight-bold">
-                                {{ $p->judul }}
-                            </div>
-                            <div class="item__description">
-                                {{ $p->deskripsi }}
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
             </div>
         </div>
-    </section> --}}
+        <div class="columns is-centered has-background-primary mb-3">
+            <div class="column has-text-centered">
+                <p class="content has-text-white">
+                    Ingin lihat produk-produk asli kerajinan tangan Kampung Tudung ? ayo langsung cek !
+                </p>
+                <a class="button is-white has-text-primary is-centered" href="/toko">
+                    <strong>Cek Toko <i class="fas fa-arrow-right"></i></strong>
+                </a>
+            </div>
+        </div>
+    </section>
     <section class="container video my-5" id="video">
         <div class="card">
             <div class="card-content">
@@ -443,7 +405,7 @@
                                             <option selected disabled>Pilih Paket</option>
                                             @foreach ($paket as $p)
                                                 <option value="{{ $p->id }}">{{ $p->nama }}
-                                                    ({{ $p->harga }}/orang)
+                                                    (@currency($p->harga)/Orang)
                                                 </option>
                                             @endforeach
                                         </select>

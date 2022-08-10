@@ -10,7 +10,7 @@
                         <div class="level-item">
                             <div class="is-widget-label">
                                 <h3 class="subtitle is-spaced">
-                                    Mitra
+                                    Toko
                                 </h3>
                                 <h1 class="title">
                                     {{ $merchant->count() }}

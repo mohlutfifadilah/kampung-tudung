@@ -59,7 +59,7 @@
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $p->nama }}</td>
-                                        <td data-label="Harga">{{ $p->harga }}</td>
+                                        <td data-label="Harga">@currency($p->harga)</td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
                                                 <a href="/paket/{{ $p->id }}/edit"

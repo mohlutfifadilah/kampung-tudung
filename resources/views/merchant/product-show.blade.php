@@ -65,7 +65,7 @@
                                                 style="max-height: 200px; max-width: 400px;">
                                         </td>
                                         <td data-label="Judul">{{ $p->judul }}</td>
-                                        <td data-label="Harga">{{ $p->harga }}</td>
+                                        <td data-label="Harga">@currency($p->harga)</td>
                                         <td data-label="Deskripsi">{{ $p->deskripsi }}</td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">

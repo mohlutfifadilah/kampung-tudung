@@ -60,7 +60,8 @@ class ConfirmController extends Controller
         // 
         $confirm = Confirm::find($id);
         return view('admin.confirm-show', [
-            'confirm' => $confirm
+            'confirm' => $confirm,
+            'title'   => 'confirm'
         ]);
     }
 

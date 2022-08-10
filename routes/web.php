@@ -12,9 +12,11 @@ use App\Http\Controllers\PaketController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\TokoController;
 use App\Models\Paket;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+
 
 
 /*
@@ -52,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::resource('/merchant', MerchantController::class);
+Route::resource('/toko', TokoController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

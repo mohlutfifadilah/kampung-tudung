@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\Confirm;
 use App\Models\Paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class SendController extends Controller
 {
@@ -42,7 +44,7 @@ class SendController extends Controller
             'no' => 'required|numeric',
             'tanggal' => 'required',
             'paket' => 'required',
-            'jumlah' => 'required|numeric|max:10',
+            'jumlah' => 'required|numeric|max:999',
             'email' => 'email:rfc,dns|required',
         ]);
 
@@ -65,6 +67,8 @@ class SendController extends Controller
         $confirm->status = 0;
 
         $confirm->save();
+
+        // Mail::to($email)->send(new SendMail());
 
         return redirect('/')->with(['status' => 'Telah dikirim, cek email anda', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Merchant;
-use App\Models\Confirm;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class TokoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,8 @@ class DashboardController extends Controller
     {
         //
         $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
-        $uncofirmed = Confirm::where('status', 0);
-        $confirmed = Confirm::where('status', 1);
-        return view('admin.dashboard', [
-            'title' => 'dashboard',
-            'merchant' => $merchant,
-            'unconfirmed' => $uncofirmed,
-            'confirmed' => $confirmed
+        return view('toko', [
+            'merchant' => $merchant
         ]);
     }
 
@@ -58,6 +53,13 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
+        $merchant  = Merchant::find($id);
+        $product = Product::where('id_merchant', $merchant->id)->paginate(10);
+        return view('toko-show', [
+            'product' => $product,
+            'merchant'       => $merchant,
+            'title' => 'produk'
+        ]);
     }
 
     /**

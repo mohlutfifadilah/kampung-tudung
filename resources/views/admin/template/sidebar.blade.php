@@ -27,7 +27,7 @@
                 <a href="/merchant" class="has-icon {{ $title === 'merchant' ? 'is-active router-link-active' : '' }}">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                     <span class="icon"><i class="mdi mdi-shopping"></i></span>
-                    <span class="menu-item-label">Mitra</span>
+                    <span class="menu-item-label">Toko</span>
                 </a>
             </li>
             {{-- <li>

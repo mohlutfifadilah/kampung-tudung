@@ -1,6 +1,6 @@
 @section('title', 'Produk')
-@include('admin.template.header')
-@include('admin.template.sidebar')
+@include('merchant.template.header')
+@include('merchant.template.sidebar')
 @if (session('status'))
     <script>
         swal({
@@ -138,7 +138,7 @@
                                     </button>
                                 </div>
                                 <div class="control">
-                                    <a href="/product" class="button is-outlined is-danger">
+                                    <a href="/product/{{ auth()->user()->id }}" class="button is-outlined is-danger">
                                         Kembali
                                     </a>
                                 </div>
