@@ -13,6 +13,10 @@ use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\TokoController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\GalleryController;
+use App\Models\About;
+use App\Models\Gallery;
 use App\Models\Paket;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +36,14 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     $paket = Paket::all();
+    $about = About::first();
     $product = Product::all();
+    $galeri = Gallery::all();
     $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
     return view('index', [
         'paket' => $paket,
+        'about' => $about,
+        'gallery' => $galeri,
         'produk' => $product,
         'merchant' => $merchant
     ]);
@@ -55,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('/merchant', MerchantController::class);
 Route::resource('/toko', TokoController::class);
+Route::resource('/about', AboutController::class);
+Route::resource('/gallery', GalleryController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

@@ -1,4 +1,4 @@
-@section('title', 'Toko')
+@section('title', 'Galeri')
 @include('admin.template.header')
 @include('admin.template.sidebar')
 @if (session('status'))
@@ -19,15 +19,15 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Toko</b><br>
+                        <b>Galeri</b><br>
                         <small class="ml-2">
-                            Total data : {{ $merchant->total() }}
+                            Total data : {{ $gallery->total() }}
                         </small>
                     </div>
                 </div>
             </div>
             <div class="level-right">
-                <a href="/merchant/create" class="button is-small is-info">
+                <a href="/gallery/create" class="button is-small is-info">
                     <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
                 </a>
             </div>
@@ -38,7 +38,7 @@
         <div class="card-content">
             <div class="b-table has-pagination">
                 <div class="table-wrapper has-mobile-cards">
-                    @if ($merchant->count())
+                    @if ($gallery->count())
                         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
@@ -49,44 +49,26 @@
                                     </label>
                                 </th> --}}
                                     <th>No</th>
-                                    <th>Foto</th>
-                                    <th>Nama Mitra</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>No Whatsapp</th>
-                                    {{-- <th>Harga</th> --}}
+                                    <th>Gambar</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($merchant as $p)
+                                @foreach ($gallery as $p)
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
-                                        @if ($p->foto)
-                                            <td data-label="Foto">
-                                                <img src="{{ asset('storage/' . $p->foto) }}" alt=""
-                                                    style="max-height: 200px; max-width: 400px;">
-                                            </td>
-                                        @else
-                                            <td data-label="Foto">
-                                                Belum ada Foto
-                                            </td>
-                                        @endif
-                                        <td data-label="Nama">{{ $p->nama }}</td>
-                                        <td data-label="Username">{{ $p->username }}</td>
-                                        <td data-label="Password">{{ $p->password }}</td>
-                                        @if ($p->wa)
-                                            <td data-label="Whatsapp">{{ $p->wa }}</td>
-                                        @endif
-                                        <td data-label="Whatsapp">Belum ada No Whatsapp</td>
+                                        <td data-label="Gambar">
+                                            <img src="{{ asset('storage/' . $p->foto) }}" alt=""
+                                                style="max-height: 200px; max-width: 400px;">
+                                        </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                <a href="/merchant/{{ $p->id }}/edit"
+                                                <a href="/gallery/{{ $p->id }}/edit"
                                                     class="button is-small is-warning"><span class="icon"><i
                                                             class="fa-solid fa-pen-to-square"></i></span></a>
                                                 <button class="button is-small is-danger remove-user" type="submit"
                                                     data-id="{{ $p->id }}"
-                                                    data-action="{{ route('merchant.destroy', $p->id) }}">
+                                                    data-action="{{ route('gallery.destroy', $p->id) }}">
                                                     <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
                                                 </button>
                                             </div>
@@ -111,13 +93,13 @@
                         </div>
                     @endif
                 </div>
-                @if ($merchant->count())
+                @if ($gallery->count())
                     <hr>
                     <div class="columns px-5 pb-5">
                         <div class="column">
 
                             <ul class="pagination-list">
-                                {{ $merchant->links() }}
+                                {{ $gallery->links() }}
                             </ul>
                         </div>
                         <div class="column">
@@ -128,8 +110,8 @@
                         </div>
                         <div class="column has-text-right">
                             <small>
-                                Halaman ke {{ $merchant->currentPage() }} dari
-                                {{ $merchant->count() }}
+                                Halaman ke {{ $gallery->currentPage() }} dari
+                                {{ $gallery->count() }}
                             </small>
                         </div>
                     </div>
@@ -143,7 +125,7 @@
         var current_object = $(this);
         swal({
             title: "Apakah anda yakin ?",
-            text: "Hapus Mitra ini",
+            text: "Hapus galeri ini",
             type: "warning",
             showCancelButton: true,
             dangerMode: true,

@@ -116,6 +116,11 @@ class MerchantController extends Controller
     public function edit($id)
     {
         //
+        $id  = Merchant::find($id);
+        return view('admin.merchant-edit', [
+            'id' => $id,
+            'title' => 'merchant'
+        ]);
     }
 
     /**

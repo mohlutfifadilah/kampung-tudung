@@ -157,7 +157,7 @@
     <section class="container about" id="about" style="margin-top: 30px;">
         <div class="columns">
             <div class="column has-text-centered">
-                <img src="{{ asset('main-image/selfie.jpg') }}" class="img" alt="" width="300"
+                <img src="{{ asset('storage/' . $about->foto) }}" class="img" alt="" width="300"
                     height="300">
             </div>
             <div class="column mt-5">
@@ -169,14 +169,7 @@
                 </p>
                 <hr class="is-primary" width="10%">
                 <p class="content has-text-justified">
-                    Kampung Tudung merupakan desa wisata yang terletak di Desa Grujugan, Kecamatan Petanahan, Kabupaten
-                    Kebumen. Wisata pendidikan atau wisata edukasi, bisa juga disebut
-                    sebagai anjangkarya atau karyawisata adalah suatu kegiatan
-                    atau perjalanan yang dilakukan untuk rekreasi atau liburan dan juga
-                    terdapat aktivitas edukasi atau pendidikan di dalamnya. Ada banyak
-                    kegiatan wisata edukasi yang bisa di lakukan khususnya bagi anak-
-                    anak untuk di Desa Wisata Kampung Tudung, anak-anak biasa belajar
-                    membuat Tudung/Caping, Besek, Ilir/kipas dan anyaman dari bambu.
+                    {{ $about->deskripsi }}
                 </p>
             </div>
         </div>

@@ -14,6 +14,23 @@
                 </a>
             </li>
         </ul>
+        <p class="menu-label">Halaman Utama</p>
+        <ul class="menu-list">
+            <li>
+                <a href="/about" class="has-icon {{ $title === 'about' ? 'is-active router-link-active' : '' }}">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-view-array"></i></span>
+                    <span class="menu-item-label">Tentang Kami</span>
+                </a>
+            </li>
+            <li>
+                <a href="/gallery" class="has-icon {{ $title === 'gallery' ? 'is-active router-link-active' : '' }}">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-square-edit-outline"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-collage"></i></span>
+                    <span class="menu-item-label">Galeri</span>
+                </a>
+            </li>
+        </ul>
         <p class="menu-label">Data</p>
         <ul class="menu-list">
             <li>
@@ -40,7 +57,7 @@
             <li>
                 <a href="/paket" class="has-icon {{ $title === 'paket' ? 'is-active router-link-active' : '' }}">
                     <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
-                    <span class="icon"><i class="mdi mdi-playlist-plus"></i></span>
+                    <span class="icon"><i class="mdi mdi-package"></i></span>
                     <span class="menu-item-label">Paket</span>
                 </a>
             </li>
@@ -97,7 +114,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/product" class="has-icon {{ $title === 'produk' ? 'is-active router-link-active' : '' }}">
+                    <a href="/product"
+                        class="has-icon {{ $title === 'produk' ? 'is-active router-link-active' : '' }}">
                         <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                         <span class="icon"><i class="mdi mdi-shopping"></i></span>
                         <span class="menu-item-label">Produk</span>

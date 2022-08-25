@@ -44,7 +44,7 @@
                             <div class="is-user-avatar">
                                 {{-- <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe"> --}}
                             </div>
-                            <div class="is-user-name"><span>{{ auth()->user()->username }}</span></div>
+                            <div class="is-user-name"><span>Username : {{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
                         </a>
                         <div class="navbar-dropdown">
