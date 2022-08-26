@@ -346,7 +346,8 @@
                             <div class="field">
                                 <div class="control">
                                     <input class="input @error('no') is-danger @enderror" type="text"
-                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}">
+                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}"
+                                        id="number_only">
                                     @error('no')
                                         <p class="help is-danger">{{ $message }}</p>
                                     @enderror
