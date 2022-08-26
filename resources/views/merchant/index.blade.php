@@ -23,9 +23,12 @@
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
-                    <figure class="image is-128x128 pr-4 pb-4 mb-5">
-                        <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}" alt="Placeholder image">
-                    </figure>
+                    @if ($merchant->foto)
+                        <img src="{{ asset('storage/' . $merchant->foto) }}" alt=""
+                            style="max-height: 200px; max-width: 400px;">
+                    @else
+                        <i class="fa-solid fa-circle-user fa-10x"></i>
+                    @endif
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{ $merchant->nama }}</p>
@@ -33,9 +36,11 @@
                 </div>
             </div>
 
-            <div class="content mt-5">
+            <div class="content">
                 @if ($merchant->deskripsi)
-                    {{ $merchant->deskripsi }}
+                    <p>
+                        {{ $merchant->deskripsi }}
+                    </p>
                 @else
                     Belum ada deskripsi
                 @endif

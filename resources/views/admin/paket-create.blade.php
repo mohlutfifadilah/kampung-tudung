@@ -60,7 +60,7 @@
                         <div class="field">
                             <p class="control is-expanded">
                                 <input class="input @error('harga') is-danger @enderror" type="text" placeholder=""
-                                    name="harga" id="harga" value="{{ old('harga') }}">
+                                    name="harga" id="number_only" value="{{ old('harga') }}">
 
                             </p>
                             @error('harga')

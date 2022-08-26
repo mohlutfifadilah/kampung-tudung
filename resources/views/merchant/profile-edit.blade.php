@@ -64,7 +64,7 @@
                 </div>
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
-                        <label class="label">Nama Mitra</label>
+                        <label class="label">Nama Toko</label>
                     </div>
                     <div class="field-body">
                         <div class="field">

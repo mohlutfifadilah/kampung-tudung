@@ -52,7 +52,7 @@
                                     <th>Foto</th>
                                     <th>Nama Mitra</th>
                                     <th>Username</th>
-                                    <th>Password</th>
+                                    {{-- <th>Password</th> --}}
                                     <th>No Whatsapp</th>
                                     {{-- <th>Harga</th> --}}
                                     <th>Aksi</th>
@@ -69,16 +69,17 @@
                                             </td>
                                         @else
                                             <td data-label="Foto">
-                                                Belum ada Foto
+                                                <i class="fa-solid fa-circle-user fa-10x"></i>
                                             </td>
                                         @endif
                                         <td data-label="Nama">{{ $p->nama }}</td>
                                         <td data-label="Username">{{ $p->username }}</td>
-                                        <td data-label="Password">{{ $p->password }}</td>
+                                        {{-- <td data-label="Password">{{ $p->password }}</td> --}}
                                         @if ($p->wa)
                                             <td data-label="Whatsapp">{{ $p->wa }}</td>
+                                        @else
+                                            <td data-label="Whatsapp">Belum ada No Whatsapp</td>
                                         @endif
-                                        <td data-label="Whatsapp">Belum ada No Whatsapp</td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
                                                 <a href="/merchant/{{ $p->id }}/edit"

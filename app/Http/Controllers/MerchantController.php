@@ -55,7 +55,7 @@ class MerchantController extends Controller
         //
         $nama     = $request->nama;
         $username     = $request->username;
-        $password     = $request->password;
+        $password     = Hash::make($request->password);
 
         // $kode = Str::random(40);
         $validator = Validator::make($request->all(), [
@@ -74,7 +74,7 @@ class MerchantController extends Controller
 
         $merchant->nama = $nama;
         $merchant->username = $username;
-        $merchant->password = Hash::make($password);
+        $merchant->password = $password;
         // $merchant->harga = $harga;
 
         $merchant->save();
@@ -83,7 +83,7 @@ class MerchantController extends Controller
 
         $user->role = 1;
         $user->username = $username;
-        $user->password = Hash::make($password);
+        $user->password = $password;
 
         $user->save();
         return redirect('merchant')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Mitra', 'type' => 'success']);
@@ -133,6 +133,41 @@ class MerchantController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $merchant = Merchant::find($id);
+        $nama     = $request->nama;
+        $username     = $request->username;
+        $password     = Hash::make($request->password);
+
+        $validator = Validator::make($request->all(), [
+            'nama'        => 'required',
+            'username'        => 'required',
+            'password'        => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('merchant/' . $id . '/edit')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Toko', 'type' => 'error']);
+        }
+
+        DB::table('merchant')
+            ->where('id', $id)
+            ->update([
+                'nama'       => $nama,
+                'username'       => $username,
+                'password'       => $password,
+            ]);
+
+        DB::table('users')
+            ->where([
+                'username' => $merchant->username
+
+            ])
+            ->update([
+                'username'       => $username,
+                'password'       => $password,
+            ]);
+
+        return redirect('merchant')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Toko', 'type' => 'success']);
     }
 
     /**

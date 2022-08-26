@@ -39,6 +39,11 @@
 {{-- <script src="https://code.jquery.com/jquery.js"></script> --}}
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+    $('#number_only').bind('keyup paste', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>
 </body>
 
 </html>

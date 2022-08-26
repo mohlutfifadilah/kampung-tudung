@@ -17,7 +17,7 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
             /* background-color: #00d1b2; */
-            background-image: url('{{ asset('main-image/slide_2.jpg') }}');
+            background-image: url('{{ asset('default/slide_2.jpg') }}');
             -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             -moz-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
@@ -69,7 +69,7 @@
         <div class="login column is-4 ">
             <section class="section">
                 <div class="has-text-centered">
-                    <img class="login-logo" src="{{ asset('main-image/tudung.png') }}">
+                    <img class="login-logo" src="{{ asset('default/tudung.png') }}">
                 </div>
 
                 <form action="/login" method="POST">

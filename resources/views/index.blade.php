@@ -503,6 +503,10 @@
             slidesToShow: 3,
             infinite: true,
         });
+
+        $('#number_only').bind('keyup paste', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
     </script>
 </body>
 

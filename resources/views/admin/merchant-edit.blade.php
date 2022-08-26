@@ -29,14 +29,13 @@
         <header class="card-header">
             <p class="card-header-title ml-2">
                 <span class="icon mr-1"><i class="fa-solid fa-plus-circle"></i></span>
-                Tambah Data
+                Edit Data
             </p>
         </header>
         <div class="card-content">
-            <form method="post" action="/merchant" enctype="multipart/form-data">
+            <form method="post" action="/merchant/{{ $id->id }}">
                 @csrf
-                <input class="file-input @error('gambar') is-danger @enderror" type="file" name="gambar"
-                    value="dawdaw">
+                @method('put')
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
                         <label class="label">Nama Toko</label>
@@ -45,7 +44,7 @@
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input @error('nama') is-danger @enderror" type="text" placeholder=""
-                                    name="nama" id="nama" value="{{ old('nama') }}">
+                                    name="nama" id="nama" value="{{ $id->nama }}">
                                 <span class="icon is-small is-left"><i class="fa-solid fa-shop"></i></span>
                             </p>
                             @error('nama')
@@ -62,7 +61,7 @@
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input @error('username') is-danger @enderror" type="text"
-                                    placeholder="" name="username" id="username" value="{{ old('username') }}">
+                                    placeholder="" name="username" id="username" value="{{ $id->username }}">
                                 <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span>
                             </p>
                             @error('username')
@@ -114,8 +113,8 @@
                         <div class="field">
                             <div class="field is-grouped">
                                 <div class="control">
-                                    <button type="submit" class="button is-info">
-                                        <span>Tambah</span>
+                                    <button type="submit" class="button is-warning">
+                                        <span>Edit</span>
                                     </button>
                                 </div>
                                 <div class="control">

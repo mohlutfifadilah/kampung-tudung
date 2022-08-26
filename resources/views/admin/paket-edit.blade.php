@@ -61,7 +61,7 @@
                         <div class="field">
                             <p class="control is-expanded">
                                 <input class="input @error('harga') is-danger @enderror" type="text" placeholder=""
-                                    name="harga" value="{{ $id->harga }}" id="harga">
+                                    name="harga" value="{{ $id->harga }}" id="number_only">
 
                             </p>
                             @error('harga')
