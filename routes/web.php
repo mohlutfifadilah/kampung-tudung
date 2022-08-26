@@ -15,6 +15,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\VideoController;
 use App\Models\About;
 use App\Models\Gallery;
 use App\Models\Paket;
@@ -65,6 +66,7 @@ Route::resource('/merchant', MerchantController::class);
 Route::resource('/toko', TokoController::class);
 Route::resource('/about', AboutController::class);
 Route::resource('/gallery', GalleryController::class);
+Route::resource('/video', VideoController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

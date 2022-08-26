@@ -30,6 +30,13 @@
                     <span class="menu-item-label">Galeri</span>
                 </a>
             </li>
+            <li>
+                <a href="/video" class="has-icon {{ $title === 'video' ? 'is-active router-link-active' : '' }}">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-square-edit-outline"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-video"></i></span>
+                    <span class="menu-item-label">Video Profil</span>
+                </a>
+            </li>
         </ul>
         <p class="menu-label">Data</p>
         <ul class="menu-list">
@@ -122,7 +129,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/paket" class="has-icon {{ $title === 'paket' ? 'is-active router-link-active' : '' }}">
+                    <a href="/paket"
+                        class="has-icon {{ $title === 'paket' ? 'is-active router-link-active' : '' }}">
                         <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
                         <span class="icon"><i class="mdi mdi-playlist-plus"></i></span>
                         <span class="menu-item-label">Paket</span>
