@@ -46,7 +46,7 @@ Route::get('/', function () {
         'about' => $about,
         'gallery' => $galeri,
         'produk' => $product,
-        'merchant' => $merchant
+        'merchant' => $merchant,
     ]);
 });
 

@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/landing.css') }}"> --}}
     <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -41,7 +42,7 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
             /* background-color: #00d1b2; */
-            background-image: url('{{ asset('main-image/bg.jpg') }}');
+            background-image: url('{{ asset('default/bg.jpg') }}');
             -webkit-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             -moz-box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
             box-shadow: inset 24px 4px 64px -24px rgba(71, 71, 71, 1);
@@ -49,7 +50,7 @@
         }
 
         .brand {
-            background: url('{{ asset('main-image/tudung.png') }}') no-repeat center center;
+            background: url('{{ asset('default/tudung.png') }}') no-repeat center center;
             background-size: cover;
             width: 84px
         }
@@ -136,7 +137,7 @@
                     <p class="subtitle is-6 has-text-white">Di website desa wisata Kampung Tudung, Ayo jelajahi lebih
                         jauh mengenai "Wiskadung"</p>
                     <a class="button is-primary" data-scroll href="#about">
-                        <strong>Jelajahi </strong> <i class="fas fa-arrow-right"></i>
+                        <strong>Jelajahi &nbsp; </strong> <i class="fas fa-arrow-right"></i>
                     </a>
                     {{-- <div class="box">
                         <div class="field is-grouped">
@@ -184,97 +185,75 @@
             </p>
             <hr class="is-primary" width="10%">
         </div>
-        <div class="columns">
-            <div class="column is-6 has-text-centered">
-                <img class="modal-button pointer" data-target="modal-01" src="{{ asset('main-image/DSC_2416.jpg') }}"
-                    alt="" width="450" height="450">
-                <div id="modal-01" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/DSC_2416.jpg') }}" width="450" height="450">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-01" class="modal modal-fx-fadeInScale"></div>
+        <div class="container">
+            <!-- Start Carousel -->
+            <div id="carousel-demo" class="carousel">
+                @foreach ($gallery as $g)
+                    <img src="{{ asset('storage/' . $g->foto) }}" alt="">
+                @endforeach
             </div>
-            <div class="column is-3">
-                <img class="modal-button pointer atas" data-target="modal-02"
-                    src="{{ asset('main-image/portfolio_big_2.jpg') }}" alt="">
-                <div id="modal-02" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/portfolio_big_2.jpg') }}">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-02" class="modal modal-fx-fadeInScale"></div>
-                <img class="modal-button pointer mt-3 kiri" data-target="modal-06"
-                    src="{{ asset('main-image/portfolio_5.jpg') }}" alt="">
-                <div id="modal-06" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/portfolio_5.jpg') }}">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-06" class="modal modal-fx-fadeInScale"></div>
-                <img class="modal-button pointer mt-3" data-target="modal-05"
-                    src="{{ asset('main-image/portfolio_4.jpg') }}" alt="">
-                <div id="modal-05" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/portfolio_4.jpg') }}">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-05" class="modal modal-fx-fadeInScale"></div>
-            </div>
-            <div class="column is-3">
-                <img class="modal-button pointer mb-3 kiri" data-target="modal-04"
-                    src="{{ asset('main-image/slide_3.jpg') }}" alt="">
-                <div id="modal-04" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/slide_3.jpg') }}" height="450" width="450">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-04" class="modal modal-fx-fadeInScale"></div>
-                <img class="modal-button pointer kanan" data-target="modal-03"
-                    src="{{ asset('main-image/portfolio_big_3.jpg') }}" alt="">
-                <div id="modal-03" class="modal modal-fx-fadeInScale">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <img src="{{ asset('main-image/portfolio_big_3.jpg') }}">
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
-                <div id="modal-03" class="modal modal-fx-fadeInScale"></div>
-            </div>
+            <!-- End Carousel -->
         </div>
     </section>
-    <section class="container has-text-centered is-fluid mitra my-5 py-5 has-background-primary" id="mitra">
-        <div class="columns is-centered mt-3">
-            <div class="column has-text-centered">
-                <div class="text-has-centered mb-3">
-                    <p class="title">
-                        Toko Online
-                    </p>
-                    <p class="subtitle has-text-white">
-                        Kampung Tudung
-                    </p>
-                    <hr class="is-white is-centered" width="10%" style="margin:auto;">
+    <section class="container paket my-5" id="paket">
+        <div class="text-has-centered mb-3">
+            <p class="title">
+                Paket Wisata
+            </p>
+            <p class="subtitle has-text-primary">
+                Kampung Tudung
+            </p>
+            <hr class="is-primary" width="10%">
+        </div>
+        <div class="container">
+            <!-- Start Carousel -->
+            <div id="carousel-demo" class="carousel">
+                @foreach ($paket as $g)
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-16by9 is-covered">
+                                <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                                    alt="" />
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="item__title">
+                                Mon titre 1
+                            </div>
+                            <div class="item__description">
+                                Ici une petite description pour tester le slider
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <!-- End Carousel -->
+        </div>
+    </section>
+    <section class="has-text-centered is-fluid mitra my-5 py-5 has-background-primary" id="mitra">
+        <div class="container">
+            <div class="columns is-centered mt-3">
+                <div class="column has-text-centered">
+                    <div class="text-has-centered mb-3">
+                        <p class="title">
+                            Toko Online
+                        </p>
+                        <p class="subtitle has-text-white">
+                            Kampung Tudung
+                        </p>
+                        <hr class="is-white is-centered" width="10%" style="margin:auto;">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="columns is-centered has-background-primary mb-3">
-            <div class="column has-text-centered">
-                <p class="content has-text-white">
-                    Ingin lihat produk-produk asli kerajinan tangan Kampung Tudung ? ayo langsung cek !
-                </p>
-                <a class="button is-white has-text-primary is-centered" href="/toko">
-                    <strong>Cek Toko <i class="fas fa-arrow-right"></i></strong>
-                </a>
+            <div class="columns is-centered has-background-primary mb-3">
+                <div class="column has-text-centered">
+                    <p class="content has-text-white">
+                        Ingin lihat produk-produk asli kerajinan tangan Kampung Tudung ? ayo langsung cek !
+                    </p>
+                    <a class="button is-white has-text-primary is-centered" href="/toko">
+                        <strong>Cek Toko <i class="fas fa-arrow-right"></i></strong>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -484,7 +463,7 @@
     <!-- Get a specific version -->
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
     <script>
         var scroll = new SmoothScroll('a[href*="#"]', {
@@ -499,7 +478,7 @@
             scale: 1.5
         });
 
-        bulmaCarousel.attach('#slider', {
+        bulmaCarousel.attach('#carousel-demo', {
             slidesToScroll: 1,
             slidesToShow: 3,
             infinite: true,
