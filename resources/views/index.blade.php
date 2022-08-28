@@ -18,8 +18,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker($.datepicker.regional["id"]);
+            $("#datepicker").datepicker({
+                altField: "#alternate",
+                altFormat: "DD, d MM, yy"
+            });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <style>
         .pointer {
             cursor: pointer;
@@ -66,6 +80,10 @@
         .navbar-menu .navbar-end .navbar-item.mr-3:hover {
             color: #00c4a7;
         }
+
+        #alternate {
+            padding: 0 0;
+        }
     </style>
 </head>
 
@@ -81,13 +99,13 @@
             });
         </script>
     @endif
-    <section class="hero is-fullheight mb-5" data-scroll href="#home">
+    {{-- <section class="hero is-fullheight mb-5" data-scroll href="#home">
         <div class="hero-head">
             <nav data-scroll-header class="navbar" role="navigation" aria-label="main navigation">
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item brand" href="#home">
-                            {{-- <img src="{{ asset('main-image/tudung.png') }}" width="112" height="500"> --}}
+
                         </a>
 
                         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -139,18 +157,6 @@
                     <a class="button is-primary" data-scroll href="#about">
                         <strong>Jelajahi &nbsp; </strong> <i class="fas fa-arrow-right"></i>
                     </a>
-                    {{-- <div class="box">
-                        <div class="field is-grouped">
-                            <p class="control is-expanded">
-                                <input class="input" type="text" placeholder="Enter your email">
-                            </p>
-                            <p class="control">
-                                <a class="button is-info">
-                                    Notify Me
-                                </a>
-                            </p>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -194,8 +200,7 @@
                 @endforeach
             </ul>
         </div>
-    </section>
-    {{-- <section class="container paket splidee my-5" id="paket" aria-labelledby="carousel-heading">
+    </section><section class="container paket splidee my-5" id="paket" aria-labelledby="carousel-heading">
         <div class="text-has-centered mb-3">
             <p class="title">
                 Paket Wisata
@@ -227,7 +232,7 @@
                 @endforeach
             </ul>
         </div>
-    </section> --}}
+    </section>
     <section class="container paket my-5" id="paket">
         <div class="text-has-centered mb-3">
             <p class="title">
@@ -318,11 +323,16 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="container booking mt-2" id="booking">
         <p class="title is-3 mt-3">Pesan</p>
         <p class="subtitle has-text-primary is-3">Sekarang</p>
         <div class="card">
+            <header class="card-header">
+                <p class="card-header-title is-centered is-size-4">
+                    Pemesanan Tiket Wisata
+                </p>
+            </header>
             <div class="card-content">
                 <form action="/send" method="post">
                     @csrf
@@ -330,9 +340,10 @@
                     <div class="columns">
                         <div class="column">
                             <div class="field">
+                                <label for="" class="label">Nama / Organisasi / Instansi</label>
                                 <div class="control">
                                     <input class="input @error('nama') is-danger @enderror" type="text"
-                                        placeholder="Nama / Instansi" name="nama" value="{{ old('nama') }}">
+                                        name="nama" value="{{ old('nama') }}">
                                     @error('nama')
                                         <p class="help is-danger">{{ $message }}</p>
                                     @enderror
@@ -341,73 +352,46 @@
                         </div>
                         <div class="column">
                             <div class="field">
+                                <label for="" class="label">Tanggal Pemesanan</label>
                                 <div class="control">
-                                    <input class="input @error('alamat') is-danger @enderror" type="text"
-                                        placeholder="Alamat" name="alamat" value="{{ old('alamat') }}">
-                                    @error('alamat')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input @error('no') is-danger @enderror" type="text"
-                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}"
-                                        id="number_only">
-                                    @error('no')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input @error('tanggal') is-danger @enderror" type="date"
-                                        placeholder="Tanggal" name="tanggal" value="{{ old('tanggal') }}">
+                                    <input class="input @error('tanggal') is-danger @enderror" type="text"
+                                        placeholder="Tanggal" name="tanggal" value="{{ old('tanggal') }}"
+                                        id="datepicker">
                                     @error('tanggal')
                                         <p class="help is-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="column">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input @error('email') is-danger @enderror" type="email"
-                                        placeholder="E-mail" name="email" value="{{ old('email') }}">
-                                    @error('email')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input @error('jumlah') is-danger @enderror" type="text"
-                                        placeholder="Jumlah Orang" name="jumlah" value="{{ old('jumlah') }}">
-                                    @error('jumlah')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="columns">
-                        <div class="column is-4">
+                        <div class="column">
                             <div class="field">
+                                <label for="" class="label">Kontak Pemesanan (No. Handphone / Whatsapp)</label>
+                                <div class="control">
+                                    <input class="input @error('no') is-danger @enderror" type="text"
+                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}"
+                                        id="number">
+                                    @error('no')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label for="" class="label">Pilih Paket Wisata</label>
                                 <div class="control">
                                     <div class="select">
                                         <select class="input @error('paket') is-danger @enderror" style="width: 100%;"
-                                            name="paket">
+                                            name="paket" id="language" onChange="update()">
                                             <option selected disabled>Pilih Paket</option>
                                             @foreach ($paket as $p)
-                                                <option value="{{ $p->id }}">{{ $p->nama }}
+                                                <option
+                                                    value="{{ $p->nama }}
+                                                    (@currency($p->harga)/Orang)
+">
+                                                    {{ $p->nama }}
                                                     (@currency($p->harga)/Orang)
                                                 </option>
                                             @endforeach
@@ -419,66 +403,210 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="columns">
                         <div class="column">
                             <div class="field">
+                                <label for="" class="label">Konfirmasi Pesanan (Pilih salah satu)</label>
+                                <div class="control">
+                                    <label class="radio">
+                                        <input type="radio" name="answer" id="yesCheck"
+                                            onclick="javascript:yesnoCheck();">
+                                        Whatsapp
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="answer" id="noCheck"
+                                            onclick="javascript:yesnoCheck();">
+                                        Email
+                                    </label>
+                                    <div id="ifYes" class="mt-2" style="display: none;">
+                                        <input class="input @error('wa') is-danger @enderror" type="text"
+                                            placeholder="Whatsapp" name="wa" value="{{ old('wa') }}"
+                                            id="numberr">
+                                    </div>
+                                    <div id="ifNo" class="mt-2" style="display: none;">
+                                        <input class="input @error('email') is-danger @enderror" type="text"
+                                            placeholder="Email" id="copy" name="email"
+                                            value="{{ old('email') }}">
+                                    </div>
+                                    @error('jumlah')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label for="" class="label">Jumlah Orang</label>
+                                <div class="control">
+                                    <div class="columns is-mobile">
+                                        <div class="column">
+                                            <div class="field">
+                                                <label for="" class="label">Dewasa</label>
+                                                <input class="input @error('jumlah') is-danger @enderror"
+                                                    type="text" placeholder="Jumlah Orang" name="jumlah"
+                                                    value="{{ old('jumlah') }}" id="numberrr">
+                                            </div>
+                                        </div>
+                                        <div class="column">
+                                            <div class="field">
+                                                <label for="" class="label">Anak-anak</label>
+                                                <input class="input @error('jumlah') is-danger @enderror"
+                                                    type="text" placeholder="Jumlah Orang" name="jumlah"
+                                                    value="{{ old('jumlah') }}" id="numberrrr">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @error('jumlah')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label for="" class="label">Alamat</label>
+                                <div class="control">
+                                    <textarea class="textarea @error('alamat') is-danger @enderror" name="alamat">{{ old('alamat') }}</textarea>
+                                    @error('alamat')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="field">
+                                <label for="" class="label">Pesan (Opsional)</label>
                                 <div class="control">
                                     <textarea class="textarea" placeholder="Pesan (Opsional)" name="pesan">{{ old('pesan') }}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="button is-primary is-fullwidth" type="submit">Kirim</button>
+                    <div class="columns">
+                        <div class="column"></div>
+                        <div class="column">
+                            <div class="field">
+                                <div class="control">
+                                    <div class="columns is-mobile">
+                                        <div class="column">
+                                            <div class="field">
+                                                <dl>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            readonly value="Tanggal Pemesanan">
+                                                    </dt>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            readonly value="Paket">
+                                                    </dt>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            readonly value="Jumlah Orang">
+                                                    </dt>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            readonly value="Jumlah yang harus dibayar">
+                                                    </dt>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            readonly value="Konfirmasi pesanan ke">
+                                                    </dt>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="column">
+                                            <div class="field">
+                                                <dl>
+                                                    <dt>
+                                                        <input id="alternate" name="alternate" type="text"
+                                                            style="border: none transparent;"
+                                                            class="input is-static m-0 p-0" readonly>
+                                                    </dt>
+                                                    <dt>
+                                                        <input id="text" name="alternate" type="text"
+                                                            style="border: none transparent;"
+                                                            class="input is-static m-0 p-0" readonly>
+                                                    </dt>
+                                                    <dt>Jumlah Orang</dt>
+                                                    <dt>Jumlah yang harus dibayar</dt>
+                                                    <dt>
+                                                        <input id="copy-value" name="alternate" type="text"
+                                                            style="border: none transparent;"
+                                                            class="input is-static m-0 p-0">
+                                                    </dt>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column"></div>
+                        <div class="column">
+                            <button class="button is-primary is-fullwidth" type="submit">Kirim</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="content has-text-centered bg-primary mb-0">
-            <div class="columns">
-                <div class="column is-2 is-offset-5">
-                    <nav class="level">
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="http://wa.me/6282323723593">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-success">
-                                            <i class="fab fa-whatsapp fa-2x"></i>
-                                        </span>
+    <div class="content has-text-centered bg-primary mb-0">
+        <div class="columns">
+            <div class="column is-2 is-offset-5">
+                <nav class="level">
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <a href="http://wa.me/6282323723593">
+                                <span class="icon-text">
+                                    <span class="icon has-text-success">
+                                        <i class="fab fa-whatsapp fa-2x"></i>
                                     </span>
-                                </a>
-                            </div>
+                                </span>
+                            </a>
                         </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.instagram.com/desa_grujugan/">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-info">
-                                            <i class="fab fa-instagram fa-2x"></i>
-                                        </span>
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <a href="https://www.instagram.com/desa_grujugan/">
+                                <span class="icon-text">
+                                    <span class="icon has-text-info">
+                                        <i class="fab fa-instagram fa-2x"></i>
                                     </span>
-                                </a>
-                            </div>
+                                </span>
+                            </a>
                         </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-danger">
-                                            <i class="fab fa-youtube fa-2x"></i>
-                                        </span>
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
+                                <span class="icon-text">
+                                    <span class="icon has-text-danger">
+                                        <i class="fab fa-youtube fa-2x"></i>
                                     </span>
-                                </a>
-                            </div>
+                                </span>
+                            </a>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
-            <p>
-                <strong>Powered</strong> by SID. Work.
-            </p>
         </div>
+        <p>
+            <strong>Powered</strong> by SID. Work.
+        </p>
+    </div>
     </footer>
-
     <script async type="text/javascript" src="{{ asset('js/bulma.js') }}"></script>
     <!-- Always get the latest version -->
     <!-- Not recommended for production sites! -->
@@ -496,7 +624,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-id.js"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
+        $('#numberr').keyup(function() {
+            $('#copy-value').val($(this).val());
+        });
+        $('#copy').keyup(function() {
+            $('#copy-value').val($(this).val());
+        });
         var scroll = new SmoothScroll('a[href*="#"]', {
             header: '[data-scroll-header]',
             speed: 500
@@ -520,7 +659,16 @@
             infinite: true,
         });
 
-        $('#number_only').bind('keyup paste', function() {
+        $('#number').bind('keyup paste', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        $('#numberr').bind('keyup paste', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        $('#numberrr').bind('keyup paste', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        $('#numberrrr').bind('keyup paste', function() {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
@@ -533,6 +681,36 @@
             autoWidth: true,
             autoHeight: true
         }).mount();
+
+        window.onload = function() {
+            document.getElementById('wa').style.display = 'none';
+            document.getElementById('email').style.display = 'none';
+        }
+
+        function yesnoCheck() {
+            if (document.getElementById('yesCheck').checked) {
+                document.getElementById('ifYes').style.display = 'block';
+                document.getElementById('ifNo').style.display = 'none';
+                document.getElementById('redhat1').style.display = 'none';
+                document.getElementById('aix1').style.display = 'none';
+            } else if (document.getElementById('noCheck').checked) {
+                document.getElementById('ifNo').style.display = 'block';
+                document.getElementById('ifYes').style.display = 'none';
+                document.getElementById('redhat1').style.display = 'none';
+                document.getElementById('aix1').style.display = 'none';
+            }
+        }
+
+
+        function update() {
+            var select = document.getElementById('language');
+            var option = select.options[select.selectedIndex];
+
+            document.getElementById('value').value = option.value;
+            document.getElementById('text').value = option.text;
+        }
+
+        update();
     </script>
 </body>
 
