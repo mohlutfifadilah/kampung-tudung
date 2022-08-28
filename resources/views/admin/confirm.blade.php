@@ -65,7 +65,7 @@
                                         @endphp
                                         <td data-label="Paket">{{ $nama_paket }}</td>
                                         <td data-label="Harga">@currency($harga_paket)</td>
-                                        <td data-label="Jumlahorang">{{ $c->jumlahorang }}</td>
+                                        <td data-label="Jumlahorang">{{ $c->jumlah }}</td>
                                         <td data-label="Total">@currency($c->total)</td>
                                         <td data-label="Status">
                                             <span

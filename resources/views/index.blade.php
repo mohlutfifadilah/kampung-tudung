@@ -22,18 +22,21 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-id.js"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
     <script>
         $(function() {
-            $("#datepicker").datepicker($.datepicker.regional["id"]);
+
             $("#datepicker").datepicker({
                 altField: "#alternate",
-                altFormat: "DD, d MM, yy"
+                altFormat: "DD, d MM yy"
             });
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     <style>
         .pointer {
             cursor: pointer;
@@ -369,10 +372,9 @@
                             <div class="field">
                                 <label for="" class="label">Kontak Pemesanan (No. Handphone / Whatsapp)</label>
                                 <div class="control">
-                                    <input class="input @error('no') is-danger @enderror" type="text"
-                                        placeholder="No. Telepon" name="no" value="{{ old('no') }}"
-                                        id="number">
-                                    @error('no')
+                                    <input class="input @error('kontak') is-danger @enderror keep-number" type="text"
+                                        name="kontak" value="{{ old('kontak') }}" id="number">
+                                    @error('kontak')
                                         <p class="help is-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -387,12 +389,8 @@
                                             name="paket" id="language" onChange="update()">
                                             <option selected disabled>Pilih Paket</option>
                                             @foreach ($paket as $p)
-                                                <option
-                                                    value="{{ $p->nama }}
-                                                    (@currency($p->harga)/Orang)
-">
-                                                    {{ $p->nama }}
-                                                    (@currency($p->harga)/Orang)
+                                                <option value="{{ $p->id }}" data-id="{{ $p->harga }}">
+                                                    {{ $p->nama }}(@currency($p->harga)/Orang)
                                                 </option>
                                             @endforeach
                                         </select>
@@ -420,18 +418,23 @@
                                         Email
                                     </label>
                                     <div id="ifYes" class="mt-2" style="display: none;">
-                                        <input class="input @error('wa') is-danger @enderror" type="text"
-                                            placeholder="Whatsapp" name="wa" value="{{ old('wa') }}"
-                                            id="numberr">
+                                        <input class="input auto @error('wa') is-danger @enderror keep-number"
+                                            type="text" name="wa" value="{{ old('wa') }}">
+                                        <p class="help is-info">* Whatsapp atau email ini akan digunakan untuk
+                                            konfirmasi</p>
+                                        @error('wa')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div id="ifNo" class="mt-2" style="display: none;">
-                                        <input class="input @error('email') is-danger @enderror" type="text"
-                                            placeholder="Email" id="copy" name="email"
-                                            value="{{ old('email') }}">
+                                        <input class="input auto @error('email') is-danger @enderror" type="text"
+                                            id="copy" name="email" value="{{ old('email') }}">
+                                        <p class="help is-info">* Whatsapp atau email ini akan digunakan untuk
+                                            konfirmasi</p>
+                                        @error('email')
+                                            <p class="help is-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                    @error('jumlah')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -443,23 +446,32 @@
                                         <div class="column">
                                             <div class="field">
                                                 <label for="" class="label">Dewasa</label>
-                                                <input class="input @error('jumlah') is-danger @enderror"
-                                                    type="text" placeholder="Jumlah Orang" name="jumlah"
-                                                    value="{{ old('jumlah') }}" id="numberrr">
+                                                <input
+                                                    class="input @error('dewasa') is-danger @enderror keep-number InvQty"
+                                                    type="text" name="dewasa" value="{{ old('dewasa') }}"
+                                                    id="InvQty1">
+                                                <p class="help is-info">
+                                                    * Jika tidak ada, isi dengan 0
+                                                </p>
+                                                @error('dewasa')
+                                                    <p class="help is-danger">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="column">
                                             <div class="field">
                                                 <label for="" class="label">Anak-anak</label>
-                                                <input class="input @error('jumlah') is-danger @enderror"
-                                                    type="text" placeholder="Jumlah Orang" name="jumlah"
-                                                    value="{{ old('jumlah') }}" id="numberrrr">
+                                                <input
+                                                    class="input @error('anak') is-danger @enderror keep-number InvQty"
+                                                    type="text" name="anak" value="{{ old('anak') }}"
+                                                    id="InvQty2">
+                                                @error('anak')
+                                                    <p class="help is-danger">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
+
                                     </div>
-                                    @error('jumlah')
-                                        <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -482,7 +494,7 @@
                             <div class="field">
                                 <label for="" class="label">Pesan (Opsional)</label>
                                 <div class="control">
-                                    <textarea class="textarea" placeholder="Pesan (Opsional)" name="pesan">{{ old('pesan') }}</textarea>
+                                    <textarea class="textarea" name="pesan">{{ old('pesan') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -498,29 +510,30 @@
                                                 <dl>
                                                     <dt>
                                                         <input type="text"
-                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            style="border: none transparent;"class="has-text-weight-bold input is-static m-0 p-0"
+                                                            readonly value="Konfirmasi pesanan ke">
+                                                    </dt>
+                                                    <dt>
+                                                        <input type="text"
+                                                            style="border: none transparent;"class="has-text-weight-bold input is-static m-0 p-0"
                                                             readonly value="Tanggal Pemesanan">
                                                     </dt>
                                                     <dt>
                                                         <input type="text"
-                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            style="border: none transparent;"class="has-text-weight-bold input is-static m-0 p-0"
                                                             readonly value="Paket">
                                                     </dt>
                                                     <dt>
                                                         <input type="text"
-                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            style="border: none transparent;"class="has-text-weight-bold input is-static m-0 p-0"
                                                             readonly value="Jumlah Orang">
                                                     </dt>
                                                     <dt>
                                                         <input type="text"
-                                                            style="border: none transparent;"class="input is-static m-0 p-0"
+                                                            style="border: none transparent;"class="has-text-weight-bold input is-static m-0 p-0"
                                                             readonly value="Jumlah yang harus dibayar">
                                                     </dt>
-                                                    <dt>
-                                                        <input type="text"
-                                                            style="border: none transparent;"class="input is-static m-0 p-0"
-                                                            readonly value="Konfirmasi pesanan ke">
-                                                    </dt>
+
                                                 </dl>
                                             </div>
                                         </div>
@@ -528,22 +541,29 @@
                                             <div class="field">
                                                 <dl>
                                                     <dt>
+                                                        <input type="text" style="border: none transparent;"
+                                                            class="input is-static m-0 p-0 auto-display">
+                                                    </dt>
+                                                    <dt>
                                                         <input id="alternate" name="alternate" type="text"
                                                             style="border: none transparent;"
-                                                            class="input is-static m-0 p-0" readonly>
+                                                            class="input is-static m-0 p-0 " readonly>
                                                     </dt>
                                                     <dt>
-                                                        <input id="text" name="alternate" type="text"
+                                                        <input id="display-package" type="text"
                                                             style="border: none transparent;"
                                                             class="input is-static m-0 p-0" readonly>
                                                     </dt>
-                                                    <dt>Jumlah Orang</dt>
-                                                    <dt>Jumlah yang harus dibayar</dt>
                                                     <dt>
-                                                        <input id="copy-value" name="alternate" type="text"
-                                                            style="border: none transparent;"
-                                                            class="input is-static m-0 p-0">
+                                                        <input type="text" style="border: none transparent;"
+                                                            class="input is-static m-0 p-0 Total" id="Total"
+                                                            readonly>
                                                     </dt>
+                                                    <dt>
+                                                        <input type="text" style="border: none transparent;"
+                                                            class="input is-static m-0 p-0" id="fee" readonly>
+                                                    </dt>
+
                                                 </dl>
                                             </div>
                                         </div>
@@ -626,15 +646,51 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-id.js"></script>
-    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
     <script>
-        $('#numberr').keyup(function() {
-            $('#copy-value').val($(this).val());
+        $('.auto').keyup(function() {
+            $('.auto-display').val($(this).val());
         });
-        $('#copy').keyup(function() {
-            $('#copy-value').val($(this).val());
+        $('.InvQty').keyup(function() {
+            var val2 = 0;
+            var select = document.getElementById('InvQty1').value;
+            var select2 = document.getElementById('InvQty2').value;
+            $("input[id^='InvQty']").each(function() {
+                if ($(this).val().length != 0) {
+                    val2 = val2 + parseInt($(this).val())
+                }
+            });
+            if (select > 0) {
+                if (select2 < 1) {
+                    $('#Total').val(select + " Dewasa");
+                }
+                $('#Total').val(val2 + " Orang (" + select + " Dewasa, " + select2 + " Anak-anak)");
+            } else if (select2 > 0) {
+                if (select < 1) {
+                    $('#Total').val(select + " Anak-anak");
+                }
+                $('#Total').val(val2 + " Orang (" + select + " Dewasa, " + select2 + " Anak-anak)");
+            }
+
+            var option = $('#language').find(':selected').attr('data-id');
+
+            var zui = option;
+            var mgh = val2 * zui;
+
+            $('#fee').val(convertToRupiah(mgh));
+        });
+        var rupiah = document.getElementById('fee');
+        rupiah.addEventListener('keyup', function(e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            rupiah.value = formatRupiah(this.value, 'Rp. ');
         });
         var scroll = new SmoothScroll('a[href*="#"]', {
             header: '[data-scroll-header]',
@@ -659,16 +715,7 @@
             infinite: true,
         });
 
-        $('#number').bind('keyup paste', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-        $('#numberr').bind('keyup paste', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-        $('#numberrr').bind('keyup paste', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-        $('#numberrrr').bind('keyup paste', function() {
+        $('.keep-number').bind('keyup paste', function() {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
@@ -701,13 +748,19 @@
             }
         }
 
+        function convertToRupiah(angka) {
+            var rupiah = '';
+            var angkarev = angka.toString().split('').reverse().join('');
+            for (var i = 0; i < angkarev.length; i++)
+                if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+            return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
+        }
 
         function update() {
             var select = document.getElementById('language');
             var option = select.options[select.selectedIndex];
 
-            document.getElementById('value').value = option.value;
-            document.getElementById('text').value = option.text;
+            document.getElementById('display-package').value = option.text;
         }
 
         update();

@@ -16,53 +16,47 @@ class SendController extends Controller
     //
     public function send(Request $request)
     {
-        $nama     = $request->nama;
-        $alamat     = $request->alamat;
-        $no     = $request->no;
-        $tanggal     = $request->tanggal;
-        $paket     = $request->paket;
-        // if ($paket == 'Tudung') {
-        //     $paket = 30000;
-        // } else if ($paket == 'Ilir') {
-        //     $paket = 23000;
-        // } else if ($paket == 'Ethnik') {
-        //     $paket = 30000;
-        // } else if ($paket == 'Lukis Ilis') {
-        //     $paket = 21000;
-        // } else {
-        //     $paket = 57500;
-        // }
-        $jumlah     = $request->jumlah;
+        $nama      = $request->nama;
+        $kontak    = $request->kontak;
+        $wa        = $request->wa;
         $email     = $request->email;
+        $alamat    = $request->alamat;
+        $tanggal   = $request->alternate;
+        $paket     = $request->paket;
+        $dewasa    = $request->dewasa;
+        $anak      = $request->anak;
+        $jumlah    = $dewasa + $anak;
         $pesan     = $request->pesan;
-        $p = Paket::find($paket);
+        $p         = Paket::find($paket);
         $total     = $p->harga * (int) $jumlah;
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'kontak' => 'required',
+            'email' => 'email:rfc,dns|nullable',
             'alamat' => 'required',
-            'no' => 'required|numeric',
             'tanggal' => 'required',
             'paket' => 'required',
-            'jumlah' => 'required|numeric|max:999',
-            'email' => 'email:rfc,dns|required',
         ]);
 
         if ($validator->fails()) {
             return redirect('/#booking')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Gagal Booking', 'type' => 'error']);
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Gagal memesan tiket', 'type' => 'error']);
         }
 
         $confirm = new Confirm;
 
         $confirm->nama = $nama;
+        $confirm->kontak = $kontak;
+        $confirm->wa = $wa;
+        $confirm->email = $email;
         $confirm->alamat = $alamat;
-        $confirm->nohp = $no;
         $confirm->tanggal = $tanggal;
         $confirm->paket = $paket;
-        $confirm->jumlahorang = $jumlah;
-        $confirm->email = $email;
-        $confirm->catatan = $pesan;
+        $confirm->dewasa = $dewasa;
+        $confirm->anak = $anak;
+        $confirm->jumlah = $jumlah;
+        $confirm->pesan = $pesan;
         $confirm->total = $total;
         $confirm->status = 0;
 
@@ -70,6 +64,6 @@ class SendController extends Controller
 
         // Mail::to($email)->send(new SendMail());
 
-        return redirect('/')->with(['status' => 'Telah dikirim, cek email anda', 'title' => 'Berhasil Booking', 'type' => 'success']);
+        return redirect('/')->with(['status' => 'Berhasil', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }
 }

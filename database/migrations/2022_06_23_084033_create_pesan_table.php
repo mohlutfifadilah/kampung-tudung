@@ -16,13 +16,16 @@ class CreatePesanTable extends Migration
         Schema::create('pesan', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('kontak')->length(255);
+            $table->string('wa')->length(255)->nullable();
+            $table->string('email')->length(255)->nullable();
             $table->string('alamat');
-            $table->string('nohp')->length(255);
-            $table->date('tanggal');
+            $table->string('tanggal');
             $table->string('paket');
-            $table->integer('jumlahorang');
-            $table->string('email');
-            $table->string('catatan')->nullable();
+            $table->integer('dewasa');
+            $table->integer('anak');
+            $table->integer('jumlah');
+            $table->string('pesan')->nullable();
             $table->integer('total');
             $table->integer('status');
             $table->timestamps();
