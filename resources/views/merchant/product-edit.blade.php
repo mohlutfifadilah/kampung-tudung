@@ -110,6 +110,59 @@
                 </div>
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
+                        <label class="label">Keterangan</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="level mt-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <input type="checkbox" class="check-kondisi">&nbsp; Kondisi |
+                                </div>
+                                <div class="level-item">
+                                    <input type="checkbox" class="check-ukuran">&nbsp; Ukuran |
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                        <label class="label"></label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded">
+                                <input class="input @error('kondisi') is-danger @enderror hidden" type="text"
+                                    placeholder="* Masukkan kondisi barang. Contoh : Baik, Baru, Bekas" name="kondisi"
+                                    id="kondisi" value="{{ $id->kondisi }}">
+                                {{-- <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span> --}}
+                            </p>
+                            @error('kondisi')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                        <label class="label"></label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded">
+                                <input class="input @error('ukuran') is-danger @enderror hidden" type="text"
+                                    placeholder="* Masukkan ukuran dimensi barang (panjang, lebar, tinggi). Contoh : 20 x 40 x 10"
+                                    name="ukuran" id="ukuran" value="{{ $id->ukuran }}">
+                                {{-- <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span> --}}
+                            </p>
+                            @error('ukuran')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
                         <label class="label">Deskripsi</label>
                     </div>
                     <div class="field-body">
@@ -170,5 +223,25 @@
             reader.readAsDataURL(file);
         }
     }
+    $(function() {
+        $('input[id="kondisi"]').hide();
+        $('input[id="ukuran"]').hide();
+
+        //show it when the checkbox is clicked
+        $('input[class="check-kondisi"]').on('click', function() {
+            if ($(this).prop('checked')) {
+                $('input[id="kondisi"]').fadeIn();
+            } else {
+                $('input[id="kondisi"]').hide();
+            }
+        });
+        $('input[class="check-ukuran"]').on('click', function() {
+            if ($(this).prop('checked')) {
+                $('input[id="ukuran"]').fadeIn();
+            } else {
+                $('input[id="ukuran"]').hide();
+            }
+        });
+    });
 </script>
 @include('admin.template.footer')

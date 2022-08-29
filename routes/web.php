@@ -16,10 +16,12 @@ use App\Http\Controllers\TokoController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\TermasukController;
 use App\Models\About;
 use App\Models\Gallery;
 use App\Models\Paket;
 use App\Models\Product;
+use App\Models\Termasuk;
 use Illuminate\Support\Facades\DB;
 
 
@@ -40,12 +42,14 @@ Route::get('/', function () {
     $about = About::first();
     $product = Product::all();
     $galeri = Gallery::all();
+    $include = Termasuk::all();
     $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
     return view('index', [
         'paket' => $paket,
         'about' => $about,
         'gallery' => $galeri,
         'produk' => $product,
+        'include' => $include,
         'merchant' => $merchant,
     ]);
 });
@@ -67,6 +71,7 @@ Route::resource('/toko', TokoController::class);
 Route::resource('/about', AboutController::class);
 Route::resource('/gallery', GalleryController::class);
 Route::resource('/video', VideoController::class);
+Route::resource('/termasuk', TermasukController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

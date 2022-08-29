@@ -142,9 +142,18 @@
                                             class="tag is-medium is-info is-rounded">@currency($m->harga)</span></p>
                                 </div>
                             </div>
-
                             <div class="content">
-                                {{ $m->deskripsi }}
+                                <p>
+                                    Kondisi : {{ $m->kondisi }}
+                                </p>
+                                <p>
+                                    Ukuran : {{ $m->ukuran }}
+                                </p>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Deskripsi : {{ $m->deskripsi }}
+                                </p>
                             </div>
                         </div>
                         <footer class="card-footer">

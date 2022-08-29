@@ -87,7 +87,7 @@
                         <div class="field">
                             <p class="control is-expanded">
                                 <input class="input @error('wa') is-danger @enderror" type="text" placeholder=""
-                                    name="wa" id="wa" value="{{ $id->wa }}">
+                                    name="wa" id="number_only" value="{{ $id->wa }}">
                                 {{-- <span class="icon is-small is-left"><i class="fa-solid fa-user"></i></span> --}}
                             </p>
                             @error('wa')

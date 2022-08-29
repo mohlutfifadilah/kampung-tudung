@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMerchantTable extends Migration
+class CreateTermasukTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateMerchantTable extends Migration
      */
     public function up()
     {
-        Schema::create('merchant', function (Blueprint $table) {
+        Schema::create('termasuk', function (Blueprint $table) {
             $table->id();
-            $table->string('id_produk')->nullable();
-            $table->string('username');
-            $table->string('password');
+            $table->string('id_paket');
             $table->string('nama');
-            $table->text('foto')->nullable();
-            $table->string('deskripsi')->length(9999)->nullable();
-            $table->string('wa')->length(255)->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ class CreateMerchantTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merchant');
+        Schema::dropIfExists('termasuk');
     }
 }

@@ -51,6 +51,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Harga</th>
+                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,18 @@
                                         <td data-label="No">{{ $loop->iteration }}</td>
                                         <td data-label="Nama">{{ $p->nama }}</td>
                                         <td data-label="Harga">@currency($p->harga)</td>
+                                        @php
+                                            $za = \App\Models\Termasuk::where('id_paket', $p->id_paket)->get();
+                                        @endphp
+                                        <td data-label="Keterangan">
+                                            @foreach ($za as $i)
+                                                <label class="checkbox" disabled>
+                                                    <input type="checkbox" disabled checked>
+                                                    {{ $i->nama }}
+                                                </label>
+                                                <br>
+                                            @endforeach
+                                        </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
                                                 <a href="/paket/{{ $p->id }}/edit"

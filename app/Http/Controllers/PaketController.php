@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paket;
+use App\Models\Termasuk;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PaketController extends Controller
 {
@@ -18,9 +20,11 @@ class PaketController extends Controller
     {
         //
         $paket = Paket::paginate(10);
+        $included = Termasuk::groupBy('nama')->get();
         return view('admin.paket', [
             'title' => 'paket',
-            'paket' => $paket
+            'paket' => $paket,
+            'included' => $included
         ]);
     }
 
@@ -32,8 +36,10 @@ class PaketController extends Controller
     public function create()
     {
         //
+        $include = Termasuk::groupBy('nama')->get();
         return view('admin.paket-create', [
-            'title' => 'paket'
+            'title' => 'paket',
+            'include' => $include
         ]);
     }
 
@@ -48,6 +54,8 @@ class PaketController extends Controller
         //
         $nama     = $request->nama;
         $harga     = $request->harga;
+        $include = $request->include;
+        $kode = Str::random(40);
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
@@ -61,10 +69,20 @@ class PaketController extends Controller
 
         $paket = new Paket;
 
+        $paket->id_paket = $kode;
         $paket->nama = $nama;
         $paket->harga = $harga;
 
         $paket->save();
+
+
+        foreach ($include as $i) {
+            $include = new Termasuk;
+            $include->id_paket = $kode;
+            $include->nama = $i;
+
+            $include->save();
+        }
 
         return redirect('paket')->with(['status' => 'Berhasil Ditambahkan', 'title' => 'Data Paket', 'type' => 'success']);
     }
@@ -89,10 +107,16 @@ class PaketController extends Controller
     public function edit($id)
     {
         //
-        $id  = Paket::find($id);
+        $idp  = Paket::find($id);
+        $include = DB::table('paket')->where('id_paket', $idp->id_paket)->first();
+        $included = Termasuk::groupBy('nama')->get();
+        $includee = DB::table('termasuk')->where('id_paket', $include->id_paket)->groupBy('nama')->value('nama');
         return view('admin.paket-edit', [
-            'id' => $id,
-            'title' => 'paket'
+            'id' => $idp,
+            'title' => 'paket',
+            'include' => $include,
+            'included' => $included,
+            'includee' => $includee
         ]);
     }
 
@@ -106,8 +130,10 @@ class PaketController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $idp  = Paket::find($id);
         $nama     = $request->nama;
         $harga     = $request->harga;
+        $include = $request->include;
 
         $validator = Validator::make($request->all(), [
             'nama'        => 'required',
@@ -125,6 +151,14 @@ class PaketController extends Controller
                 'nama'       => $nama,
                 'harga'       => $harga,
             ]);
+
+        foreach ($include as $i) {
+            DB::table('termasuk')
+                ->where('id_paket', $idp->id_paket)
+                ->update([
+                    'nama'       => $include,
+                ]);
+        }
 
         return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
     }

@@ -50,12 +50,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request);
         $coba  = User::find($request->id);
         $merchant = DB::table('merchant')->where('username', $coba->username)->first();
         // $product = Product::where('id', $merchant->id_produk)->paginate(10);
         // dd($merchant->id);
         $judul         = $request->judul;
+        $kondisi         = $request->kondisi;
+        $ukuran         = $request->ukuran;
         $deskripsi     = $request->deskripsi;
         $harga         = $request->harga;
         $kode = Str::random(40);
@@ -82,8 +83,10 @@ class ProductController extends Controller
         $product->id_merchant = $merchant->id;
         $product->gambar = $gambar;
         $product->judul = $judul;
-        $product->deskripsi = $deskripsi;
         $product->harga = $harga;
+        $product->kondisi = $kondisi;
+        $product->ukuran = $ukuran;
+        $product->deskripsi = $deskripsi;
 
         $product->save();
 
@@ -153,6 +156,8 @@ class ProductController extends Controller
         $user = DB::table('users')->where('username', $merchant->username)->first();
         $judul     = $request->judul;
         $harga     = $request->harga;
+        $kondisi         = $request->kondisi;
+        $ukuran         = $request->ukuran;
         $deskripsi     = $request->deskripsi;
         $gambar = $u->gambar;
 
@@ -178,6 +183,8 @@ class ProductController extends Controller
             ->update([
                 'judul'       => $judul,
                 'harga'       => $harga,
+                'kondisi'       => $kondisi,
+                'ukuran'       => $ukuran,
                 'deskripsi'   => $deskripsi,
                 'gambar'      => $gambar,
             ]);

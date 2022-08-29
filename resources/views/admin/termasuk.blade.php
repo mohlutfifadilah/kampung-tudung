@@ -1,6 +1,6 @@
-@section('title', 'Produk')
-@include('merchant.template.header')
-@include('merchant.template.sidebar')
+@section('title', 'Include Paket')
+@include('admin.template.header')
+@include('admin.template.sidebar')
 @if (session('status'))
     <script>
         swal({
@@ -19,15 +19,15 @@
                 <div class="level-item">
                     <div>
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-                        <b>Produk</b><br>
+                        <b>Include Paket</b><br>
                         <small class="ml-2">
-                            Total data : {{ $product->total() }}
+                            Total data : {{ $include->total() }}
                         </small>
                     </div>
                 </div>
             </div>
             <div class="level-right">
-                <a href="/product/create" class="button is-small is-info">
+                <a href="/termasuk/create" class="button is-small is-info">
                     <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
                 </a>
             </div>
@@ -38,7 +38,7 @@
         <div class="card-content">
             <div class="b-table has-pagination">
                 <div class="table-wrapper has-mobile-cards">
-                    @if ($product->count())
+                    @if ($include->count())
                         <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
                             <thead>
                                 <tr>
@@ -49,41 +49,23 @@
                                     </label>
                                 </th> --}}
                                     <th>No</th>
-                                    <th>Gambar</th>
-                                    <th>Judul</th>
-                                    <th>Harga</th>
-                                    <th>Keterangan</th>
-                                    <th>Deskripsi</th>
+                                    <th>Nama</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($product as $p)
+                                @foreach ($include as $p)
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
-                                        <td data-label="Gambar">
-                                            <img src="{{ asset('storage/' . $p->gambar) }}" alt=""
-                                                style="max-height: 200px; max-width: 400px;">
-                                        </td>
-                                        <td data-label="Judul">{{ $p->judul }}</td>
-                                        <td data-label="Harga">@currency($p->harga)</td>
-                                        <td data-label="Keterangan">
-                                            <p>
-                                                Kondisi : {{ $p->kondisi }}
-                                            </p>
-                                            <p>
-                                                Ukuran : {{ $p->ukuran }}
-                                            </p>
-                                        </td>
-                                        <td data-label="Deskripsi">{{ $p->deskripsi }}</td>
+                                        <td data-label="Nama">{{ $p->nama }}</td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                <a href="/product/{{ $p->id }}/edit"
+                                                <a href="/termasuk/{{ $p->id }}/edit"
                                                     class="button is-small is-warning"><span class="icon"><i
                                                             class="fa-solid fa-pen-to-square"></i></span></a>
                                                 <button class="button is-small is-danger remove-user" type="submit"
                                                     data-id="{{ $p->id }}"
-                                                    data-action="{{ route('product.destroy', $p->id) }}">
+                                                    data-action="{{ route('termasuk.destroy', $p->id) }}">
                                                     <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
                                                 </button>
                                             </div>
@@ -108,13 +90,13 @@
                         </div>
                     @endif
                 </div>
-                @if ($product->count())
+                @if ($include->count())
                     <hr>
                     <div class="columns px-5 pb-5">
                         <div class="column">
 
                             <ul class="pagination-list">
-                                {{ $product->links() }}
+                                {{ $include->links() }}
                             </ul>
                         </div>
                         <div class="column">
@@ -125,8 +107,8 @@
                         </div>
                         <div class="column has-text-right">
                             <small>
-                                Halaman ke {{ $product->currentPage() }} dari
-                                {{ $product->count() }}
+                                Halaman ke {{ $include->currentPage() }} dari
+                                {{ $include->count() }}
                             </small>
                         </div>
                     </div>
@@ -140,7 +122,7 @@
         var current_object = $(this);
         swal({
             title: "Apakah anda yakin ?",
-            text: "Hapus produk ini",
+            text: "Hapus include paket ini",
             type: "warning",
             showCancelButton: true,
             dangerMode: true,
@@ -166,4 +148,4 @@
         });
     });
 </script>
-@include('merchant.template.footer')
+@include('admin.template.footer')

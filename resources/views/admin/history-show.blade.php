@@ -35,34 +35,44 @@
                 <div class="columns">
                     <div class="column">
                         <dl>
-                            <dt><strong>Nama / Instansi</strong></dt>
+                            <dt><strong>Nama / Organisasi / Instansi</strong></dt>
                             <dd class="mb-4 mt-2">{{ $history->nama }}</dd>
-                            <dt><strong>Alamat</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $history->alamat }}</dd>
-                            <dt><strong>No Handphone</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $history->nohp }}</dd>
+                            <dt><strong>Kontak</strong></dt>
+                            <dd class="mb-4 mt-2">{{ $history->kontak }}</dd>
+                            <dt><strong>Konfirmasi</strong></dt>
+                            @if ($history->wa)
+                                <dd class="mb-4 mt-2">Whatsapp : {{ $history->wa }}</dd>
+                            @endif
+                            @if ($history->email)
+                                <dd class="mb-4 mt-2">Email : {{ $history->email }}</dd>
+                            @endif
                             <dt><strong>Tanggal</strong></dt>
                             <dd class="mb-4 mt-2">{{ $history->tanggal }}</dd>
                             @php
                                 $nama_paket = \App\Models\Paket::where('id', $history->paket)->value('nama');
                                 $harga_paket = \App\Models\Paket::where('id', $history->paket)->value('harga');
                             @endphp
-                            <dt><strong>Email</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $history->email }}</dd>
+                            <dt><strong>Alamat</strong></dt>
+                            <dd class="mb-4 mt-2">{{ $history->alamat }}</dd>
                         </dl>
                     </div>
                     <div class="column">
                         <dl>
                             <dt><strong>Paket</strong></dt>
                             <dd class="mb-4 mt-2">{{ $nama_paket }}</dd>
-                            <dt><strong>Catatan</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $history->catatan }}</dd>
+                            <dt><strong>Jumlah Orang</strong></dt>
+                            <dd class="mb-4 mt-2">{{ $history->jumlah }} Orang ({{ $history->dewasa }} Dewasa,
+                                {{ $history->anak }} Anak-anak)</dd>
                             <dt><strong>Harga</strong></dt>
                             <dd class="mb-4 mt-2">@currency($harga_paket)</dd>
-                            <dt><strong>Jumlah Orang</strong></dt>
-                            <dd class="mb-4 mt-2">{{ $history->jumlahorang }}</dd>
                             <dt><strong>Total</strong></dt>
                             <dd class="mb-4 mt-2">@currency($history->total)</dd>
+                            <dt><strong>Pesan</strong></dt>
+                            @if ($history->catatan)
+                                <dd class="mb-4 mt-2">{{ $history->catatan }}</dd>
+                            @else
+                                <dd class="mb-4 mt-2">-</dd>
+                            @endif
                         </dl>
                     </div>
                 </div>

@@ -55,6 +55,24 @@
                 </div>
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
+                        <label class="label">Include Paket</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="level mt-1">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    @foreach ($included as $i)
+                                        <input type="checkbox" name="include[]" value="{{ $i->nama }}"
+                                            {{ $i->nama == $includee ? 'checked' : '' }}>
+                                        &nbsp; {{ $i->nama }} | &nbsp;
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
                         <label class="label">Harga</label>
                     </div>
                     <div class="field-body">

@@ -68,6 +68,13 @@
                     <span class="menu-item-label">Paket</span>
                 </a>
             </li>
+            <li>
+                <a href="/termasuk" class="has-icon {{ $title === 'termasuk' ? 'is-active router-link-active' : '' }}">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-sort-ascending"></i></span>
+                    <span class="menu-item-label">Include Paket</span>
+                </a>
+            </li>
             {{-- <li>
                 <a href="forms.html" class="has-icon">
                     <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
