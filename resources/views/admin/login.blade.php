@@ -71,7 +71,6 @@
                 <div class="has-text-centered">
                     <img class="login-logo" src="{{ asset('default/tudung.png') }}">
                 </div>
-
                 <form action="/login" method="POST">
                     @csrf
                     <div class="field">
@@ -84,7 +83,6 @@
                             </span>
                         </div>
                     </div>
-
                     <div class="field">
                         <label class="label">Password</label>
                         <div class="control has-icons-right">
@@ -95,8 +93,18 @@
                             </span>
                         </div>
                     </div>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <p class="help is-danger">* Jika mengalami masalah saat login, silahkan menghubungi <a
+                                        href="https://wa.me/6287832657197">admin</a></p>
+                            </label>
+                        </div>
+                    </div>
                     <div class="has-text-centered">
-                        <button class="button is-vcentered is-primary is-outlined" type="submit">Login</button>
+                        <button class="button is-vcentered is-primary is-outlined" type="submit">
+                            Login
+                        </button>
                     </div>
                 </form>
             </section>

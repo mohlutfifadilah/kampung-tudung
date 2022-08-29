@@ -50,6 +50,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request);
         $coba  = User::find($request->id);
         $merchant = DB::table('merchant')->where('username', $coba->username)->first();
         // $product = Product::where('id', $merchant->id_produk)->paginate(10);

@@ -42,7 +42,10 @@
                         class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
                         <a class="navbar-link is-arrowless">
                             <div class="is-user-avatar">
-                                {{-- <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe"> --}}
+                                {{-- @php
+                                    $foto = \App\Models\Merchant::where('id', auth()->user()->id)->value('foto');
+                                @endphp
+                                <img src="{{ asset('profile-image/' . $foto) }}" alt="John Doe"> --}}
                             </div>
                             <div class="is-user-name"><span>{{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>

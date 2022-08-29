@@ -19,8 +19,10 @@ class CreateProdukTable extends Migration
             $table->integer('id_merchant');
             $table->string('gambar');
             $table->string('judul');
-            $table->string('deskripsi');
             $table->integer('harga');
+            $table->string('kondisi');
+            $table->string('ukuran');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
