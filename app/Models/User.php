@@ -40,4 +40,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [];
+    public function routeNotificationForWhatsApp()
+    {
+        return $this->phone_number;
+    }
 }

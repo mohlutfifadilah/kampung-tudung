@@ -4,10 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Kampung Tudung</title>
+    <link rel="shortcut icon" href="{{ asset('default/tudung.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://jqueryui.com/resources/demos/datepicker/i18n/datepicker-id.js"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
     <script>
         $(function() {
 
@@ -112,17 +126,20 @@
 
         .map-responsive {
             overflow: hidden;
-            padding-bottom: 56.25%;
             position: relative;
-            height: 0;
+            height: 350px;
         }
 
         .map-responsive iframe {
             left: 0;
             top: 0;
-            height: 40%;
+            height: 100%;
             width: 100%;
             position: absolute;
+        }
+
+        .link {
+            margin: 0 15px;
         }
 
         @media only screen and (max-width: 768px) {
@@ -624,51 +641,58 @@
         </div>
     </section>
     <section class="section has-text-centered" id="mitra">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-2 is-offset-5">
-                    <nav class="level">
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="http://wa.me/6282323723593">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-success">
-                                            <i class="fab fa-whatsapp fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.instagram.com/desa_grujugan/">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-info">
-                                            <i class="fab fa-instagram fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-danger">
-                                            <i class="fab fa-youtube fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <a href="http://wa.me/6282323723593" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-success">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.instagram.com/desa_grujugan/" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-info">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-danger">
+                            <i class="fab fa-youtube fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
             </div>
-            <p>
-                <strong>Powered</strong> by SID. Work.
-            </p>
-        </div>
+        </nav>
+        <p>
+            <strong>Powered</strong> by SID. Work.
+        </p>
     </section>
+    <script async type="text/javascript" src="{{ asset('js/bulma.js') }}"></script>
+    <!-- Always get the latest version -->
+    <!-- Not recommended for production sites! -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- Get minor updates and patch fixes within a major version -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- Get patch fixes within a minor version -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- Get a specific version -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('js/datepicker-id.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 

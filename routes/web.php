@@ -15,6 +15,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TermasukController;
 use App\Models\About;
@@ -79,3 +80,4 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/send', [SendController::class, 'send']);
+Route::get('/kirim_email', [App\Http\Controllers\MailController::class, 'kirim']);

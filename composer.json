@@ -11,7 +11,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "revolution/laravel-pagination-bulma": "^1.1"
+        "revolution/laravel-pagination-bulma": "^1.1",
+        "twilio/sdk": "^6.41"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

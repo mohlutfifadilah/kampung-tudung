@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\OrderProcessed;
 
 class SendController extends Controller
 {
     //
     public function send(Request $request)
     {
+        Mail::to('kampungtudung12@gmail.com')->send(new SendMail());
+        dd('sukses');
         $nama      = $request->nama;
         $kontak    = $request->kontak;
         $wa        = $request->wa;
@@ -29,7 +32,6 @@ class SendController extends Controller
         $pesan     = $request->pesan;
         $p         = Paket::find($paket);
         $total     = $p->harga * (int) $jumlah;
-
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'kontak' => 'required',
@@ -62,7 +64,11 @@ class SendController extends Controller
 
         $confirm->save();
 
-        // Mail::to($email)->send(new SendMail());
+        if ($wa) {
+        } else if ($email) {
+            Mail::to($email)->send(new SendMail());
+        } else {
+        }
 
         return redirect('/')->with(['status' => 'Berhasil', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }
