@@ -61,11 +61,12 @@
                         <div class="level mt-1">
                             <div class="level-left">
                                 <div class="level-item">
-                                    @foreach ($included as $i)
+                                    {{-- {{ $included }} <br> {{ $collection }} <br> {{ $merged }} --}}
+                                    {{-- @foreach ($included as $i)
                                         <input type="checkbox" name="include[]" value="{{ $i->nama }}"
-                                            {{ $i->nama == $includee ? 'checked' : '' }}>
+                                            {{ $i->nama == $collection ? 'checked' : '' }}>
                                         &nbsp; {{ $i->nama }} | &nbsp;
-                                    @endforeach
+                                        @endforeach --}}
                                 </div>
                             </div>
                         </div>

@@ -41,12 +41,6 @@
                     <div
                         class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
                         <a class="navbar-link is-arrowless">
-                            <div class="is-user-avatar">
-                                {{-- @php
-                                    $foto = \App\Models\Merchant::where('id', auth()->user()->id)->value('foto');
-                                @endphp
-                                <img src="{{ asset('profile-image/' . $foto) }}" alt="John Doe"> --}}
-                            </div>
                             <div class="is-user-name"><span>{{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
                         </a>
@@ -56,12 +50,17 @@
                                 <span>Edit Password</span>
                             </a> --}}
                             {{-- <hr class="navbar-divider"> --}}
-                            <form action="/logout" method="post">
+                            <form action="/logout" method="post" id="my_form">
                                 @csrf
-                                <button type="submit" class="navbar-item">
+                                <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
+                                    class="navbar-item">
                                     <span class="icon"><i class="mdi mdi-logout"></i></span>
                                     <span>Keluar</span>
-                                </button>
+                                </a>
+                                {{-- <button type="submit" class="navbar-item">
+                                    <span class="icon"><i class="mdi mdi-logout"></i></span>
+                                    <span>Keluar</span>
+                                </button> --}}
                             </form>
                         </div>
                     </div>

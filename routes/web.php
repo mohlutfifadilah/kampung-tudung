@@ -63,16 +63,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/confirm', ConfirmController::class);
     Route::resource('/paket', PaketController::class);
     Route::resource('/history', HistoryController::class);
-    Route::resource('/profile', ProfileController::class);
-    Route::resource('/password', PasswordController::class);
+    Route::resource('/about', AboutController::class);
+    Route::resource('/gallery', GalleryController::class);
+    Route::resource('/video', VideoController::class);
+    Route::resource('/termasuk', TermasukController::class);
 });
 
+
+Route::resource('/profile', ProfileController::class);
+Route::resource('/password', PasswordController::class);
 Route::resource('/merchant', MerchantController::class);
 Route::resource('/toko', TokoController::class);
-Route::resource('/about', AboutController::class);
-Route::resource('/gallery', GalleryController::class);
-Route::resource('/video', VideoController::class);
-Route::resource('/termasuk', TermasukController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

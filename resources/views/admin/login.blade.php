@@ -97,7 +97,7 @@
                         <div class="control">
                             <label class="checkbox">
                                 <p class="help is-danger">* Jika mengalami masalah saat login, silahkan menghubungi <a
-                                        href="https://wa.me/6287832657197">admin</a></p>
+                                        href="https://wa.me/6287832657197">admin</a>(087832657197)</p>
                             </label>
                         </div>
                     </div>

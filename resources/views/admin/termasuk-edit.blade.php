@@ -2,15 +2,15 @@
 @include('admin.template.header')
 @include('admin.template.sidebar')
 @if (session('status'))
-<script>
-    swal({
-        text: "{!! session('status') !!}",
-        title: "{!! session('title') !!}",
-        type: "{!! session('type') !!}",
-        icon: "{!! session('type') !!}",
-        // more options
-    });
-</script>
+    <script>
+        swal({
+            text: "{!! session('status') !!}",
+            title: "{!! session('title') !!}",
+            type: "{!! session('type') !!}",
+            icon: "{!! session('type') !!}",
+            // more options
+        });
+    </script>
 @endif
 <section class="section is-main-section">
     <div class="notification is-white">
@@ -43,11 +43,12 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control is-expanded">
-                                <input class="input @error('nama') is-danger @enderror" type="text" placeholder="" name="nama" value="{{ $id->nama }}" id="nama">
+                                <input class="input @error('nama') is-danger @enderror" type="text" placeholder=""
+                                    name="nama" value="{{ $id->nama }}" id="nama">
 
                             </p>
                             @error('nama')
-                            <p class="help is-danger">{{ $message }}</p>
+                                <p class="help is-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

@@ -17,7 +17,7 @@ class TermasukController extends Controller
     public function index()
     {
         //
-        $include = Termasuk::paginate(10);
+        $include = Termasuk::groupBy('nama')->paginate(10);
         return view('admin.termasuk', [
             'title' => 'termasuk',
             'include' => $include

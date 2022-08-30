@@ -109,14 +109,27 @@ class PaketController extends Controller
         //
         $idp  = Paket::find($id);
         $include = DB::table('paket')->where('id_paket', $idp->id_paket)->first();
-        $included = Termasuk::groupBy('nama')->get();
-        $includee = DB::table('termasuk')->where('id_paket', $include->id_paket)->groupBy('nama')->value('nama');
+        $included = Termasuk::groupBy('nama')->get('nama');
+        $includee = Termasuk::where('id_paket', $include->id_paket)->get('nama');
+        $collection = collect($includee);
+        $ck = [];
+        foreach ($collection as $c) {
+            dd($c);
+            $ck = $c;
+        }
+        dd($ck);
+        $merged = $collection->merge($includee);
+        $merged->all();
         return view('admin.paket-edit', [
             'id' => $idp,
             'title' => 'paket',
             'include' => $include,
             'included' => $included,
-            'includee' => $includee
+            'includee' => $includee,
+            'merged' => $merged,
+            'collection' => $collection,
+            'ck' => $ck,
+
         ]);
     }
 
@@ -134,33 +147,38 @@ class PaketController extends Controller
         $nama     = $request->nama;
         $harga     = $request->harga;
         $include = $request->include;
-
-        $validator = Validator::make($request->all(), [
-            'nama'        => 'required',
-            'harga'        => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('paket/' . $id . '/edit')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
+        $included = Termasuk::where('id_paket', $idp->id_paket)->get();
+        foreach ($included as $i) {
+            dd($i);
         }
+        // $validator = Validator::make($request->all(), [
+        //     'nama'        => 'required',
+        //     'harga'        => 'required',
+        // ]);
 
-        DB::table('paket')
-            ->where('id', $id)
-            ->update([
-                'nama'       => $nama,
-                'harga'       => $harga,
-            ]);
+        // if ($validator->fails()) {
+        //     return redirect('paket/' . $id . '/edit')->withErrors($validator)
+        //         ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
+        // }
 
-        foreach ($include as $i) {
-            DB::table('termasuk')
-                ->where('id_paket', $idp->id_paket)
-                ->update([
-                    'nama'       => $include,
-                ]);
-        }
+        // DB::table('paket')
+        //     ->where('id', $id)
+        //     ->update([
+        //         'nama'       => $nama,
+        //         'harga'       => $harga,
+        //     ]);
 
-        return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
+
+        // foreach ($include as $i) {
+        //     DB::table('termasuk')
+        //         ->where('id_paket', $idp->id_paket)
+        //         ->update([
+        //             'nama'       => $include,
+        //         ]);
+        //     DB::table('termasuk')->where('id_paket', $idp->id_paket)->delete();
+        // }
+
+        // return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
     }
 
     /**
@@ -173,6 +191,7 @@ class PaketController extends Controller
     {
         //
         $paket  = Paket::find($id);
+        DB::table('termasuk')->where('id_paket', $paket->id_paket)->delete();
         $paket->delete();
 
         return redirect('paket')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Paket', 'type' => 'success']);

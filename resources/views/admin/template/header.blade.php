@@ -41,24 +41,35 @@
                     <div
                         class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
                         <a class="navbar-link is-arrowless">
-                            <div class="is-user-avatar">
-                                {{-- <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe"> --}}
+                            {{-- <div class="is-user-avatar">
+                                <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe">
+                            </div> --}}
+                            <div class="is-user-name">
+
+                                <span>
+                                    {{ auth()->user()->username }}
+                                </span>
                             </div>
-                            <div class="is-user-name"><span>Username : {{ auth()->user()->username }}</span></div>
                             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
                         </a>
                         <div class="navbar-dropdown">
-                            {{-- <a href="profile.html" class="navbar-item">
+                            {{-- <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
+                                class="navbar-item">
                                 <span class="icon"><i class="mdi mdi-account"></i></span>
                                 <span>Edit Password</span>
                             </a> --}}
                             {{-- <hr class="navbar-divider"> --}}
-                            <form action="/logout" method="post">
+                            <form action="/logout" method="post" id="my_form">
                                 @csrf
-                                <button type="submit" class="navbar-item">
+                                <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
+                                    class="navbar-item">
                                     <span class="icon"><i class="mdi mdi-logout"></i></span>
                                     <span>Keluar</span>
-                                </button>
+                                </a>
+                                {{-- <button type="submit" class="navbar-item">
+                                    <span class="icon"><i class="mdi mdi-logout"></i></span>
+                                    <span>Keluar</span>
+                                </button> --}}
                             </form>
                         </div>
                     </div>

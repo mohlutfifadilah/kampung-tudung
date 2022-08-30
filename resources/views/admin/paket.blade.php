@@ -21,7 +21,12 @@
                         <span class="icon"><i class="mdi mdi-buffer default"></i></span>
                         <b>Paket</b><br>
                         <small class="ml-2">
-                            Total data : {{ $paket->total() }}
+                            Total data : {{ $paket->total() }} <br>
+                        </small>
+                        <small class="has-text-danger mt-3 ml-2">
+                            Catatan : Paket tidak bisa diedit, silahkan hapus dan buat yang baru bila terjadi
+                            kesalahan
+                            saat menambahkan paket
                         </small>
                     </div>
                 </div>
@@ -75,9 +80,9 @@
                                         </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                <a href="/paket/{{ $p->id }}/edit"
+                                                {{-- <a href="/paket/{{ $p->id }}/edit"
                                                     class="button is-small is-warning"><span class="icon"><i
-                                                            class="fa-solid fa-pen-to-square"></i></span></a>
+                                                            class="fa-solid fa-pen-to-square"></i></span></a> --}}
                                                 <button class="button is-small is-danger remove-user" type="submit"
                                                     data-id="{{ $p->id }}"
                                                     data-action="{{ route('paket.destroy', $p->id) }}">
