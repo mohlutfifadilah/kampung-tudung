@@ -21,34 +21,35 @@
             </p>
         </header>
         <div class="card-content">
-            <div class="media">
-                <div class="media-left">
-                    @if ($merchant->foto)
-                        <img src="{{ asset('storage/' . $merchant->foto) }}" alt=""
-                            style="max-height: 200px; max-width: 400px;">
-                    @else
-                        <i class="fa-solid fa-circle-user fa-10x"></i>
-                    @endif
+            <div class="card-content">
+                <div class="columns">
+                    <div class="column is-4">
+                        <div class="content">
+                            <figure class="image">
+                                <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}"
+                                    style="width: 240px; height: 240px;">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <p class="title is-4 mb-5">{{ $merchant->nama }}</p>
+                        <p class="subtitle is-6">No Whatsapp : {{ $merchant->wa }}</p>
+                        <div class="content">
+                            @if ($merchant->deskripsi)
+                                <p>
+                                    {{ $merchant->deskripsi }}
+                                </p>
+                            @else
+                                Belum ada deskripsi
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                <div class="media-content">
-                    <p class="title is-4">{{ $merchant->nama }}</p>
-                    <p class="subtitle is-6">{{ $merchant->wa }}</p>
+                <div class="buttons is-right">
+                    <a href="/profile/{{ $merchant->id }}/edit" class="button is-warning">
+                        Edit Profil
+                    </a>
                 </div>
-            </div>
-
-            <div class="content">
-                @if ($merchant->deskripsi)
-                    <p>
-                        {{ $merchant->deskripsi }}
-                    </p>
-                @else
-                    Belum ada deskripsi
-                @endif
-            </div>
-            <div class="buttons is-right">
-                <a href="/profile/{{ $merchant->id }}/edit" class="button is-warning">
-                    Edit Profil
-                </a>
             </div>
         </div>
     </div>

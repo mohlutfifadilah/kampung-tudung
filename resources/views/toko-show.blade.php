@@ -65,6 +65,10 @@
         .navbar-menu .navbar-end .navbar-item.mr-5:hover {
             color: #00c4a7;
         }
+
+        .link {
+            margin: 0 15px;
+        }
     </style>
 </head>
 
@@ -95,10 +99,13 @@
         <div class="card mb-5">
             <div class="card-content">
                 <div class="columns">
-                    <div class="column is-4">
-                        <figure class="image is-1by1">
-                            <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}">
-                        </figure>
+                    <div class="column is-3">
+                        <div class="content">
+                            <figure class="image">
+                                <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}"
+                                    style="width: 240px; height: 240px;">
+                            </figure>
+                        </div>
                     </div>
                     <div class="column mt-5 py-5">
                         <div class="media">
@@ -126,16 +133,16 @@
         </div>
         <div class="columns is-multiline">
             @foreach ($product as $m)
-                <div class="column is-3 has-text-centered">
+                <div class="column is-3">
                     <div class="card">
-                        <div class="card-image has-text-centered mb-3">
-                            <figure class="image is-128x128 is-inline-block mt-5 mb-5">
+                        <div class="card-image has-text-centered">
+                            <figure class="image is-inline-block mt-5">
                                 <img class="is-rounded" src="{{ asset('storage/' . $m->gambar) }}"
-                                    alt="Placeholder image">
+                                    style="width: 180px; height: 180px;">
                             </figure>
                         </div>
-                        <div class="card-content mt-5">
-                            <div class="media">
+                        <div class="card-content">
+                            <div class="media has-text-centered">
                                 <div class="media-content">
                                     <p class="title is-4">{{ $m->judul }}</p>
                                     <p class="subtitle is-6"><span
@@ -143,17 +150,24 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <p>
-                                    Kondisi : {{ $m->kondisi }}
-                                </p>
-                                <p>
-                                    Ukuran : {{ $m->ukuran }}
-                                </p>
+                                <ul style="list-style-type:none; margin: 0; padding:0;">
+                                    <li>
+                                        <b>Kondisi :</b> {{ $m->kondisi }}
+                                    </li>
+                                    <li>
+                                        <b>Ukuran :</b> {{ $m->ukuran }}
+                                    </li>
+                                </ul>
                             </div>
                             <div class="content">
-                                <p>
-                                    Deskripsi : {{ $m->deskripsi }}
-                                </p>
+                                <ul style="list-style-type:none; margin: 0; padding:0;">
+                                    <li>
+                                        <b>Deskripsi :</b>
+                                    </li>
+                                    <li>
+                                        {{ $m->deskripsi }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <footer class="card-footer">
@@ -167,52 +181,36 @@
             @endforeach
         </div>
     </section>
-    <footer class="footer">
-        <div class="content has-text-centered bg-primary mb-0">
-            <div class="columns">
-                <div class="column is-2 is-offset-5">
-                    <nav class="level">
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="http://wa.me/6282323723593">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-success">
-                                            <i class="fab fa-whatsapp fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.instagram.com/desa_grujugan/">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-info">
-                                            <i class="fab fa-instagram fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-danger">
-                                            <i class="fab fa-youtube fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+    <section class="section has-text-centered" id="mitra">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <a href="http://wa.me/6282323723593" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-success">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.instagram.com/desa_grujugan/" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-info">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-danger">
+                            <i class="fab fa-youtube fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
             </div>
-            <p>
-                <strong>Powered</strong> by SID. Work.
-            </p>
-        </div>
-    </footer>
+        </nav>
+        <p>
+            <strong>Powered</strong> by SID. Work.
+        </p>
+    </section>
     <script async type="text/javascript" src="{{ asset('js/bulma.js') }}"></script>
     <!-- Always get the latest version -->
     <!-- Not recommended for production sites! -->

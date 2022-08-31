@@ -65,6 +65,16 @@
         .navbar-menu .navbar-end .navbar-item.mr-5:hover {
             color: #00c4a7;
         }
+
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link {
+            margin: 0 15px;
+        }
     </style>
 </head>
 
@@ -107,19 +117,18 @@
                 <div class="column is-3 has-text-centered">
                     <div class="card">
                         <div class="card-image has-text-centered">
-                            <figure class="image is-128x128 is-inline-block mt-5">
-                                <img class="is-rounded" src="{{ asset('storage/' . $m->foto) }}"
-                                    alt="Placeholder image">
-                            </figure>
+                            @if ($m->foto)
+                                <figure class="image is-128x128 is-inline-block mt-5">
+                                    <img class="is-rounded" src="{{ asset('storage/' . $m->foto) }}"
+                                        alt="Placeholder image">
+                                </figure>
+                            @else
+                                <i class="fa-solid fa-circle-user fa-10x mt-5"></i>
+                            @endif
                         </div>
                         <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">{{ $m->nama }}</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
+                            <p class="title is-4">{{ $m->nama }}</p>
+                            <div class="content truncate">
                                 {{ $m->deskripsi }}
                             </div>
                         </div>
@@ -133,52 +142,36 @@
         </div>
         {!! $merchant->links() !!}
     </section>
-    <footer class="footer">
-        <div class="content has-text-centered bg-primary mb-0">
-            <div class="columns">
-                <div class="column is-2 is-offset-5">
-                    <nav class="level">
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="http://wa.me/6282323723593">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-success">
-                                            <i class="fab fa-whatsapp fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.instagram.com/desa_grujugan/">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-info">
-                                            <i class="fab fa-instagram fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item has-text-centered">
-                            <div>
-                                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg">
-                                    <span class="icon-text">
-                                        <span class="icon has-text-danger">
-                                            <i class="fab fa-youtube fa-2x"></i>
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+    <section class="section has-text-centered" id="mitra">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <a href="http://wa.me/6282323723593" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-success">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.instagram.com/desa_grujugan/" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-info">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
+                <a href="https://www.youtube.com/channel/UC8h_RK3-LQZmjdRL-mrSAQg" class="link">
+                    <span class="icon-text">
+                        <span class="icon has-text-danger">
+                            <i class="fab fa-youtube fa-2x"></i>
+                        </span>
+                    </span>
+                </a>
             </div>
-            <p>
-                <strong>Powered</strong> by SID. Work.
-            </p>
-        </div>
-    </footer>
+        </nav>
+        <p>
+            <strong>Powered</strong> by SID. Work.
+        </p>
+    </section>
     <script async type="text/javascript" src="{{ asset('js/bulma.js') }}"></script>
     <!-- Always get the latest version -->
     <!-- Not recommended for production sites! -->

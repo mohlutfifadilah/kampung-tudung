@@ -68,12 +68,14 @@
                                         <td data-label="Judul">{{ $p->judul }}</td>
                                         <td data-label="Harga">@currency($p->harga)</td>
                                         <td data-label="Keterangan">
-                                            <p>
-                                                Kondisi : {{ $p->kondisi }}
-                                            </p>
-                                            <p>
-                                                Ukuran : {{ $p->ukuran }}
-                                            </p>
+                                            <ul style="list-style-type:none; margin: 0; padding:0;">
+                                                <li>
+                                                    Kondisi : {{ $p->kondisi }}
+                                                </li>
+                                                <li>
+                                                    Ukuran : {{ $p->ukuran }}
+                                                </li>
+                                            </ul>
                                         </td>
                                         <td data-label="Deskripsi">{{ $p->deskripsi }}</td>
                                         <td class="is-actions-cell">
