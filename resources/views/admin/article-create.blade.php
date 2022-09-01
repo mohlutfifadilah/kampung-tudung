@@ -33,7 +33,7 @@
             </p>
         </header>
         <div class="card-content">
-            <form method="post" action="/article">
+            <form method="post" action="/article" enctype="multipart/form-data">
                 @csrf
                 <div class="field is-horizontal mb-5">
                     <div class="field-label is-normal">
@@ -68,6 +68,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                        <label class="label">Thumbnail</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="file is-normal">
+                            <label class="file-label">
+                                <input class="file-input @error('thumbnail') is-danger @enderror" accept="image/*"
+                                    onchange="showMyImage(this)" type="file" name="thumbnail">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Upload File
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="mt-2 ml-2">
+                            @error('thumbnail')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                    </div>
+                    <div class="field-body">
+                        <img id="thumbnail" src="" alt="" style="max-height: 200px;">
+                    </div>
+                </div>
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
                         <label class="label">Isi artikel</label>
@@ -75,7 +108,7 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control is-expanded">
-                                <textarea name="isi" id="summernote" cols="30" rows="10" class="textarea"></textarea>
+                                <textarea name="isi" id="summernote" cols="30" rows="10" class="textarea">{{ old('isi') }}</textarea>
                             </p>
                             @error('password')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -109,5 +142,25 @@
         </div>
     </div>
 </section>
-
+<script>
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img = document.getElementById("thumbnail");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @include('admin.template.footer')

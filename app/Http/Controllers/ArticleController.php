@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
@@ -53,7 +54,8 @@ class ArticleController extends Controller
         $validator = Validator::make($request->all(), [
             'judul' => 'required',
             'penulis' => 'required',
-            'isi' => 'required'
+            'isi' => 'required',
+            'thumbnail' => 'required|image|file',
         ]);
 
         if ($validator->fails()) {
@@ -61,11 +63,16 @@ class ArticleController extends Controller
                 ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Artikel', 'type' => 'error']);
         }
 
+        if ($request->file('thumbnail')) {
+            $thumbnail = $request->file('thumbnail')->store('thumbnail-image');
+        }
+
         $article = new Article;
 
         $article->judul = $judul;
         $article->penulis = $penulis;
         $article->isi = $isi;
+        $article->thumbnail = $thumbnail;
 
         $article->save();
 
@@ -117,23 +124,31 @@ class ArticleController extends Controller
         $judul     = $request->judul;
         $penulis     = $request->penulis;
         $isi     = $request->isi;
+        $t = Article::find($id);
+        $thumbnail = $t->thumbnail;
+
         $validator = Validator::make($request->all(), [
             'judul'        => 'required',
             'penulis'        => 'required',
             'isi'        => 'required',
+            'thumbnail' => 'required|image|file',
         ]);
 
         if ($validator->fails()) {
             return redirect('article/' . $id . '/edit')->withErrors($validator)
                 ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Artikel', 'type' => 'error']);
         }
-
+        if ($request->file('thumbnail')) {
+            Storage::delete($thumbnail);
+            $thumbnail = $request->file('thumbnail')->store('thumbnail-image');
+        }
         DB::table('article')
             ->where('id', $id)
             ->update([
                 'judul'       => $judul,
                 'penulis'       => $penulis,
-                'isi'       => $isi
+                'isi'       => $isi,
+                'thumbnail'       => $thumbnail
             ]);
 
         return redirect('article')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Artikel', 'type' => 'success']);
@@ -149,6 +164,7 @@ class ArticleController extends Controller
     {
         //
         $admin  = Article::find($id);
+        Storage::delete($admin->thumbnail);
         $admin->delete();
 
         return redirect('article')->with(['status' => 'Berhasil Dihapus', 'title' => 'Data Article', 'type' => 'success']);

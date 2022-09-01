@@ -49,6 +49,7 @@
                                     </label>
                                 </th> --}}
                                     <th>No</th>
+                                    <th>Thumbnail</th>
                                     <th>Judul</th>
                                     <th>Penulis</th>
                                     <th>Aksi</th>
@@ -58,6 +59,10 @@
                                 @foreach ($article as $a)
                                     <tr>
                                         <td data-label="No">{{ $loop->iteration }}</td>
+                                        <td data-label="Gambar">
+                                            <img src="{{ asset('storage/' . $a->thumbnail) }}" alt=""
+                                                style="max-height: 200px; max-width: 400px;">
+                                        </td>
                                         <td data-label="judul">{{ $a->judul }}</td>
                                         <td data-label="penulis">{{ $a->penulis }}</td>
                                         <td class="is-actions-cell">

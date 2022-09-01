@@ -16,5 +16,6 @@ class Article extends Model
         'judul',
         'penulis',
         'isi',
+        'thumbnail'
     ];
 }

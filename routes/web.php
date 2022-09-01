@@ -16,7 +16,7 @@ use App\Http\Controllers\TokoController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\MailController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TermasukController;
 use App\Models\About;
@@ -79,6 +79,7 @@ Route::resource('/profile', ProfileController::class);
 Route::resource('/password', PasswordController::class);
 Route::resource('/merchant', MerchantController::class);
 Route::resource('/toko', TokoController::class);
+Route::resource('/detail', DetailController::class);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

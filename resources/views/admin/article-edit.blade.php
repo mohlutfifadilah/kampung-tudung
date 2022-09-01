@@ -33,7 +33,7 @@
             </p>
         </header>
         <div class="card-content">
-            <form method="post" action="/article/{{ $id->id }}">
+            <form method="post" action="/article/{{ $id->id }}" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="field is-horizontal mb-5">
@@ -67,6 +67,44 @@
                                 <p class="help is-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                        <label class="label">Thumbnail</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="file is-normal">
+                            <label class="file-label">
+                                <input class="file-input @error('thumbnail') is-danger @enderror" accept="image/*"
+                                    onchange="showMyImage(this)" type="file" name="thumbnail">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Upload File
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="mt-2 ml-2">
+                            @error('thumbnail')
+                                <p class="help is-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal mb-5">
+                    <div class="field-label is-normal">
+                    </div>
+                    <div class="field-body">
+                        @if ($id->thumbnail)
+                            <img src="{{ asset('storage/' . $id->thumbnail) }}" id="thumbnail" src=""
+                                alt="" style="max-height: 200px;">
+                        @else
+                            <img id="thumbnail" src="" alt="" style="max-height: 200px;">
+                        @endif
                     </div>
                 </div>
                 <div class="field is-horizontal">
@@ -110,4 +148,25 @@
         </div>
     </div>
 </section>
+<script>
+    function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img = document.getElementById("thumbnail");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function(aImg) {
+                return function(e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @include('admin.template.footer')

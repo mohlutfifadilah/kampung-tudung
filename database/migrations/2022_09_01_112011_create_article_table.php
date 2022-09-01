@@ -15,6 +15,7 @@ class CreateArticleTable extends Migration
     {
         Schema::create('article', function (Blueprint $table) {
             $table->id();
+            $table->string('thumbnail');
             $table->string('judul');
             $table->string('penulis');
             $table->string('isi', 65535);
