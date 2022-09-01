@@ -43,6 +43,9 @@
     $('#number_only').bind('keyup paste', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+    $('#summernote').summernote({
+        height: 400
+    });
 </script>
 </body>
 

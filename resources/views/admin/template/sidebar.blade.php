@@ -37,6 +37,13 @@
                     <span class="menu-item-label">Video Profil</span>
                 </a>
             </li>
+            <li>
+                <a href="/article" class="has-icon {{ $title === 'article' ? 'is-active router-link-active' : '' }}">
+                    <!-- <span class="icon has-update-mark"><i class="mdi mdi-square-edit-outline"></i></span> -->
+                    <span class="icon"><i class="mdi mdi-newspaper"></i></span>
+                    <span class="menu-item-label">Artikel</span>
+                </a>
+            </li>
         </ul>
         <p class="menu-label">Data</p>
         <ul class="menu-list">

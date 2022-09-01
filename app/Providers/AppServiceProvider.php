@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Carbon::setLocale('id');
         Paginator::defaultView('pagination-bulma::bulma');
         Paginator::defaultSimpleView('pagination-bulma::bulma-simple');
         Blade::directive('currency', function ($expression) {

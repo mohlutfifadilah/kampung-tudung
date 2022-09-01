@@ -28,6 +28,10 @@ class SendController extends Controller
             'tanggal' => 'required',
             'paket' => 'required',
         ]);
+        if ($validator->fails()) {
+            return redirect('/#booking')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Gagal memesan tiket', 'type' => 'error']);
+        }
         $nama      = $request->nama;
         $kontak    = $request->kontak;
         $wa        = $request->wa;
@@ -40,12 +44,6 @@ class SendController extends Controller
         $jumlah    = $dewasa + $anak;
         $pesan     = $request->pesan;
         $p         = Paket::find($paket);
-
-
-        if ($validator->fails()) {
-            return redirect('/#booking')->withErrors($validator)
-                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Gagal memesan tiket', 'type' => 'error']);
-        }
 
         $confirm = new Confirm;
 

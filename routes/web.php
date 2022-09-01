@@ -14,11 +14,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TermasukController;
 use App\Models\About;
+use App\Models\Article;
 use App\Models\Gallery;
 use App\Models\Paket;
 use App\Models\Product;
@@ -44,6 +46,7 @@ Route::get('/', function () {
     $product = Product::all();
     $galeri = Gallery::all();
     $include = Termasuk::all();
+    $article = Article::all();
     $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
     return view('index', [
         'paket' => $paket,
@@ -52,6 +55,7 @@ Route::get('/', function () {
         'produk' => $product,
         'include' => $include,
         'merchant' => $merchant,
+        'article' => $article,
     ]);
 });
 
@@ -67,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/gallery', GalleryController::class);
     Route::resource('/video', VideoController::class);
     Route::resource('/termasuk', TermasukController::class);
+    Route::resource('/article', ArticleController::class);
 });
 
 

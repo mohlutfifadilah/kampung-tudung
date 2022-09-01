@@ -270,6 +270,49 @@
             </div>
         </div>
     </section>
+    <section class="section splide" id="article" aria-labelledby="carousel-heading">
+        <div class="container is-fluid">
+            <div class="text-has-centered mb-3">
+                <p class="title">
+                    Artikel
+                </p>
+                <p class="subtitle has-text-primary">
+                    Kampung Tudung
+                </p>
+                <hr class="is-primary" width="10%">
+            </div>
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach ($article as $g)
+                        <li class="splide__slide">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="https://bulma.io/images/placeholders/1280x960.png"
+                                            alt="Placeholder image">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p class="title is-4">{{ $g->judul }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="content has-text-centered">
+                                        <small>
+                                            {{ $g->created_at->diffForHumans() }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="{{ asset('storage/' . $g->foto) }}" alt="">
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </section>
     <section class="section splide" id="paket">
         <div class="container">
             <div class="text-has-centered mb-3">
@@ -787,16 +830,26 @@
                 perPage: 3,
                 perMove: 1,
                 focus: 'center',
-                autoWidth: true,
-                autoHeight: true
+                fixedWidth: '30rem',
+                fixedHeight: '30rem',
+            }).mount();
+
+            new Splide('#article', {
+                type: 'loop',
+                padding: '0',
+                perPage: 3,
+                perMove: 1,
+                focus: 'center',
+                fixedWidth: '25rem',
+                fixedHeight: '28rem',
             }).mount();
 
             new Splide('#paket', {
                 perPage: 1,
                 perMove: 1,
                 focus: 'center',
-                autoWidth: true,
-                autoHeight: true
+                fixedWidth: '20rem',
+                fixedHeight: '20rem',
             }).mount();
         });
         window.onload = function() {
