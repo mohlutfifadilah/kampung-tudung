@@ -17,8 +17,17 @@ class SendController extends Controller
     //
     public function send(Request $request)
     {
-        Mail::to('kampungtudung12@gmail.com')->send(new SendMail());
-        dd('sukses');
+        // Mail::to('kampungtudung12@gmail.com')->send(new SendMail());
+        // dd('sukses');
+        // dd($request);
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'kontak' => 'required',
+            'email' => 'email:rfc,dns|nullable',
+            'alamat' => 'required',
+            'tanggal' => 'required',
+            'paket' => 'required',
+        ]);
         $nama      = $request->nama;
         $kontak    = $request->kontak;
         $wa        = $request->wa;
@@ -31,15 +40,7 @@ class SendController extends Controller
         $jumlah    = $dewasa + $anak;
         $pesan     = $request->pesan;
         $p         = Paket::find($paket);
-        $total     = $p->harga * (int) $jumlah;
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'kontak' => 'required',
-            'email' => 'email:rfc,dns|nullable',
-            'alamat' => 'required',
-            'tanggal' => 'required',
-            'paket' => 'required',
-        ]);
+
 
         if ($validator->fails()) {
             return redirect('/#booking')->withErrors($validator)
@@ -59,16 +60,17 @@ class SendController extends Controller
         $confirm->anak = $anak;
         $confirm->jumlah = $jumlah;
         $confirm->pesan = $pesan;
-        $confirm->total = $total;
+        $confirm->total =
+            $p->harga * (int) $jumlah;
         $confirm->status = 0;
 
         $confirm->save();
 
-        if ($wa) {
-        } else if ($email) {
-            Mail::to($email)->send(new SendMail());
-        } else {
-        }
+        // if ($wa) {
+        // } else if ($email) {
+        //     Mail::to($email)->send(new SendMail());
+        // } else {
+        // }
 
         return redirect('/')->with(['status' => 'Berhasil', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }
