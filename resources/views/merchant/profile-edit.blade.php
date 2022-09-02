@@ -44,6 +44,7 @@
                             </label>
                         </div>
                         <div class="mt-2 ml-2">
+                            <p class="help is-info">* Lebar : 240px dan Tinggi : 240px</p>
                             @error('foto')
                                 <p class="help is-danger">{{ $message }}</p>
                             @enderror

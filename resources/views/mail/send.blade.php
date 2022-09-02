@@ -2,12 +2,10 @@
 <html>
 
 <head>
-    <title>websitepercobaan.com</title>
+    <title>ItsolutionStuff.com</title>
 </head>
 
 <body>
-    <h1>KONTOL</h1>
-    <p>ASu</p>
 
     <p>Thank you</p>
 </body>

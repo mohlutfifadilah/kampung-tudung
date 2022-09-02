@@ -56,6 +56,7 @@
                             </label>
                         </div>
                         <div class="mt-2 ml-2">
+                            <p class="help is-info">Lebar : 480px dan Tinggi : 480px</p>
                             @error('gambar')
                                 <p class="help is-danger">{{ $message }}</p>
                             @enderror

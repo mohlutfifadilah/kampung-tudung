@@ -111,25 +111,12 @@ class PaketController extends Controller
         $include = DB::table('paket')->where('id_paket', $idp->id_paket)->first();
         $included = Termasuk::groupBy('nama')->get('nama');
         $includee = Termasuk::where('id_paket', $include->id_paket)->get('nama');
-        $collection = collect($includee);
-        $ck = [];
-        foreach ($collection as $c) {
-            dd($c);
-            $ck = $c;
-        }
-        dd($ck);
-        $merged = $collection->merge($includee);
-        $merged->all();
         return view('admin.paket-edit', [
             'id' => $idp,
             'title' => 'paket',
             'include' => $include,
             'included' => $included,
-            'includee' => $includee,
-            'merged' => $merged,
-            'collection' => $collection,
-            'ck' => $ck,
-
+            'includee' => $includee
         ]);
     }
 
@@ -143,42 +130,43 @@ class PaketController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $idp  = Paket::find($id);
+        $paket  = Paket::find($id);
+        DB::table('termasuk')->where('id_paket', $paket->id_paket)->delete();
+        $paket->delete();
+
         $nama     = $request->nama;
         $harga     = $request->harga;
         $include = $request->include;
-        $included = Termasuk::where('id_paket', $idp->id_paket)->get();
-        foreach ($included as $i) {
-            dd($i);
+        $kode = Str::random(40);
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'harga' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/paket/create')->withErrors($validator)
+                ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
         }
-        // $validator = Validator::make($request->all(), [
-        //     'nama'        => 'required',
-        //     'harga'        => 'required',
-        // ]);
 
-        // if ($validator->fails()) {
-        //     return redirect('paket/' . $id . '/edit')->withErrors($validator)
-        //         ->withInput()->with(['status' => 'Terjadi Kesalahan', 'title' => 'Data Paket', 'type' => 'error']);
-        // }
+        $paket = new Paket;
 
-        // DB::table('paket')
-        //     ->where('id', $id)
-        //     ->update([
-        //         'nama'       => $nama,
-        //         'harga'       => $harga,
-        //     ]);
+        $paket->id_paket = $kode;
+        $paket->nama = $nama;
+        $paket->harga = $harga;
+
+        $paket->save();
 
 
-        // foreach ($include as $i) {
-        //     DB::table('termasuk')
-        //         ->where('id_paket', $idp->id_paket)
-        //         ->update([
-        //             'nama'       => $include,
-        //         ]);
-        //     DB::table('termasuk')->where('id_paket', $idp->id_paket)->delete();
-        // }
+        foreach ($include as $i) {
+            $include = new Termasuk;
+            $include->id_paket = $kode;
+            $include->nama = $i;
 
-        // return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
+            $include->save();
+        }
+
+        return redirect('paket')->with(['status' => 'Berhasil Diubah', 'title' => 'Data Paket', 'type' => 'success']);
     }
 
     /**

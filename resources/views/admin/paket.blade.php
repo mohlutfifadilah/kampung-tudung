@@ -80,9 +80,9 @@
                                         </td>
                                         <td class="is-actions-cell">
                                             <div class="buttons is-center">
-                                                {{-- <a href="/paket/{{ $p->id }}/edit"
+                                                <a href="/paket/{{ $p->id }}/edit"
                                                     class="button is-small is-warning"><span class="icon"><i
-                                                            class="fa-solid fa-pen-to-square"></i></span></a> --}}
+                                                            class="fa-solid fa-pen-to-square"></i></span></a>
                                                 <button class="button is-small is-danger remove-user" type="submit"
                                                     data-id="{{ $p->id }}"
                                                     data-action="{{ route('paket.destroy', $p->id) }}">

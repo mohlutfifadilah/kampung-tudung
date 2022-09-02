@@ -17,9 +17,6 @@ class SendController extends Controller
     //
     public function send(Request $request)
     {
-        // Mail::to('kampungtudung12@gmail.com')->send(new SendMail());
-        // dd('sukses');
-        // dd($request);
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'kontak' => 'required',
@@ -58,17 +55,10 @@ class SendController extends Controller
         $confirm->anak = $anak;
         $confirm->jumlah = $jumlah;
         $confirm->pesan = $pesan;
-        $confirm->total =
-            $p->harga * (int) $jumlah;
+        $confirm->total = $p->harga * (int) $jumlah;
         $confirm->status = 0;
 
         $confirm->save();
-
-        // if ($wa) {
-        // } else if ($email) {
-        //     Mail::to($email)->send(new SendMail());
-        // } else {
-        // }
 
         return redirect('/')->with(['status' => 'Berhasil', 'title' => 'Berhasil Booking', 'type' => 'success']);
     }

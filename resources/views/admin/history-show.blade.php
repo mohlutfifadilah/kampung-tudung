@@ -68,8 +68,8 @@
                             <dt><strong>Total</strong></dt>
                             <dd class="mb-4 mt-2">@currency($history->total)</dd>
                             <dt><strong>Pesan</strong></dt>
-                            @if ($history->catatan)
-                                <dd class="mb-4 mt-2">{{ $history->catatan }}</dd>
+                            @if ($history->pesan)
+                                <dd class="mb-4 mt-2">{{ $history->pesan }}</dd>
                             @else
                                 <dd class="mb-4 mt-2">-</dd>
                             @endif

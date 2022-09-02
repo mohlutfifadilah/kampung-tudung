@@ -68,8 +68,8 @@
                             <dt><strong>Total</strong></dt>
                             <dd class="mb-4 mt-2">@currency($confirm->total)</dd>
                             <dt><strong>Pesan</strong></dt>
-                            @if ($confirm->catatan)
-                                <dd class="mb-4 mt-2">{{ $confirm->catatan }}</dd>
+                            @if ($confirm->pesan)
+                                <dd class="mb-4 mt-2">{{ $confirm->pesan }}</dd>
                             @else
                                 <dd class="mb-4 mt-2">-</dd>
                             @endif
@@ -85,6 +85,24 @@
                                 @if ($confirm->status == 0)
                                     <span class="tag is-warning is-medium has-text-white has-text-weight-bold">Belum
                                         Dikonfirmasi</span>
+                                @endif
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="column">
+                        <dl>
+                            <dt><strong>Hubungi Pemesan</strong></dt>
+                            <dd class="mb-4 mt-2">
+                                @if ($confirm->email)
+                                    <a href="mailto:{{ $confirm->email }}?subject=kampungtudung12@gmail.com&body="
+                                        class="button is-info text-white">
+                                        Email
+                                    </a>
+                                @elseif($confirm->wa)
+                                    <a href="http://wa.me/{{ Str::replaceFirst('0', '62', $confirm->wa) }}"
+                                        class="button is-info text-white">
+                                        Whatsapp
+                                    </a>
                                 @endif
                             </dd>
                         </dl>

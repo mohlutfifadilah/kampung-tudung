@@ -25,10 +25,14 @@
                 <div class="columns">
                     <div class="column is-4">
                         <div class="content">
-                            <figure class="image">
-                                <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}"
-                                    style="width: 240px; height: 240px;">
-                            </figure>
+                            @if ($merchant->foto)
+                                <figure class="image">
+                                    <img class="is-rounded" src="{{ asset('storage/' . $merchant->foto) }}"
+                                        style="width: 240px; height: 240px;">
+                                </figure>
+                            @else
+                                <i class="fa-solid fa-circle-user fa-10x"></i>
+                            @endif
                         </div>
                     </div>
                     <div class="column">

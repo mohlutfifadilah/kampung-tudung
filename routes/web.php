@@ -88,3 +88,14 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/send', [SendController::class, 'send']);
 Route::get('/kirim_email', [App\Http\Controllers\MailController::class, 'kirim']);
+Route::get('/send_mail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    \Illuminate\Support\Facades\Mail::to('mohlutfifadilah23@gmail.com')->send(new \App\Mail\SendMail($details));
+
+    dd("Email is Sent.");
+});

@@ -61,13 +61,12 @@
                         <div class="level mt-1">
                             <div class="level-left">
                                 <div class="level-item">
-                                    {{-- {{ $included }} <br> {{ $collection }} <br> {{ $merged }} --}}
-                                    {{-- @foreach ($included as $i)
-                                        <input type="checkbox" name="include[]" value="{{ $i->nama }}"
-                                            {{ $i->nama == $collection ? 'checked' : '' }}>
+                                    @foreach ($included as $i)
+                                        <input type="checkbox" name="include[]" value="{{ $i->nama }}">
                                         &nbsp; {{ $i->nama }} | &nbsp;
-                                        @endforeach --}}
+                                    @endforeach
                                 </div>
+                                <p class="help is-info">* Include paket harus diinput ulang</p>
                             </div>
                         </div>
                     </div>
