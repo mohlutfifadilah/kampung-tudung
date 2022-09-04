@@ -20,8 +20,8 @@ class CreateProdukTable extends Migration
             $table->string('gambar');
             $table->string('judul');
             $table->integer('harga');
-            $table->string('kondisi');
-            $table->string('ukuran');
+            $table->string('kondisi')->nullable();
+            $table->string('ukuran')->nullable();
             $table->string('deskripsi');
             $table->timestamps();
         });
