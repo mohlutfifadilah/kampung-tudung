@@ -17,7 +17,7 @@ class TokoController extends Controller
     public function index()
     {
         //
-        $merchant = DB::table('merchant')->groupBy('username')->paginate(10);
+        $merchant = DB::table('merchant')->groupBy('username')->paginate(12);
         return view('toko', [
             'merchant' => $merchant
         ]);
@@ -54,7 +54,7 @@ class TokoController extends Controller
     {
         //
         $merchant  = Merchant::find($id);
-        $product = Product::where('id_merchant', $merchant->id)->paginate(10);
+        $product = Product::where('id_merchant', $merchant->id)->paginate(12);
         return view('toko-show', [
             'product' => $product,
             'merchant'       => $merchant,
