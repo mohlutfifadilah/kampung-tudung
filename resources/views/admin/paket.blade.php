@@ -23,19 +23,16 @@
                         <small class="ml-2">
                             Total data : {{ $paket->total() }} <br>
                         </small>
-                        <small class="has-text-danger mt-3 ml-2">
-                            Catatan : Paket tidak bisa diedit, silahkan hapus dan buat yang baru bila terjadi
-                            kesalahan
-                            saat menambahkan paket
-                        </small>
                     </div>
                 </div>
             </div>
-            <div class="level-right">
-                <a href="/paket/create" class="button is-small is-info">
-                    <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
-                </a>
-            </div>
+            @if ($included->count())
+                <div class="level-right">
+                    <a href="/paket/create" class="button is-small is-info">
+                        <span class="icon"><i class="fa-solid fa-circle-plus"></i></span><b>Tambah</b>
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -104,6 +101,9 @@
                                                     class="mdi mdi-emoticon-sad mdi-48px"></i></span>
                                         </p>
                                         <p>Data kosong</p>
+                                        @if (!$included->count())
+                                            <p class="has-text-danger">Silahkan isi Include Paket terlebih dahulu</p>
+                                        @endif
                                     </div>
                                 </section>
                             </div>

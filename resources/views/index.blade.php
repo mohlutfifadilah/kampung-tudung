@@ -545,7 +545,7 @@
                                     <label for="" class="label">Jumlah Orang</label>
                                     <div class="control">
                                         <div class="columns is-mobile">
-                                            <div class="column">
+                                            <div class="column" id="jumlah" style="display: none;">
                                                 <div class="field">
                                                     <label for="" class="label">Dewasa</label>
                                                     <input
@@ -560,7 +560,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="column">
+                                            <div class="column" id="jumlahh" style="display: none;">
                                                 <div class="field">
                                                     <label for="" class="label">Anak-anak</label>
                                                     <input
@@ -572,7 +572,6 @@
                                                     @enderror
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -879,6 +878,11 @@
                 if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
             return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
         }
+
+        $('#language').on('change', function() {
+            document.getElementById('jumlah').style.display = 'block';
+            document.getElementById('jumlahh').style.display = 'block';
+        });
 
         function update() {
             var select = document.getElementById('language');
